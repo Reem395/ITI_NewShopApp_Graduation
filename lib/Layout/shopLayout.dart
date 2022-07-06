@@ -6,9 +6,13 @@ import 'package:shop_app/Modules/CategoriesScreen.dart';
 import 'package:shop_app/Modules/LoginScreen.dart';
 import 'package:shop_app/Modules/favouriteScreen.dart';
 import 'package:shop_app/Modules/productScreen.dart';
-import 'package:shop_app/Modules/settingScreen.dart';
+import 'package:shop_app/Modules/ProfileScreen.dart';
 import 'package:shop_app/Shared/Components.dart';
 import 'package:shop_app/Shared/Local/CacheHelper.dart';
+import '../Modules/AccountInfoScreen.dart';
+import '../Modules/AddressScreen.dart';
+import '../Modules/ResetPassword.dart';
+import '../Modules/products.dart';
 import '../Modules/searchScreen.dart';
 import '../Shared/constants.dart';
 
@@ -35,9 +39,14 @@ class _ShopLayoutState extends State<ShopLayout> {
               ProductScreen(),
               CategoriesScreen(),
               FavouriteScreen(),
-              SettingScreen()
+              // ProfileScreen()
+              AccountInfoScreen(),
+              // Address(),
+              // RestPasswordScreen()
+              // ProductsScreen(),
             ];
             return Scaffold(
+              resizeToAvoidBottomInset: false,
               appBar: AppBar(
                 backgroundColor: defaultColor,
                 title: const Text("ShopApp"),
@@ -62,7 +71,8 @@ class _ShopLayoutState extends State<ShopLayout> {
                   BottomNavigationBarItem(
                       icon: Icon(Icons.favorite), label: "Favourites"),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.settings), label: "Setting"),
+                      // icon: Icon(Icons.settings), label: "Setting"),
+                      icon: Icon(Icons.person), label: "Profile"),
                 ],
                 onTap: (index) {
                   setState(() {

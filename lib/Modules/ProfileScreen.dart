@@ -7,7 +7,7 @@ import 'package:shop_app/Modules/LoginScreen.dart';
 import 'package:shop_app/Shared/Components.dart';
 import '../Shared/constants.dart';
 
-class SettingScreen extends StatelessWidget {
+class ProfileScreen extends StatelessWidget {
   var nameController = TextEditingController();
   var emailController = TextEditingController();
   var phoneController = TextEditingController();
