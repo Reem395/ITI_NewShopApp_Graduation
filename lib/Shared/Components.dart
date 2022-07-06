@@ -5,6 +5,7 @@ import 'package:shop_app/Models/SearchModel.dart';
 import '../Models/HomeModel.dart';
 import '../Modules/Block/Cubit.dart';
 import '../Modules/LoginScreen.dart';
+import '../Modules/product_details.dart';
 import 'Local/CacheHelper.dart';
 
 Widget buildOnBoard(String image, String text, BuildContext context) {
@@ -40,12 +41,14 @@ Widget defaultTextFormField(
       bool password= false,
       Function()? changePassword,
       Function()? onEditingComplate,
+      bool readOnly=false
     }) {
   return TextFormField(
     keyboardType: keyboard,
     controller: controller,
     validator: validate,
     obscureText: password,
+    readOnly: readOnly,
     onEditingComplete: onEditingComplate,
     decoration: InputDecoration(
         fillColor: Colors.grey[200],
@@ -447,4 +450,67 @@ void navigateToLogin(BuildContext context)
   CacheHelper.setData(key: "onBoardingOpened", value: true).then((value) =>
       navigateAndReplace(context, LoginScreen())
   );
+}
+
+
+//Hadeer
+class ProductItem extends StatefulWidget {
+  const ProductItem({Key? key}) : super(key: key);
+
+  @override
+  State<ProductItem> createState() => _ProductItemState();
+}
+//hadeer
+class _ProductItemState extends State<ProductItem> {
+  bool isFavorite = false;
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(10),
+      child: GridTile(
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const ProductDetailsScreen()),
+            );
+          },
+          child: Image.asset(
+            'assets/images/girl.png',
+            fit: BoxFit.cover,
+          ),
+        ),
+        footer: GridTileBar(
+          backgroundColor: const Color.fromARGB(221, 78, 82, 87),
+          leading: IconButton(
+            icon: Icon(
+              isFavorite ? Icons.favorite : Icons.favorite_border,
+            ),
+            color: Colors.red,
+            onPressed: () {
+              toggleFavoriteStatus();
+            },
+          ),
+          title: const Text(
+            "Girls",
+            textAlign: TextAlign.center,
+          ),
+          trailing: IconButton(
+            icon: const Icon(
+              Icons.shopping_cart,
+            ),
+            onPressed: () {},
+            color: Theme.of(context).primaryColor,
+          ),
+        ),
+      ),
+    );
+  }
+
+  void toggleFavoriteStatus() {
+    setState(() {
+      isFavorite = !isFavorite;
+    });
+  }
 }
