@@ -8,7 +8,19 @@ class ProductsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  GridView.builder(
+return Scaffold(
+      // appBar: AppBar(
+      //   title: const Text('Products'),
+      //   backgroundColor: defaultColor,
+      //   //centerTitle: true,
+      //   leading: IconButton(
+      //     icon: const Icon(Icons.arrow_back),
+      //     onPressed: () {
+      //       Navigator.pop(context);
+      //     },
+      //   ),
+      // ),
+      body: GridView.builder(
         padding: const EdgeInsets.all(15.0),
         itemCount: 10,
         itemBuilder: (ctx, i) => (const ProductItem()),
@@ -18,7 +30,8 @@ class ProductsScreen extends StatelessWidget {
           crossAxisSpacing: 15,
           mainAxisSpacing: 15,
         ),
-      );
+      ),
+    );
 
     
   }

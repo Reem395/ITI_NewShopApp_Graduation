@@ -8,10 +8,10 @@ class ProductDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: defaultColor,
-        title: const Text("Name of Products"),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: defaultColor,
+      //   title: const Text("Name of Products"),
+      // ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[

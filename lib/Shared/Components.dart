@@ -6,6 +6,7 @@ import '../Models/HomeModel.dart';
 import '../Modules/Block/Cubit.dart';
 import '../Modules/LoginScreen.dart';
 import '../Modules/product_details.dart';
+import '../Modules/products.dart';
 import 'Local/CacheHelper.dart';
 
 Widget buildOnBoard(String image, String text, BuildContext context) {
@@ -251,22 +252,59 @@ Widget buildCategories(BuildContext context) {
   );
 }
 
+// Widget buildCatItem(BuildContext context, int index) {
+//   return Row(
+//     children: [Image(image: NetworkImage(ShopCubit.get(context).categoryModel!.data.data[index].image),
+//       fit: BoxFit.cover,
+//       height: 120,
+//       width: 120,),
+//       const SizedBox(width: 10,),
+//       Text(ShopCubit.get(context).categoryModel!.data.data[index].name, style: const TextStyle(
+//           fontWeight: FontWeight.bold,
+//           fontSize: 17
+//       ),),
+//       const Spacer(),
+//       IconButton(onPressed: (){}, icon: const Icon(Icons.arrow_forward_ios))
+//     ],
+//   );
+// }
+
+
+
+
 Widget buildCatItem(BuildContext context, int index) {
-  return Row(
-    children: [Image(image: NetworkImage(ShopCubit.get(context).categoryModel!.data.data[index].image),
-      fit: BoxFit.cover,
-      height: 120,
-      width: 120,),
-      const SizedBox(width: 10,),
-      Text(ShopCubit.get(context).categoryModel!.data.data[index].name, style: const TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 17
-      ),),
-      const Spacer(),
-      IconButton(onPressed: (){}, icon: const Icon(Icons.arrow_forward_ios))
-    ],
+  return InkWell(
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const ProductsScreen()),
+      );
+    },
+    child: Row(
+      children: [
+        Image(
+          image: NetworkImage(
+              ShopCubit.get(context).categoryModel!.data.data[index].image),
+          fit: BoxFit.cover,
+          height: 120,
+          width: 120,
+        ),
+        const SizedBox(
+          width: 10,
+        ),
+        Expanded(
+          child: Text(
+            ShopCubit.get(context).categoryModel!.data.data[index].name,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+          ),
+        ),
+        const Spacer(),
+        IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_forward_ios))
+      ],
+    ),
   );
 }
+
 
 ListView buildProductList(var model, bool favColor) {
   return ListView.separated(
@@ -371,7 +409,8 @@ ListView buildSearchList(SearchModel model, bool favColor) {
                 children: [
                   Image(
                     image: NetworkImage(
-                        model!.data.data[index].image),
+                        // model!.data.data[index].image),
+                        model.data.data[index].image),
                     height: 100,
                     width: 120,
                   ),

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/Modules/Block/Cubit.dart';
@@ -48,9 +47,7 @@ class _ShopLayoutState extends State<ShopLayout> {
                 // RestPasswordScreen()
                 // ProductsScreen(),
               ];
-              return CupertinoTabScaffold(
-                tabBuilder: ((context, index) {
-                  return Scaffold(
+              return Scaffold(
                 resizeToAvoidBottomInset: false,
                 appBar: AppBar(
                   backgroundColor: defaultColor,
@@ -63,22 +60,30 @@ class _ShopLayoutState extends State<ShopLayout> {
                         icon: const Icon(Icons.search))
                   ],
                 ),
-                body: SafeArea(child: pages[index]),
-              );
-                }),
-
-                tabBar: CupertinoTabBar(items: const [
+                body: SafeArea(child: pages[currentIndex]),
+                bottomNavigationBar: BottomNavigationBar(
+                  selectedItemColor: defaultColor,
+                  type: BottomNavigationBarType.fixed,
+                  currentIndex: currentIndex,
+                  items: const [
                     BottomNavigationBarItem(
-                          icon: Icon(Icons.home), label: "Home"),
-                      BottomNavigationBarItem(
-                          icon: Icon(Icons.apps_sharp), label: "Categories"),
-                      BottomNavigationBarItem(
-                          icon: Icon(Icons.favorite), label: "Favourites"),
-                      BottomNavigationBarItem(
-                          // icon: Icon(Icons.settings), label: "Setting"),
-                          icon: Icon(Icons.person), label: "Profile"),
-                ]),
-                );
+                        icon: Icon(Icons.home), label: "Home"),
+                    BottomNavigationBarItem(
+                        icon: Icon(Icons.apps_sharp), label: "Categories"),
+                    BottomNavigationBarItem(
+                        icon: Icon(Icons.favorite), label: "Favourites"),
+                    BottomNavigationBarItem(
+                        // icon: Icon(Icons.settings), label: "Setting"),
+                        icon: Icon(Icons.person), label: "Profile"),
+                  ],
+                  onTap: (index) {
+                    setState(() {
+                      currentIndex = index;
+                      print(currentIndex);
+                    });
+                  },
+                ),
+              );
             },
             listener: (context, states) {},
           )),
