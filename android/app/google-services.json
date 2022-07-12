@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "142937458178",
+    "project_id": "itigraduationprojectshopapp",
+    "storage_bucket": "itigraduationprojectshopapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:142937458178:android:675ee49234e42a3128c91b",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "142937458178-1qousof9uqr6sk0d5du98i82v9r4e8ne.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.application",
+            "certificate_hash": "efeacef602900d042f7d41bcde79d332762aedae"
+          }
+        },
+        {
+          "client_id": "142937458178-ja9ec605bonqmas2d7hend3951m6eet5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMvz-gY_dTdni68U0ejAhgq7fiC-GeVHE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "142937458178-ja9ec605bonqmas2d7hend3951m6eet5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

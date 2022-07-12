@@ -1,4 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:firebase/firebase.dart';
+import 'package:firebase_database/firebase_database.dart';
+// import 'package:firebase/firebase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/Layout/onBoaredingScreen.dart';
@@ -10,11 +13,13 @@ import 'package:shop_app/Shared/Network/DioHelper.dart';
 import 'Layout/shopLayout.dart';
 import 'Shared/BlocObserver.dart';
 import 'Shared/constants.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() {
   BlocOverrides.runZoned(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
+      await Firebase.initializeApp();
       DioHelper.init();
       await CacheHelper.init();
       token = CacheHelper.getData(key: "token");
