@@ -45,9 +45,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ShopCubit>(
-      create: (context){return ShopCubit();},
+      create: (context) {
+        return ShopCubit();
+      },
       child: BlocConsumer<ShopCubit, ShopStates>(
-        builder: (context, states){
+        builder: (context, states) {
           return MaterialApp(
             theme: ThemeData(
                 primaryColor: const Color(0xff3b75a8),
@@ -61,7 +63,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
           );
         },
-        listener: (context, states){},
+        listener: (context, states) {},
       ),
     );
   }
