@@ -1,4 +1,5 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/Modules/Block/Cubit.dart';
@@ -145,6 +146,22 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                             navigateAndReplace(context, LoginScreen());
                           },
                           child: const Text("LogOut"),
+                        ),
+                      ),
+
+                      const SizedBox(
+                        height: 20,
+                      ),
+                       Container(
+                        width: MediaQuery.of(context).size.width / 2,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(defaultColor)),
+                          onPressed: (){
+                              FirebaseDatabase.instance.ref().child("test").set(820);
+                            },
+                          child: const Text("Fire"),
                         ),
                       )
                     ],

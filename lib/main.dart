@@ -1,20 +1,17 @@
 import 'package:bloc/bloc.dart';
-import 'package:firebase/firebase.dart';
-import 'package:firebase_database/firebase_database.dart';
-// import 'package:firebase/firebase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/Layout/onBoaredingScreen.dart';
 import 'package:shop_app/Modules/Block/Cubit.dart';
 import 'package:shop_app/Modules/Block/States.dart';
 import 'package:shop_app/Modules/LoginScreen.dart';
+import 'package:shop_app/Modules/demo.dart';
 import 'package:shop_app/Shared/Local/CacheHelper.dart';
 import 'package:shop_app/Shared/Network/DioHelper.dart';
 import 'Layout/shopLayout.dart';
 import 'Shared/BlocObserver.dart';
 import 'Shared/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
-
 void main() {
   BlocOverrides.runZoned(
     () async {
@@ -38,6 +35,7 @@ void main() {
         widget = OnBoarding();
       }
       runApp(MyApp(widget));
+      // runApp(MyApp(DemoScreen()));
     },
     blocObserver: MyBlocObserver(),
   );
@@ -65,6 +63,7 @@ class MyApp extends StatelessWidget {
                         gapPadding: 10,
                         borderSide: BorderSide(color: Color(0xff3b75a8))))),
             home: widget,
+            // home:DemoScreen(),
             debugShowCheckedModeBanner: false,
           );
         },
