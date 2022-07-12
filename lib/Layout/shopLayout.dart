@@ -5,6 +5,7 @@ import 'package:shop_app/Modules/Block/Cubit.dart';
 import 'package:shop_app/Modules/Block/States.dart';
 import 'package:shop_app/Modules/CategoriesScreen.dart';
 import 'package:shop_app/Modules/LoginScreen.dart';
+import 'package:shop_app/Modules/demo.dart';
 import 'package:shop_app/Modules/favouriteScreen.dart';
 import 'package:shop_app/Modules/productScreen.dart';
 import 'package:shop_app/Modules/ProfileScreen.dart';
@@ -47,6 +48,7 @@ class _ShopLayoutState extends State<ShopLayout> {
                 // Address(),
                 // RestPasswordScreen()
                 // ProductsScreen(),
+                // DemoScreen(),
               ];
               return CupertinoTabScaffold(
                 tabBuilder: ((context, index) {
