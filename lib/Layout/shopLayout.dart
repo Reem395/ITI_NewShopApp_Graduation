@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/Modules/Admin/AddCategoryForm.dart';
 import 'package:shop_app/Modules/Block/Cubit.dart';
 import 'package:shop_app/Modules/Block/States.dart';
 import 'package:shop_app/Modules/CategoriesScreen.dart';
@@ -44,11 +45,12 @@ class _ShopLayoutState extends State<ShopLayout> {
                 CategoriesScreen(),
                 FavouriteScreen(),
                 // ProfileScreen()
-                AccountInfoScreen(),
+                // AccountInfoScreen(),
                 // Address(),
                 // RestPasswordScreen()
                 // ProductsScreen(),
-                // DemoScreen(),
+                DemoScreen(),
+                // AddCategoryForm()
               ];
               return CupertinoTabScaffold(
                 tabBuilder: ((context, index) {

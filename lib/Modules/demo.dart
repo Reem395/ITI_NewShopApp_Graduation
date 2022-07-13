@@ -1,8 +1,9 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:shop_app/Models/ProductModel.dart';
-import 'package:shop_app/Service/fireStore_Product.dart';
+import 'package:shop_app/Models/OrderModel.dart';
+import 'package:shop_app/Service/fireStore_Order.dart';
+
+import '../Models/OrderModel.dart';
+import '../Service/fireStore_Cart.dart';
 
 class DemoScreen extends StatefulWidget {
   const DemoScreen({ Key? key }) : super(key: key);
@@ -14,151 +15,81 @@ class DemoScreen extends StatefulWidget {
 class _DemoScreenState extends State<DemoScreen> {
   @override
   Widget build(BuildContext context) {
-   String? productId ,name,description ,image ,categoryName;
-   int? oldPrice,price ,noItemsInStock,discount;
-   List<String> prodImages=[];
-   TextEditingController imageTwo = TextEditingController();
-   TextEditingController imageThree = TextEditingController();
-    WidgetsFlutterBinding.ensureInitialized();
+   String? userId,state;
+   List<String> productIds=[];
+   TextEditingController prod1 = TextEditingController();
+   TextEditingController Prod2 = TextEditingController();
+   
+   WidgetsFlutterBinding.ensureInitialized();
    return SingleChildScrollView(
-     child: Column(
-        children: [
-            TextField(
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Name',
-                        hintText: 'product Name',
-                      ),
-                      onChanged: (value){
-                        name = value;
-                      },
-                  ),
-   
-            TextField(
-              decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'old price',
-              hintText: 'product old price',
-            ),
-              keyboardType: TextInputType.number ,
-              onChanged: (value){
-                oldPrice = int.parse(value);
-              },
-          ),
-   
-            TextField(
-              decoration: const InputDecoration(
+     child: Padding(
+       padding: const EdgeInsets.all(8.0),
+       child: Column(
+          children: [
+
+              TextField(
+                decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'price',
-                hintText: 'product price',
+                labelText: 'userId price',
+                hintText: 'product old price',
               ),
-              keyboardType: TextInputType.number ,
-              onChanged: (value){
-                price = int.parse(value);
-              },
+                keyboardType: TextInputType.number ,
+                onChanged: (value){
+                  userId = value;
+                },
             ),
    
-            TextField(
-              decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'description',
-              hintText: 'product description',
-            ),
-              onChanged: (value){
-                description = value;
-              },
-          ),
+              TextField(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'productId',
+                  hintText: 'productId price',
+                ),
+                keyboardType: TextInputType.number ,
+                onChanged: (value){
+                  state = value;
+                },
+              ),
    
-            TextField(
-              decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'discount',
-              hintText: 'product discount',
-            ),
-              keyboardType: TextInputType.number ,
-              onChanged: (value){
-                discount = int.parse(value);
-              },
-          ),
-   
-          TextField(
-              decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'noItemsInStock',
-              hintText: 'noItemsInStock',
-            ),
-              keyboardType: TextInputType.number ,
-              onChanged: (value){
-                noItemsInStock = int.parse(value);
-              },
-          ),
-   
-          TextField(
-              decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'main image',
-              hintText: 'main image',
-            ),
-              onChanged: (value){
-                image = value;
-              },
-          ),
-          
-      
+              TextField(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'prodId1',
+                  hintText: 'prodId1',
+                ),
+                keyboardType: TextInputType.number ,
+                controller: prod1,
+              ),
+
              TextField(
-              decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'second Image',
-              hintText: 'second Image',
-            ),
-              // onChanged: (value){
-              //   prodImages.add(value);
-              // },
-              controller: imageTwo,
-          ),
-          TextField(
-              decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'third Image',
-              hintText: 'third Image',
-            ),
-              // onChanged: (value){
-              //   prodImages.add(value);
-              // },
-              controller: imageThree,
-          ),
-          TextField(
-              decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'categoryName',
-              hintText: 'categoryName',
-            ),
-              keyboardType: TextInputType.number ,
-              onChanged: (value){
-                categoryName = value;
-              },
-          ),
-       
-          ElevatedButton(onPressed: ()async{
-            try {
-              // ProductModel product = ProductModel(name: name,price: price!,oldPrice: oldPrice!);
-              prodImages.add(imageTwo.text);
-              prodImages.add(imageThree.text);
-              ProductModel product = ProductModel(name: name, oldPrice: oldPrice!, price: price!, description: description, image: image, prodImages: prodImages, noItemsInStock: noItemsInStock!, categoryName: categoryName,discount: discount);
-              await  FireStoreProduct().addProductToFireStore(product);
-              prodImages.clear();
-            } catch (e) {
-              print(e.toString());
-            }
-            try {
-              
-            } catch (e) {
-            }
-          }, child:const Text("Add")),
-            ElevatedButton(onPressed: (){
-            FireStoreProduct().getProducts();
-          }, child: Text("Get"))
-        ],
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'prodId2',
+                  hintText: 'prodId2',
+                ),
+                keyboardType: TextInputType.number ,
+                controller: Prod2,
+              ),
+              ElevatedButton(onPressed: ()async{
+              try {
+                productIds.add(prod1.text);
+                productIds.add(Prod2.text);
+                OrderModel orderModel = OrderModel(userId: userId!, prodIds: productIds, state: state!);
+                await  FireStoreOrder().addOrderToFireStore(orderModel);
+                productIds.clear();
+              } catch (e) {
+                print(e.toString());
+              }
+
+            }, child:const Text("Add")),
+
+
+            
+              ElevatedButton(onPressed: (){
+              FireStoreOrder().getOrders();
+            }, child: Text("Get"),),
+          ],
+       ),
      ),
    );
 
