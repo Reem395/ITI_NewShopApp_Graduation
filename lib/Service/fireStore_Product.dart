@@ -6,18 +6,17 @@ class FireStoreProduct {
   
   List<ProductModel> products=[] ;
   final CollectionReference _productCollectionRef =
-      FirebaseFirestore.instance.collection('Products');
+      FirebaseFirestore.instance.collection('products');
 
   Future<void> addProductToFireStore(ProductModel productModel) async {
-    var id = _productCollectionRef
-        // .doc(productModel.productId).id;
-        .doc().id;
-        productModel.productId = id
-        ;
+    // var id = _productCollectionRef
+    //     // .doc(productModel.productId).id;
+    //     .doc().id;
+    //     productModel.productId = id;
         
   print("myID : ${productModel.productId}");
         await _productCollectionRef
-        .doc(productModel.productId).set(productModel.toJson())
+        .add(productModel.toJson())
         .then((value) => {
         print("Product Id : ${productModel.productId}")
           
@@ -26,7 +25,7 @@ class FireStoreProduct {
    getProducts () {
   
 // FirebaseFirestore.instance.collection("Products").get().then((value) {
-FirebaseFirestore.instance.collection("Products").get().then((value) {
+FirebaseFirestore.instance.collection("products").get().then((value) {
 value.docs.forEach((element) { 
   products.add(ProductModel.fromJson(element.data()));
   print(element.data());

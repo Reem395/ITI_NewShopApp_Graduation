@@ -26,6 +26,7 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ShopCubit.get(context).getProfileData();
     return BlocConsumer<ShopCubit, ShopStates>(
         builder: (context, state) {
           nameController.text = ShopCubit.get(context).getProfile!.data!.name;
@@ -152,18 +153,7 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                       const SizedBox(
                         height: 20,
                       ),
-                       Container(
-                        width: MediaQuery.of(context).size.width / 2,
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all(defaultColor)),
-                          onPressed: (){
-                              FirebaseDatabase.instance.ref().child("test").set(820);
-                            },
-                          child: const Text("Fire"),
-                        ),
-                      )
+                       
                     ],
                   ),
                 );

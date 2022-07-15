@@ -13,7 +13,8 @@ class _AddProductFormState extends State<AddProductForm> {
   @override
   Widget build(BuildContext context) {
    String? name,description ,image ,categoryName;
-   int? oldPrice,price ,noItemsInStock,discount;
+   int? noItemsInStock;
+   double? oldPrice,price ,discount;
    List<String> prodImages=[];
    TextEditingController imageTwo = TextEditingController();
    TextEditingController imageThree = TextEditingController();
@@ -40,7 +41,7 @@ class _AddProductFormState extends State<AddProductForm> {
             ),
               keyboardType: TextInputType.number ,
               onChanged: (value){
-                oldPrice = int.parse(value);
+                oldPrice = double.parse(value);
               },
           ),
    
@@ -52,7 +53,7 @@ class _AddProductFormState extends State<AddProductForm> {
               ),
               keyboardType: TextInputType.number ,
               onChanged: (value){
-                price = int.parse(value);
+                price = double.parse(value);
               },
             ),
    
@@ -75,7 +76,7 @@ class _AddProductFormState extends State<AddProductForm> {
             ),
               keyboardType: TextInputType.number ,
               onChanged: (value){
-                discount = int.parse(value);
+                discount = double.parse(value);
               },
           ),
    

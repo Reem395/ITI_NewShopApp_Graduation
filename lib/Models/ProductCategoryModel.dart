@@ -1,6 +1,6 @@
 class ProductCategoryModel{
 
-  String? categoryId;
+  int? categoryId;
   late String name, image;
   ProductCategoryModel({this.categoryId, required this.name, required this.image});
 

@@ -13,11 +13,11 @@ class FireStoreCategory {
 
   Future<void> addCategoryToFireStore(ProductCategoryModel categoryModel)async{ 
 
-    var id = _categorycollectionReference.doc().id;
-    categoryModel.categoryId = id;
+    // var id = _categorycollectionReference.doc().id;
+    // categoryModel.categoryId = id;
 
-    await _categorycollectionReference.doc(categoryModel.categoryId)
-    .set(categoryModel.toJson())
+    await _categorycollectionReference
+    .add(categoryModel.toJson())
     .then((value) {
         print("Category Id : ${categoryModel.categoryId}");
     });

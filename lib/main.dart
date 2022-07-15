@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<ShopCubit>(
       create: (context) {
-        return ShopCubit();
+        return ShopCubit()..getProfileData();
       },
       child: BlocConsumer<ShopCubit, ShopStates>(
         builder: (context, states) {
