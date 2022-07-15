@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_app/Models/OrderModel.dart';
+import 'package:shop_app/Models/WishListModel.dart';
 import 'package:shop_app/Service/fireStore_Order.dart';
+import 'package:shop_app/Service/fireStore_WishList.dart';
 import 'package:shop_app/Shared/endpoints.dart';
 
 import '../Models/OrderModel.dart';
@@ -15,9 +17,12 @@ class DemoScreen extends StatefulWidget {
 }
 
 class _DemoScreenState extends State<DemoScreen> {
+  
+  int  currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
-   String? userId,state;
+   String? userId,state,productId;
    List<String> productIds=[];
    TextEditingController prod1 = TextEditingController();
    TextEditingController Prod2 = TextEditingController();
@@ -720,7 +725,7 @@ List<Map<String, dynamic>> products=
             "price": 47,
             "discount": 17.79,
             "categoryName": "men-watches",
-            "images": "https://i5.walmartimages.com/asr/5674324f-447a-47d3-bb9c-497e81beb721_1.13aa71bb4d761520110229a04ff1bba7.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
+            "image": "https://i5.walmartimages.com/asr/5674324f-447a-47d3-bb9c-497e81beb721_1.13aa71bb4d761520110229a04ff1bba7.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
             "prodImages": [
                 "https://i5.walmartimages.com/asr/2f9c4bdc-19c7-41c8-92aa-52d32a66124a_1.bdcfc74f8a8eeca13b7cdbed831fdbc1.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
                 "https://i5.walmartimages.com/asr/a8d5041f-7414-4aca-9ec4-66636a9b7169_1.b8e26b3024530a1921ffa34795d85cb2.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
@@ -736,7 +741,7 @@ List<Map<String, dynamic>> products=
             "price": 100,
             "discount": 10,
             "categoryName": "irons",
-            "images": "https://m.media-amazon.com/images/I/51E8+iidwnL._AC_SL1000_.jpg",
+            "image": "https://m.media-amazon.com/images/I/51E8+iidwnL._AC_SL1000_.jpg",
             "prodImages": [
                 "https://m.media-amazon.com/images/I/619yRoLAYDL._AC_SL1000_.jpg",
                 "https://m.media-amazon.com/images/I/61LpUUWdOsL._AC_SL1181_.jpg",
@@ -751,7 +756,7 @@ List<Map<String, dynamic>> products=
             "price": 68,
             "discount": 15,
             "categoryName": "irons",
-            "images": "https://m.media-amazon.com/images/I/61Ky4K-vRIL._AC_SL1000_.jpg",
+            "image": "https://m.media-amazon.com/images/I/61Ky4K-vRIL._AC_SL1000_.jpg",
             "prodImages": [
                 "https://m.media-amazon.com/images/I/41ZNUMmXvmL._AC_.jpg",
                 "https://m.media-amazon.com/images/I/71qB19wGopL._AC_SL1165_.jpg",
@@ -768,7 +773,7 @@ List<Map<String, dynamic>> products=
             "price": 72.25,
             "discount": 15,
             "categoryName": "irons",
-            "images": "https://m.media-amazon.com/images/I/61FLK+MY9aL._AC_SL1139_.jpg",
+            "image": "https://m.media-amazon.com/images/I/61FLK+MY9aL._AC_SL1139_.jpg",
             "prodImages": [
                 "https://m.media-amazon.com/images/I/91I2aF4hXHL._AC_SL1500_.jpg",
                 "https://m.media-amazon.com/images/I/91fYPwKjZ5L._AC_SL1500_.jpg",
@@ -784,7 +789,7 @@ List<Map<String, dynamic>> products=
             "price": 85.5,
             "discount": 5,
             "categoryName": "irons",
-            "images": "https://m.media-amazon.com/images/I/51a1LKGVmAL._AC_SL1500_.jpg",
+            "image": "https://m.media-amazon.com/images/I/51a1LKGVmAL._AC_SL1500_.jpg",
             "prodImages": [
                 "https://m.media-amazon.com/images/I/71+l1GvBvCL._AC_SL1500_.jpg",
                 "https://m.media-amazon.com/images/I/61hjxWoQbfL._AC_SL1500_.jpg",
@@ -801,7 +806,7 @@ List<Map<String, dynamic>> products=
             "price": 85.5,
             "discount": 5,
             "categoryName": "irons",
-            "images": "https://m.media-amazon.com/images/I/51qB7kR+GUL._AC_SL1350_.jpg",
+            "image": "https://m.media-amazon.com/images/I/51qB7kR+GUL._AC_SL1350_.jpg",
             "prodImages": [
                 "https://m.media-amazon.com/images/I/61s0EbNgjcL._AC_SL1350_.jpg",
                 "https://m.media-amazon.com/images/I/610qhY+pOjL._AC_SL1350_.jpg",
@@ -818,7 +823,7 @@ List<Map<String, dynamic>> products=
             "price": 120,
             "discount": 15,
             "categoryName": "irons",
-            "images": "https://m.media-amazon.com/images/I/61xL6hbtfbL._AC_SL1500_.jpg",
+            "image": "https://m.media-amazon.com/images/I/61xL6hbtfbL._AC_SL1500_.jpg",
             "prodImages": [
                 "https://m.media-amazon.com/images/I/71qXk2NU1jL._AC_SL1500_.jpg",
                 "https://m.media-amazon.com/images/I/61th1RWDrdL._AC_SL1500_.jpg",
@@ -835,7 +840,7 @@ List<Map<String, dynamic>> products=
             "price": 120,
             "discount": 15,
             "categoryName": "irons",
-            "images": "https://m.media-amazon.com/images/I/617R34aPuZL._AC_SL1500_.jpg",
+            "image": "https://m.media-amazon.com/images/I/617R34aPuZL._AC_SL1500_.jpg",
             "prodImages": [
                 "https://m.media-amazon.com/images/I/71JD8YZorhL._AC_SL1500_.jpg",
                 "https://m.media-amazon.com/images/I/81oAlmkKHQL._AC_SL1500_.jpg",
@@ -851,7 +856,7 @@ List<Map<String, dynamic>> products=
             "price": 50,
             "discount": 8,
             "categoryName": "fans",
-            "images": "https://i5.walmartimages.com/asr/86701e81-518e-4b53-9cba-65379618a009.68987da722961eebb800992584abdf21.png?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
+            "image": "https://i5.walmartimages.com/asr/86701e81-518e-4b53-9cba-65379618a009.68987da722961eebb800992584abdf21.png?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
             "prodImages": [
                 "https://i5.walmartimages.com/asr/a53ca7a9-a331-4b9b-a390-5efe178b86af.b4f4cf890f4765e8a4b655079aa8fd03.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
                 "https://i5.walmartimages.com/asr/487cfce8-fc70-4055-a682-c8236a294887.7948ccea4520f97e0a5a2094c2198122.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
@@ -867,7 +872,7 @@ List<Map<String, dynamic>> products=
             "price": 50,
             "discount": 8,
             "categoryName": "fans",
-            "images": "https://i5.walmartimages.com/asr/840bd7dc-497d-406e-a5e1-52b053c60089_1.7b626eb54cb5e5ea2d3d02dcf17f51cb.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
+            "image": "https://i5.walmartimages.com/asr/840bd7dc-497d-406e-a5e1-52b053c60089_1.7b626eb54cb5e5ea2d3d02dcf17f51cb.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
             "prodImages": [
                 "https://i5.walmartimages.com/asr/1880b4d6-0fc0-409c-8ca5-9d2aa53567fe_1.05f24155b3e333e90d8b48b90a1da9a9.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
                 "https://i5.walmartimages.com/asr/01fca0cd-6d59-486f-81b4-605b9c7e0207_1.2d0c17e47539cc4e538be39960e21c13.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
@@ -882,7 +887,7 @@ List<Map<String, dynamic>> products=
             "price": 31.4,
             "discount": 4,
             "categoryName": "fans",
-            "images": "https://i5.walmartimages.com/asr/e8bf5cc3-fabb-4496-b6aa-e95ec3a9101d_2.6b3b08410d7e8d69ea69d32c694acadb.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
+            "image": "https://i5.walmartimages.com/asr/e8bf5cc3-fabb-4496-b6aa-e95ec3a9101d_2.6b3b08410d7e8d69ea69d32c694acadb.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
             "prodImages": [
                 "https://i5.walmartimages.com/asr/d79b28a4-5d51-4de2-bb27-683f3d7f48b7.370dbb965c87ceaaf0312d72543f4833.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
                 "https://i5.walmartimages.com/asr/b431a3ab-7b55-4982-8c5f-47fa909f9600.76096863932cc4caf97071eade57e1d2.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
@@ -898,7 +903,7 @@ List<Map<String, dynamic>> products=
             "price": 198,
             "discount": 10,
             "categoryName": "fans",
-            "images": "https://i5.walmartimages.com/asr/14c942ea-7fb8-4f04-bf8b-851b9a32c5d3.9e4e8597fd3a71065c3ca8cee1620aa9.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
+            "image": "https://i5.walmartimages.com/asr/14c942ea-7fb8-4f04-bf8b-851b9a32c5d3.9e4e8597fd3a71065c3ca8cee1620aa9.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
             "prodImages": [
                 "https://i5.walmartimages.com/asr/7d103b1c-732b-48ad-a425-09441c1b2734.6bd707f6454b91c1efe7d573adb5828d.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
                 "https://i5.walmartimages.com/asr/d52cee4d-42da-49f6-9c4b-22bf6282589a.9becb1c201da812cd69e965ba1405089.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
@@ -914,7 +919,7 @@ List<Map<String, dynamic>> products=
             "price": 306,
             "discount": 10,
             "categoryName": "fans",
-            "images": "https://i5.walmartimages.com/asr/5f8d2b1f-d92d-4b40-8a7d-564d708b0df0.d28ca10080f92b33e483c1c3579af8b9.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
+            "image": "https://i5.walmartimages.com/asr/5f8d2b1f-d92d-4b40-8a7d-564d708b0df0.d28ca10080f92b33e483c1c3579af8b9.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
             "prodImages": [
                 "https://i5.walmartimages.com/asr/befa0edf-ac4c-4813-888e-38efa9bd86f6.4308093b73fbe790c725f42c8ddcf9a7.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
                 "https://i5.walmartimages.com/asr/f7007ff4-4562-4e4e-95e7-310b611abe0e.04ab1f8165625fb6f4a0453e88ab94af.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
@@ -945,49 +950,66 @@ List<Map<String, dynamic>> products=
                   userId = value;
                 },
             ),
-   
-              TextField(
+                 TextField(
                 decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'productId',
-                  hintText: 'productId price',
-                ),
+                border: OutlineInputBorder(),
+                labelText: 'productId ',
+                hintText: 'productId  ',
+              ),
                 keyboardType: TextInputType.number ,
                 onChanged: (value){
-                  state = value;
+                  productId = value;
                 },
-              ),
+            ),
+            //   TextField(
+            //     decoration: const InputDecoration(
+            //       border: OutlineInputBorder(),
+            //       labelText: 'productId',
+            //       hintText: 'productId price',
+            //     ),
+            //     keyboardType: TextInputType.number ,
+            //     onChanged: (value){
+            //       state = value;
+            //     },
+            //   ),
    
-              TextField(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'prodId1',
-                  hintText: 'prodId1',
-                ),
-                keyboardType: TextInputType.number ,
-                controller: prod1,
-              ),
+            //   TextField(
+            //     decoration: const InputDecoration(
+            //       border: OutlineInputBorder(),
+            //       labelText: 'prodId1',
+            //       hintText: 'prodId1',
+            //     ),
+            //     keyboardType: TextInputType.number ,
+            //     controller: prod1,
+            //   ),
 
-             TextField(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'prodId2',
-                  hintText: 'prodId2',
-                ),
-                keyboardType: TextInputType.number ,
-                controller: Prod2,
-              ),
+            //  TextField(
+            //     decoration: const InputDecoration(
+            //       border: OutlineInputBorder(),
+            //       labelText: 'prodId2',
+            //       hintText: 'prodId2',
+            //     ),
+            //     keyboardType: TextInputType.number ,
+            //     controller: Prod2,
+            //   ),
               ElevatedButton(onPressed: ()async{
-              try {
-                productIds.add(prod1.text);
-                productIds.add(Prod2.text);
-                OrderModel orderModel = OrderModel(userId: userId!, prodIds: productIds, state: state!);
-                await  FireStoreOrder().addOrderToFireStore(orderModel);
+              // try {
+              //   productIds.add(prod1.text);
+              //   productIds.add(Prod2.text);
+              //   OrderModel orderModel = OrderModel(userId: userId!, prodIds: productIds, state: state!);
+              //   await  FireStoreOrder().addOrderToFireStore(orderModel);
+              //   productIds.clear();
+              // } catch (e) {
+              //   print(e.toString());
+              // }
+try {
+               
+                WishListModel wishListModel = WishListModel(userId: userId!,productId: productId!);
+                await  FireStoreWishList().addItemToWishListFireStore(wishListModel);
                 productIds.clear();
               } catch (e) {
                 print(e.toString());
               }
-
             }, child:const Text("Add")),
 
 
@@ -1003,6 +1025,13 @@ List<Map<String, dynamic>> products=
                         .doc(id).set(element);
                   });
             }, child: Text("Push data To FireStore"),),
+
+            ElevatedButton(onPressed: (){
+              Setstate(){
+                currentIndex = 2;
+          }
+
+            }, child: Text("$currentIndex"))
           ],
        ),
      ),
