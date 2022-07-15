@@ -70,35 +70,10 @@ class _ShopLayoutState extends State<ShopLayout> {
               return CupertinoTabScaffold(
                 tabBuilder: ((context, index) {
                   
-            // return WillPopScope(
-            //   onWillPop: () async {
-            //     final isFirstRouteInCurrentTab =
-            //     !await navigatorKeys[currentPage]!.currentState!.maybePop();
-            //     if (isFirstRouteInCurrentTab) {
-            //       if (currentPage != "Home") {
-            //         _selectTab("Home", 0);
-
-            //         return false;
-            //       }
-            //     }
-            //     // let system handle back button if we're on the first route
-            //     return isFirstRouteInCurrentTab;
-            //   },
-            // child: 
             return
-                 Scaffold(
+                Scaffold(
                 resizeToAvoidBottomInset: false,
-                appBar: AppBar(
-                  backgroundColor: defaultColor,
-                  title: const Text("ShopApp"),
-                  actions: [
-                    IconButton(
-                        onPressed: () {
-                          navigateTo(context, SearchScreen());
-                        },
-                        icon: const Icon(Icons.search))
-                  ],
-                ),
+                
                 body: SafeArea(child: pages[index]),
               );
 
@@ -112,7 +87,6 @@ class _ShopLayoutState extends State<ShopLayout> {
                       BottomNavigationBarItem(
                           icon: Icon(Icons.favorite), label: "Favourites"),
                       BottomNavigationBarItem(
-                          // icon: Icon(Icons.settings), label: "Setting"),
                           icon: Icon(Icons.person), label: "Profile"),
                 ]),
                 );
@@ -133,14 +107,7 @@ class _ShopLayoutState extends State<ShopLayout> {
     );
   }
 
-  // void _selectTab(String tabItem, int index) {
-  //   if(tabItem == currentPage ){
-  //     navigatorKeys[tabItem]!.currentState!.popUntil((route) => route.isFirst);
-  //   } else {
-  //     setState(() {
-  //       currentPage = pageKeys[currentIndex];
-  //       currentIndex = index;
-  //     });
-  //   }
-  // }
+  
+ 
+
 }

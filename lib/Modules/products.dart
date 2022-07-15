@@ -20,6 +20,8 @@ return Scaffold(
       //     },
       //   ),
       // ),
+      appBar: AppBar(title: const Text('Products'),
+      backgroundColor: defaultColor,),
       body: GridView.builder(
         padding: const EdgeInsets.all(15.0),
         itemCount: 10,
