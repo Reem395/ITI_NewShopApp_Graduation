@@ -1,0 +1,47 @@
+{
+    "women-dresses": {
+        "categoryId": 1,
+        "name": "women-dresses",
+        "image": "https://i.pinimg.com/236x/c0/31/0f/c0310fd2250a904e3af5682ceb7992f4.jpg"
+    },
+    "women-jewellery": {
+        "categoryId": 2,
+        "name": "women-jewellery",
+        "image": "https://medias.utsavfashion.com/media/catalog/product/cache/1/image/500x/040ec09b1e35df139433887a97daa66f/k/u/kundan-necklace-set-v1-jmy866.jpg"
+    },
+    "women-watches": {
+        "categoryId": 3,
+        "name": "women-watches",
+        "image": "https://ae01.alicdn.com/kf/HTB1CpnvaUD1gK0jSZFGq6zd3FXaH/Women-Watches-Women-Fashion-Watch-Luxury-Diamond-Women-s-Gold-Wrist-Watch-Ladies-Watch-Women-Gifts.jpg_Q90.jpg_.webp"
+    },
+    "women-bags": {
+        "categoryId": 4,
+        "name": "women-bags",
+        "image": "https://image.made-in-china.com/202f0j00UZtYDPfGVhkO/2021-Fashion-Women-Tote-Bag-Women-Handbag-Ladies-PU-Leather-Shoulder-Luxury-Bags-Women-Handbags.jpg"
+    },
+    "sunglasses": {
+        "categoryId": 5,
+        "name": "sunglasses",
+        "image": "https://assets.aspinaloflondon.com/images/square-large/1089423-006-2424-253100003.jpg"
+    },
+    "men-shirts": {
+        "categoryId": 6,
+        "name": "men-shirts",
+        "image": "https://na3em.cc/wp-content/uploads/2018/11/5297-4.jpg"
+    },
+    "men-watches": {
+        "categoryId": 7,
+        "name": "men-watches",
+        "image": "https://reviewmefirst.com/storage/luxury-mens-watches/screen-shot-2020-12-06-at-10-32-58-pm-copy.webp"
+    },
+    "irons": {
+        "categoryId": 8,
+        "name": "irons",
+        "image": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F37%2F2022%2F04%2F19%2FBHG_BLACKDECKER-IR1010-Light-_N-Easy-Compact-Steam-Iron_3-2000.jpg"
+    },
+    "fans": {
+        "categoryId": 9,
+        "name": "fans",
+        "image": "https://www.thespruce.com/thmb/SPImRXYRJ3IfRksHiCih-q01qoI=/1500x1000/filters:fill(auto,1)/Web_1500-SPR_Group_RM_02-595106cea66b4633bb1962295055885c.jpg"
+    }
+}
