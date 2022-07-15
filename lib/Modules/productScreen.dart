@@ -5,7 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/Models/HomeModel.dart';
 import 'package:shop_app/Modules/Block/Cubit.dart';
 import 'package:shop_app/Modules/Block/States.dart';
+import 'package:shop_app/Modules/searchScreen.dart';
 import '../Shared/Components.dart';
+import '../Shared/constants.dart';
 
 class ProductScreen extends StatelessWidget {
   @override
@@ -17,7 +19,18 @@ class ProductScreen extends StatelessWidget {
             ShopHomeModel? homeModel = ShopCubit.get(context).homeData;
             return ConditionalBuilder(
               condition: homeModel != null,
-              builder: (context) => SingleChildScrollView(
+              builder: (context) => Scaffold(
+                // appBar: AppBar(backgroundColor: defaultColor,
+                //   title: const Text("ShopApp"),
+                //   actions: [
+                //     IconButton(
+                //         onPressed: () {
+                //           navigateTo(context, SearchScreen());
+                //         },
+                //         icon: const Icon(Icons.search))
+                //   ],),
+                appBar: ShopSearchAppbar(context),
+                body: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -61,6 +74,7 @@ class ProductScreen extends StatelessWidget {
                     buildGridView(homeModel, context)
                   ],
                 ),
+              ),
               ),
               fallback: (context) => const Center(
                 child: CircularProgressIndicator(),

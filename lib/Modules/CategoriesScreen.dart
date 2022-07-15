@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shop_app/Modules/searchScreen.dart';
 import '../Shared/Components.dart';
+import '../Shared/constants.dart';
 import 'Block/Cubit.dart';
 
 class CategoriesScreen extends StatelessWidget {
@@ -8,7 +10,9 @@ class CategoriesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoTabView(
       builder: (context){
-        return ListView.separated(
+        return Scaffold(
+          appBar: ShopSearchAppbar(context),
+          body: ListView.separated(
           itemBuilder: (context, index) => SizedBox(
             height: 120,
             width: 120,
@@ -18,7 +22,8 @@ class CategoriesScreen extends StatelessWidget {
             ),
           ),
           separatorBuilder: (context, index) => Container(height: 1, color: Colors.grey[300],),
-          itemCount: ShopCubit.get(context).categoryModel!.data.data.length);
+          itemCount: ShopCubit.get(context).categoryModel!.data.data.length),
+        );
       },
     );
   }

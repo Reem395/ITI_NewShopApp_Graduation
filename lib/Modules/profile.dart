@@ -13,6 +13,7 @@ class Profile extends StatelessWidget {
       builder: (context){
         return SafeArea(
         child: Scaffold(
+          // appBar: null,
           body: SizedBox(
           width: double.infinity,
           child: SingleChildScrollView(

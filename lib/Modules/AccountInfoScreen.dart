@@ -36,7 +36,11 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
           return ConditionalBuilder(
               condition: state is! ShopLoadingProfileScreen,
               builder: (context) {
-                return Padding(
+                return Scaffold(
+                  appBar: AppBar(backgroundColor: defaultColor,
+                  title: const Text("Account Info"),
+                  ),
+                  body: Padding(
                   padding: const EdgeInsets.symmetric(
                       vertical: 20.0, horizontal: 20),
                   child: Column(
@@ -156,6 +160,7 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                        
                     ],
                   ),
+                ),
                 );
               },
               fallback: (context) => const Center(

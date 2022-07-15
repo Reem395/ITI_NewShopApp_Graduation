@@ -7,7 +7,9 @@ import '../Modules/Block/Cubit.dart';
 import '../Modules/LoginScreen.dart';
 import '../Modules/product_details.dart';
 import '../Modules/products.dart';
+import '../Modules/searchScreen.dart';
 import 'Local/CacheHelper.dart';
+import 'constants.dart';
 
 Widget buildOnBoard(String image, String text, BuildContext context) {
   return Column(
@@ -552,4 +554,15 @@ class _ProductItemState extends State<ProductItem> {
       isFavorite = !isFavorite;
     });
   }
+}
+AppBar ShopSearchAppbar(context ){
+  return AppBar(backgroundColor: defaultColor,
+                  title: const Text("ShopApp"),
+                  actions: [
+                    IconButton(
+                        onPressed: () {
+                          navigateTo(context, SearchScreen());
+                        },
+                        icon: const Icon(Icons.search))
+                  ],);
 }
