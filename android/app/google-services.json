@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "813131592145",
+    "firebase_url": "https://shopappmain-default-rtdb.firebaseio.com",
     "project_id": "shopappmain",
     "storage_bucket": "shopappmain.appspot.com"
   },
@@ -14,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "813131592145-qtc4h0iojanmg5c42ts1rr342imhgukg.apps.googleusercontent.com",
+          "client_id": "813131592145-ek6bbrtobr4ke6gn8771a324g0o4a1b7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.shop_app",
-            "certificate_hash": "efeacef602900d042f7d41bcde79d332762aedae"
+            "certificate_hash": "49a54c216f08a1cbee53e6e28d25b4eb2d43103f"
           }
         },
         {

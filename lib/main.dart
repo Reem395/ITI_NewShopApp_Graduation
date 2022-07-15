@@ -9,9 +9,11 @@ import 'package:shop_app/Modules/demo.dart';
 import 'package:shop_app/Shared/Local/CacheHelper.dart';
 import 'package:shop_app/Shared/Network/DioHelper.dart';
 import 'Layout/shopLayout.dart';
+import 'Modules/Auth_Screen.dart';
 import 'Shared/BlocObserver.dart';
 import 'Shared/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
+
 void main() {
   BlocOverrides.runZoned(
     () async {
@@ -34,8 +36,8 @@ void main() {
       } else {
         widget = OnBoarding();
       }
-      runApp(MyApp(widget));
-      // runApp(MyApp(DemoScreen()));
+      // runApp(MyApp(widget));
+      runApp(MyApp(const AuthScreen(title: "Auth Screen")));
     },
     blocObserver: MyBlocObserver(),
   );
