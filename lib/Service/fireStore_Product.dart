@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../Models/ProductModel/ProductModel.dart';
+import '../Models/ProductModel.dart';
 
 class FireStoreProduct {
   

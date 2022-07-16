@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../Models/WishListModel/WishListModel.dart';
+import '../Models/WishListModel.dart';
 
 
 class FireStoreWishList {

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../Models/OrderModel/OrderModel.dart';
+import 'package:shop_app/Models/OrderModel.dart';
 
-import '../Models/OrderModel/OrderModel.dart';
+import '../Models/OrderModel.dart';
 
 
 class FireStoreOrder {
