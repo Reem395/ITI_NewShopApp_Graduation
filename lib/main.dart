@@ -2,6 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/ViewModels/Block/Cubit.dart';
+import 'ViewModels/Block/States.dart';
 import 'ViewModels/Local/CacheHelper.dart';
 import 'ViewModels/Network/DioHelper.dart';
 import 'Views/LayoutScreen/ShopLayout.dart';
@@ -44,17 +46,28 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-          primaryColor: const Color(0xff3b75a8),
-          inputDecorationTheme: const InputDecorationTheme(
-              focusColor: Colors.red,
-              labelStyle: TextStyle(color: Color(0xff3b79a8)),
-              focusedBorder: OutlineInputBorder(
-                  gapPadding: 10,
-                  borderSide: BorderSide(color: Color(0xff3b75a8))))),
-      home: widget,
-      debugShowCheckedModeBanner: false,
+    return BlocProvider<ShopCubit>(create: (context){
+      return ShopCubit();
+    },
+    child: BlocConsumer<ShopCubit, ShopStates>(
+      builder: (context, state){
+        return MaterialApp(
+          theme: ThemeData(
+              primaryColor: const Color(0xff3b75a8),
+              inputDecorationTheme: const InputDecorationTheme(
+                  focusColor: Colors.red,
+                  labelStyle: TextStyle(color: Color(0xff3b79a8)),
+                  focusedBorder: OutlineInputBorder(
+                      gapPadding: 10,
+                      borderSide: BorderSide(color: Color(0xff3b75a8))))),
+          home: widget,
+          debugShowCheckedModeBanner: false,
+        );
+      },
+      listener: (context, state){
+
+      },
+    ),
     );
   }
 }
