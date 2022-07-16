@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/foundation.dart';
@@ -68,6 +69,13 @@ class FirebaseAuthMethods {
           if (userCredential.additionalUserInfo!.isNewUser) {}
         }
       }
+      print(
+          "Google data: ${googleUser?.displayName} ${googleUser?.id} ${googleUser?.email}");
+      FirebaseFirestore.instance.collection('Users').add({
+        'userId': googleUser?.id,
+        'email': googleUser?.email,
+        'name': googleUser?.displayName
+      });
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!);
     }
@@ -78,6 +86,8 @@ class FirebaseAuthMethods {
     try {
       final LoginResult loginResult = await FacebookAuth.instance.login();
 
+      var data = await FacebookAuth.instance.getUserData();
+      print("Facebook data ${data['name']} ${data['email']} ${data['id']}");
       final OAuthCredential facebookAuthCredential =
           FacebookAuthProvider.credential(loginResult.accessToken!.token);
 
