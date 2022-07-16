@@ -566,3 +566,26 @@ AppBar ShopSearchAppbar(context ){
                         icon: const Icon(Icons.search))
                   ],);
 }
+
+
+
+//*******************Rounded Button Style ******************** */
+
+ButtonStyle roundedBtnStyle(
+  {required double borderRadius,
+  double? btnElevation,
+  required Color btnColor,
+  double? btnHeight,
+  }
+)=> ButtonStyle(
+      shape: 
+      MaterialStateProperty.all<RoundedRectangleBorder>(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(borderRadius),
+      ),
+    ),
+    elevation: MaterialStateProperty.all(btnElevation),
+    backgroundColor: MaterialStateProperty.all(btnColor),
+    minimumSize:MaterialStateProperty.all( Size.fromHeight(btnHeight ?? 40))
+      );
+

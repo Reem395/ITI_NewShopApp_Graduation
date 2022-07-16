@@ -11,6 +11,10 @@ import 'package:shop_app/Shared/endpoints.dart';
 import '../../Models/CategoriesModel.dart';
 import '../../Models/LoginModel.dart';
 import '../../Shared/Components.dart';
+import '../CategoriesScreen.dart';
+import '../favouriteScreen.dart';
+import '../productScreen.dart';
+import '../profile.dart';
 
 class ShopCubit extends Cubit<ShopStates> {
   ShopCubit() : super(ShopLLoginInitialState());
@@ -23,6 +27,26 @@ class ShopCubit extends Cubit<ShopStates> {
   Map<int, bool> favouritesProd = {};
   ShopUserModel? getProfile;
   late String LogoutMessage;
+
+
+  // int _currentIndex = 0;
+
+  // get int currentIndex => _currentIndex;
+
+  // set currentIndex(int index) {
+  //   _currentIndex = index;
+  //   emit(IndexPageChanged());
+  // }
+
+int currenyIndex=0;
+void changePageIndex(int idx){
+  currenyIndex =idx;
+  // bottomItems[idx];
+  emit(IndexPageChanged());
+  print("from cubit: $currenyIndex");
+}
+
+
 
   static ShopCubit get(BuildContext context) {
     return BlocProvider.of(context);

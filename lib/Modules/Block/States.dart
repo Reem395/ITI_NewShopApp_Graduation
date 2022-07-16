@@ -68,3 +68,6 @@ class ShopSuccessSignUpScreen extends ShopStates{
 }
 
 class ShopFailSignUpScreen extends ShopStates{}
+
+class IndexPageChanged extends ShopStates{}
+class Indexbottom extends ShopStates{}

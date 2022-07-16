@@ -16,6 +16,7 @@ import '../Modules/AccountInfoScreen.dart';
 import '../Modules/AddressScreen.dart';
 import '../Modules/Admin/AddProductForm.dart';
 import '../Modules/ResetPassword.dart';
+import '../Modules/cartpage.dart';
 import '../Modules/products.dart';
 import '../Modules/profile.dart';
 import '../Modules/searchScreen.dart';
@@ -27,17 +28,8 @@ class ShopLayout extends StatefulWidget {
 }
 
 class _ShopLayoutState extends State<ShopLayout> {
-  // String currentPage= "Home";
-  // List<String> pageKeys= ["Home","Categories","Favourites","Profile"];
-  // Map<String, GlobalKey<NavigatorState>> navigatorKeys=
-  // {
-  //   "Home":GlobalKey<NavigatorState>(),
-  //   "Categories":GlobalKey<NavigatorState>(),
-  //   "Favourites":GlobalKey<NavigatorState>(),
-  //   "Profile":GlobalKey<NavigatorState>(),
-  // };
 
-  int currentIndex = 0;
+ final myKey = new GlobalKey<_ShopLayoutState>();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -51,12 +43,14 @@ class _ShopLayoutState extends State<ShopLayout> {
               ..getProfileData();
           },
           child: BlocConsumer<ShopCubit, ShopStates>(
+            listener: (context, states) {},
             builder: (BuildContext context, Object? state) {
-              
+              var cubit = ShopCubit.get(context);
                 List<Widget> pages = [
                 ProductScreen(),
                 CategoriesScreen(),
                 FavouriteScreen(),
+                CartPage(),
                 // ProfileScreen()
                 // AccountInfoScreen(),
                 // Address(),
@@ -67,31 +61,42 @@ class _ShopLayoutState extends State<ShopLayout> {
                 // AddProductForm()
                 Profile()
               ];
+              // int currentIndex = cubit.currenyIndex;
               return CupertinoTabScaffold(
-                tabBuilder: ((context, index) {
-                  
-            return
-                Scaffold(
-                resizeToAvoidBottomInset: false,
-                
-                body: SafeArea(child: pages[index]),
-              );
-
-                }),
-
-                tabBar: CupertinoTabBar(items: const [
-                    BottomNavigationBarItem(
+                controller: CupertinoTabController(
+                    initialIndex: cubit.currenyIndex),
+                tabBar: CupertinoTabBar(
+                  onTap: (value) {
+                    cubit.changePageIndex(value);
+                    print("Tab Cubit current indx: ${cubit.currenyIndex}");
+                  },
+                  currentIndex: cubit.currenyIndex,
+                  items: const [
+                      BottomNavigationBarItem(
                           icon: Icon(Icons.home), label: "Home"),
                       BottomNavigationBarItem(
                           icon: Icon(Icons.apps_sharp), label: "Categories"),
                       BottomNavigationBarItem(
                           icon: Icon(Icons.favorite), label: "Favourites"),
                       BottomNavigationBarItem(
+                          icon: Icon(Icons.shopping_cart), label: "Cart"),
+                      BottomNavigationBarItem(
                           icon: Icon(Icons.person), label: "Profile"),
-                ]),
+                ],
+                ),
+
+                tabBuilder: ((context, index) {
+                    return
+                        Scaffold(
+                        resizeToAvoidBottomInset: false,
+                        
+                        body: SafeArea(child: pages[cubit.currenyIndex]),
+                      );
+                }
+                ),
                 );
             },
-            listener: (context, states) {},
+
           )),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/Modules/Block/Cubit.dart';
@@ -13,7 +14,9 @@ class FavouriteScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     FavouritesModel? cubit = ShopCubit.get(context).favouritesModel;
     bool favColor = true;
-    return Scaffold(
+    return CupertinoTabView(
+      builder: ((context) {
+        return Scaffold(
       appBar: ShopSearchAppbar(context),
       body: BlocConsumer<ShopCubit, ShopStates>(
         builder: (context, state) => ConditionalBuilder(
@@ -25,6 +28,8 @@ class FavouriteScreen extends StatelessWidget {
             ),
             fallback: (context) => const Center(child: CircularProgressIndicator())),
         listener: (context, state){}),
+    );
+      }),
     );
   }
 }

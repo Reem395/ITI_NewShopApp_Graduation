@@ -1,142 +1,155 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/Modules/AccountInfoScreen.dart';
 import 'package:shop_app/Shared/Components.dart';
 import 'package:shop_app/Shared/constants.dart';
+
+import 'Block/Cubit.dart';
+import 'Block/States.dart';
 
 class Profile extends StatelessWidget {
   const Profile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoTabView(
-      builder: (context){
-        return SafeArea(
-        child: Scaffold(
-          // appBar: null,
-          body: SizedBox(
-          width: double.infinity,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                  ),
-                  child: Stack(
-                    alignment: AlignmentDirectional.bottomEnd,
-                    children: [
-                      const CircleAvatar(
-                        radius: 59,
-                        backgroundImage: NetworkImage(
-                            'https://png.pngtree.com/png-clipart/20220117/original/pngtree-original-cartoon-avatar-girl-png-image_7145782.png'),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(5),
-                        child: CircleAvatar(
-                          radius: 13,
-                          backgroundColor: Colors.white,
-                          child: IconButton(
-                            alignment: AlignmentDirectional.center,
-                            icon: const Icon(
-                              Icons.edit,
-                              size: 13,
-                              color: Colors.black,
+    return BlocConsumer<ShopCubit, ShopStates>(
+      builder: (BuildContext context, Object? state) {
+              var cubit = ShopCubit.get(context);
+              return CupertinoTabView(
+                  builder: (context){
+                    return SafeArea(
+                      child: Scaffold(
+                      // appBar: null,
+                      body: SizedBox(
+                      width: double.infinity,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const SizedBox(
+                              height: 20,
                             ),
-                            onPressed: () {},
-                          ),
+                            Container(
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                              ),
+                              child: Stack(
+                                alignment: AlignmentDirectional.bottomEnd,
+                                children: [
+                                  const CircleAvatar(
+                                    radius: 59,
+                                    backgroundImage: NetworkImage(
+                                        'https://png.pngtree.com/png-clipart/20220117/original/pngtree-original-cartoon-avatar-girl-png-image_7145782.png'),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(5),
+                                    child: CircleAvatar(
+                                      radius: 13,
+                                      backgroundColor: Colors.white,
+                                      child: IconButton(
+                                        alignment: AlignmentDirectional.center,
+                                        icon: const Icon(
+                                          Icons.edit,
+                                          size: 13,
+                                          color: Colors.black,
+                                        ),
+                                        onPressed: () {},
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            const Text(
+                              "Full Name",
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                            const Text(
+                              "Anything Here",
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            ClipPath(
+                              clipper: CustomClipPath(),
+                              child: Container(
+                                height: 100,
+                                color: defaultColor,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 3 / 3.5,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  buildRow(
+                                      icon: Icons.person_outline,
+                                      title: "Account Information",
+                                      onTap: () {
+                                        navigateTo(context, AccountInfoScreen());
+                                      }),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      buildRow(
+                                          icon: Icons.location_on_outlined,
+                                          title: "My Addresses",
+                                          onTap: () {
+                                            navigateTo(context, AccountInfoScreen());
+                                          }),
+                                    ],
+                                  ),
+                                  buildRow(
+                                      icon: Icons.shopping_cart,
+                                      title: "My Orders",
+                                      onTap: () {
+                                        navigateTo(context, AccountInfoScreen());
+                                      }),
+                                  buildRow(
+                                      icon: Icons.favorite_outline,
+                                      title: "My Wishlist",
+                                      onTap: () {
+                                        // navigateTo(context, AccountInfoScreen());
+                                        cubit.changePageIndex(2);
+                                        // cubit.bottomItems[2];
+                                      }),
+                                  buildRow(
+                                      icon: Icons.language,
+                                      title: "Change Language",
+                                      onTap: () {
+                                        // navigateAndReplace(context, const Profile());
+                                        // if (logOut == false) {
+                                        //   navigateTo(context, AccountInfoScreen());
+                                        // } else {
+                                        //
+                                        // }
+                                      })
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                          ],
                         ),
-                      )
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const Text(
-                  "Full Name",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                ),
-                const Text(
-                  "Anything Here",
-                  style: TextStyle(
-                    fontSize: 13,
-                    color: Colors.grey,
-                  ),
-                ),
-                ClipPath(
-                  clipper: CustomClipPath(),
-                  child: Container(
-                    height: 100,
-                    color: defaultColor,
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 3 / 3.5,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      buildRow(
-                          icon: Icons.person_outline,
-                          title: "Account Information",
-                          onTap: () {
-                            navigateTo(context, AccountInfoScreen());
-                          }),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          buildRow(
-                              icon: Icons.location_on_outlined,
-                              title: "My Addresses",
-                              onTap: () {
-                                navigateTo(context, AccountInfoScreen());
-                              }),
-                        ],
                       ),
-                      buildRow(
-                          icon: Icons.shopping_cart,
-                          title: "My Orders",
-                          onTap: () {
-                            navigateTo(context, AccountInfoScreen());
-                          }),
-                      buildRow(
-                          icon: Icons.favorite_outline,
-                          title: "My Wishlist",
-                          onTap: () {
-                            navigateTo(context, AccountInfoScreen());
-                          }),
-                      buildRow(
-                          icon: Icons.language,
-                          title: "Change Language",
-                          onTap: () {
-                            // navigateAndReplace(context, const Profile());
-                            // if (logOut == false) {
-                            //   navigateTo(context, AccountInfoScreen());
-                            // } else {
-                            //
-                            // }
-                          })
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-              ],
-            ),
-          ),
-        ),
-      
-    ));
-      
-      },
+                    ),
+                  
+                ));
+                  
+                  },
+                );
+                          
+              },
+    listener: (context, states) {},
     );
 
   }
