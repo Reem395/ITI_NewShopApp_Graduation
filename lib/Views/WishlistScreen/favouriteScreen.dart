@@ -12,16 +12,8 @@ class FavouriteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD:lib/Modules/favouriteScreen.dart
-    FavouritesModel? cubit = ShopCubit.get(context).favouritesModel;
-    bool favColor = true;
-    return CupertinoTabView(
-      builder: ((context) {
-        return Scaffold(
-=======
     ShopCubit.get(context).getProdFav();
     return Scaffold(
->>>>>>> main:lib/Views/WishlistScreen/favouriteScreen.dart
       appBar: ShopSearchAppbar(context),
       body: BlocConsumer<ShopCubit, ShopStates>(
         builder: (context, state) => ConditionalBuilder(
@@ -35,7 +27,6 @@ class FavouriteScreen extends StatelessWidget {
             )),
         listener: (context, state){}),
     );
-      }),
-    );
+
   }
 }

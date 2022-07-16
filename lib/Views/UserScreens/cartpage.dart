@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/Shared/Components.dart';
 
-import '../Shared/constants.dart';
+import '../../ViewModels/constants.dart';
+
 
 class CartPage extends StatefulWidget {
   @override

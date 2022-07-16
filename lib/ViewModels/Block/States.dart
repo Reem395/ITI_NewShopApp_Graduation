@@ -69,9 +69,4 @@ class ShopSuccessSignUpScreen extends ShopStates{
 
 class ShopFailSignUpScreen extends ShopStates{}
 
-<<<<<<< HEAD:lib/Modules/Block/States.dart
-class IndexPageChanged extends ShopStates{}
-class Indexbottom extends ShopStates{}
-=======
 class MoveToWishList extends ShopStates{}
->>>>>>> main:lib/ViewModels/Block/States.dart
