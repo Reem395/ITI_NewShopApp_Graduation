@@ -1,4 +1,5 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'LoginScreen.dart';
@@ -148,6 +149,14 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                           onPressed: () {
                             ShopCubit.get(context).LogOut();
                             navigateAndReplace(context, LoginScreen());
+                            // Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (context) => LoginScreen()));
+                          // Navigator.of(context).pushAndRemoveUntil(CupertinoPageRoute(builder: (context) => LoginScreen()), (r) => true);
+                          Navigator.of(context, rootNavigator: true).push(
+                             CupertinoPageRoute<bool>(
+                              fullscreenDialog: true,
+                              builder: (BuildContext context) => LoginScreen(),
+                            ),
+                          );
                           },
                           child: const Text("LogOut"),
                         ),

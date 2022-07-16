@@ -41,6 +41,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  
   final Widget widget;
   const MyApp(this.widget, {Key? key}) : super(key: key);
 
@@ -53,7 +54,7 @@ class MyApp extends StatelessWidget {
       builder: (context, state){
         return MaterialApp(
           theme: ThemeData(
-              primaryColor: const Color(0xff3b75a8),
+              primaryColor: const Color(0xff00695C),
               inputDecorationTheme: const InputDecorationTheme(
                   focusColor: Colors.red,
                   labelStyle: TextStyle(color: Color(0xff3b79a8)),
