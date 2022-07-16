@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/ViewModels/constants.dart';
+import 'package:shop_app/Views/UserScreens/cartpage.dart';
 import 'package:shop_app/Views/UserScreens/profile_screen.dart';
 import '../CategoriesScreen/CategoriesScreen.dart';
 import '../HomeScreen/home_screen.dart';
@@ -13,7 +15,8 @@ class ShopLayout extends StatelessWidget {
     const HomeScreen(),
     const CategoriesScreen(),
     const FavouriteScreen(),
-    const ProfileScreen()
+     CartPage(),
+    const ProfileScreen(),
   ];
 
   ShopLayout({Key? key}) : super(key: key);
@@ -42,6 +45,8 @@ class ShopLayout extends StatelessWidget {
                   );
                 }),
                 tabBar: CupertinoTabBar(
+                    // activeColor: Color(0xff00695C),
+                    activeColor: Color(0xff00695C),
                     onTap: (index) {
                       ShopCubit.get(context).changeCurrentIndex(index);
                     },
@@ -52,6 +57,8 @@ class ShopLayout extends StatelessWidget {
                           icon: Icon(Icons.apps_sharp), label: "Categories"),
                       BottomNavigationBarItem(
                           icon: Icon(Icons.favorite), label: "Favourites"),
+                      BottomNavigationBarItem(
+                          icon: Icon(Icons.shopping_cart), label: "Cart"),
                       BottomNavigationBarItem(
                           icon: Icon(Icons.person), label: "Profile"),
                     ]),
