@@ -60,6 +60,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           theme: ThemeData(
               primaryColor: const Color(0xff00695C),
+              primarySwatch: Colors.teal,
               inputDecorationTheme: const InputDecorationTheme(
                   focusColor: Colors.red,
                   labelStyle: TextStyle(color: Color(0xff3b79a8)),

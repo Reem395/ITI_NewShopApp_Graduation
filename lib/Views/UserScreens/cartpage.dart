@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_app/Views/UserScreens/UserFullInfo.dart';
 
+import '../../ViewModels/Components.dart';
 import '../../ViewModels/constants.dart';
 
 
@@ -16,6 +17,7 @@ class _CartPageState extends State<CartPage> {
     return CupertinoTabView(
       builder: ((context) {
         return Scaffold(
+      appBar: ShopSearchAppbar(context),
       backgroundColor: Color.fromARGB(255, 237, 237, 237),
       // appBar: AppBar(
       //   centerTitle: true,

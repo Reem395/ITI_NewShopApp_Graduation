@@ -5,9 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/ViewModels/constants.dart';
 import 'package:shop_app/Views/UserScreens/cartpage.dart';
 import 'package:shop_app/Views/UserScreens/profile_screen.dart';
+import '../../Demo/testPage.dart';
 import '../CategoriesScreen/CategoriesScreen.dart';
 import '../HomeScreen/home_screen.dart';
 import '../UserScreens/UserFullInfo.dart';
+import '../UserScreens/orderReview.dart';
 import '../WishlistScreen/favouriteScreen.dart';
 import '../../ViewModels/Block/Cubit.dart';
 import '../../ViewModels/Block/States.dart';
@@ -18,7 +20,9 @@ class ShopLayout extends StatelessWidget {
     const CategoriesScreen(),
     const FavouriteScreen(),
      CartPage(),
-     UserFullInfo(),
+    //  UserFullInfo(),
+    const orderReviewScreen(),
+    // ResponsavelProfilePage(),
     const ProfileScreen(),
   ];
 
