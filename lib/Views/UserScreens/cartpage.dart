@@ -61,31 +61,33 @@ class _CartPageState extends State<CartPage> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(15),
-                            child: Column(
-                              children: <Widget>[
-                                Container(
-                                  child: Center(
-                                    child: Container(
-                                      width: 120,
-                                      height: 120,
-                                      decoration: BoxDecoration(
-                                        // boxShadow:[
-                                        //   BoxShadow(
-                                        //     color: Colors.grey.withOpacity(0.5),
-                                        //     spreadRadius: 5,
-                                        //     blurRadius: 2,
-                                        //     offset: Offset(0, 3), // changes position of shadow
-                                        //   ),
-                                        // ] ,
-                                          borderRadius: BorderRadius.circular(5),
-                                          image: const DecorationImage(
-                                              image:
-                                                  AssetImage("assets/images/girl.png"),
-                                              fit: BoxFit.cover)),
+                            child: Expanded(
+                              child: Column(
+                                children: <Widget>[
+                                  Container(
+                                    child: Center(
+                                      child: Container(
+                                        width: 120,
+                                        height: 120,
+                                        decoration: BoxDecoration(
+                                          // boxShadow:[
+                                          //   BoxShadow(
+                                          //     color: Colors.grey.withOpacity(0.5),
+                                          //     spreadRadius: 5,
+                                          //     blurRadius: 2,
+                                          //     offset: Offset(0, 3), // changes position of shadow
+                                          //   ),
+                                          // ] ,
+                                            borderRadius: BorderRadius.circular(5),
+                                            image: const DecorationImage(
+                                                image:
+                                                    AssetImage("assets/images/girl.png"),
+                                                fit: BoxFit.cover)),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                           const SizedBox(
@@ -93,6 +95,7 @@ class _CartPageState extends State<CartPage> {
                           ),
                           Expanded(
                               child: Column(
+                            // crossAxisAlignment: CrossAxisAlignment.stretch,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
@@ -142,7 +145,9 @@ class _CartPageState extends State<CartPage> {
                                               }),
                                           )
                                         ),
-                                        SizedBox(width: 10,),
+                                        // SizedBox(width: 10,),
+
+
                                         // CircleAvatar(
                                         //   radius: 20,
                                         //   backgroundColor: defaultColor,
@@ -161,7 +166,7 @@ class _CartPageState extends State<CartPage> {
 
                                         Text("4"),
 
-                                        const SizedBox(width:10),
+                                        // const SizedBox(width:10),
 
                                         // ElevatedButton(onPressed: (){
                                         // },
