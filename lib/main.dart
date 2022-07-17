@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/ViewModels/Block/Cubit.dart';
 import 'ViewModels/Block/States.dart';
@@ -13,6 +14,10 @@ import 'ViewModels/BlocObserver.dart';
 import 'ViewModels/constants.dart';
 
 void main() {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    // systemNavigationBarColor: Colors.yellow, // navigation bar color
+    statusBarColor: Color(0xff004D40),
+  ));
   BlocOverrides.runZoned(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
@@ -55,6 +60,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           theme: ThemeData(
               primaryColor: const Color(0xff00695C),
+              primarySwatch: Colors.teal,
               inputDecorationTheme: const InputDecorationTheme(
                   focusColor: Colors.red,
                   labelStyle: TextStyle(color: Color(0xff3b79a8)),

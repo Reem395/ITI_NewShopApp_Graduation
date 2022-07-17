@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shop_app/Views/UserScreens/UserFullInfo.dart';
 
+import '../../ViewModels/Components.dart';
 import '../../ViewModels/constants.dart';
 
 
@@ -11,7 +14,10 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CupertinoTabView(
+      builder: ((context) {
+        return Scaffold(
+      appBar: ShopSearchAppbar(context),
       backgroundColor: Color.fromARGB(255, 237, 237, 237),
       // appBar: AppBar(
       //   centerTitle: true,
@@ -57,31 +63,33 @@ class _CartPageState extends State<CartPage> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(15),
-                            child: Column(
-                              children: <Widget>[
-                                Container(
-                                  child: Center(
-                                    child: Container(
-                                      width: 120,
-                                      height: 120,
-                                      decoration: BoxDecoration(
-                                        // boxShadow:[
-                                        //   BoxShadow(
-                                        //     color: Colors.grey.withOpacity(0.5),
-                                        //     spreadRadius: 5,
-                                        //     blurRadius: 2,
-                                        //     offset: Offset(0, 3), // changes position of shadow
-                                        //   ),
-                                        // ] ,
-                                          borderRadius: BorderRadius.circular(5),
-                                          image: const DecorationImage(
-                                              image:
-                                                  AssetImage("assets/images/girl.png"),
-                                              fit: BoxFit.cover)),
+                            child: Expanded(
+                              child: Column(
+                                children: <Widget>[
+                                  Container(
+                                    child: Center(
+                                      child: Container(
+                                        width: 120,
+                                        height: 120,
+                                        decoration: BoxDecoration(
+                                          // boxShadow:[
+                                          //   BoxShadow(
+                                          //     color: Colors.grey.withOpacity(0.5),
+                                          //     spreadRadius: 5,
+                                          //     blurRadius: 2,
+                                          //     offset: Offset(0, 3), // changes position of shadow
+                                          //   ),
+                                          // ] ,
+                                            borderRadius: BorderRadius.circular(5),
+                                            image: const DecorationImage(
+                                                image:
+                                                    AssetImage("assets/images/girl.png"),
+                                                fit: BoxFit.cover)),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                           const SizedBox(
@@ -89,6 +97,7 @@ class _CartPageState extends State<CartPage> {
                           ),
                           Expanded(
                               child: Column(
+                            // crossAxisAlignment: CrossAxisAlignment.stretch,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
@@ -116,41 +125,99 @@ class _CartPageState extends State<CartPage> {
                                        Row(
                                           children: [
                                           ElevatedButton(onPressed: (){
-
-                                        }, child: Text("+"),
+                                            print("-");
+                                          },
+                                           child: Text("-",style: TextStyle(color: defaultColor,
+                                           fontWeight: FontWeight.bold),),
                                           style: ButtonStyle(
                                             minimumSize:MaterialStateProperty.all(Size(35, 35)) ,
-                                            backgroundColor: MaterialStateProperty.all(defaultColor),
-                                              shape: 
-                                                MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(3),
-                                                ),
-                                              ),
+                                            // backgroundColor: MaterialStateProperty.all(defaultColor),
+                                            backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 255, 255, 255)),
+                                              // shape: 
+                                              //   MaterialStateProperty.all<RoundedRectangleBorder>(
+                                              //   RoundedRectangleBorder(
+                                              //     borderRadius: BorderRadius.circular(3),
+                                              //   ),
+                                              // ),
+                                              shape: MaterialStateProperty.resolveWith((states) {
+                                                return RoundedRectangleBorder(
+                                                  side: BorderSide(color: defaultColor,width: 2),
+                                                  borderRadius: BorderRadius.circular(25)
+                                                );
+                                              }),
                                           )
                                         ),
-                                        const SizedBox(width:11),
+                                        // SizedBox(width: 10,),
+
+
+                                        // CircleAvatar(
+                                        //   radius: 20,
+                                        //   backgroundColor: defaultColor,
+                                        //   child: IconButton(
+                                        //     icon: Icon(
+                                        //       Icons.add,
+                                        //       // color: Colors.black,
+                                        //     ),
+                                        //     onPressed: () {},
+                                        //   ),
+                                        //   ),
+                                        // IconButton(onPressed: (){},
+                                        //  icon: Icon(Icons.add),
+                                        //  color: defaultColor,),
+                                        // const SizedBox(width:11),
 
                                         Text("4"),
 
-                                        const SizedBox(width:11),
+                                        // const SizedBox(width:10),
 
-                                        ElevatedButton(onPressed: (){
-                                        },
-                                         child: Text("-"),
-                                          style: ButtonStyle(
+                                        // ElevatedButton(onPressed: (){
+                                        // },
+                                        //  child: Text("-"),
+                                        //   style: ButtonStyle(
+                                        //     minimumSize:MaterialStateProperty.all(Size(35, 35)) ,
+                                        //     backgroundColor: MaterialStateProperty.all(defaultColor),
+                                        //       shape: 
+                                        //         MaterialStateProperty.all<RoundedRectangleBorder>(
+                                        //         RoundedRectangleBorder(
+                                        //           borderRadius: BorderRadius.circular(3),
+                                        //         ),
+                                        //       ),
+                                        //   )
+                                        // ),
+                                        // CircleAvatar(
+                                        //   radius: 20,
+                                        //   backgroundColor: defaultColor,
+                                        //   child: IconButton(
+                                        //     icon: Icon(
+                                        //       Icons.remove
+                                        //       // color: Colors.black,
+                                        //     ),
+                                        //     onPressed: () {},
+                                        //   ),
+                                        //   ),
+                                     ElevatedButton(onPressed: (){
+                                      print("+");
+                                     },
+                                           child: Text("+",style: TextStyle(color: defaultColor,
+                                           fontWeight: FontWeight.bold),),
+                                           style: ButtonStyle(
                                             minimumSize:MaterialStateProperty.all(Size(35, 35)) ,
-                                            backgroundColor: MaterialStateProperty.all(defaultColor),
-                                              shape: 
-                                                MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(3),
-                                                ),
-                                              ),
+                                            // backgroundColor: MaterialStateProperty.all(defaultColor),
+                                            backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 255, 255, 255)),
+                                              // shape: 
+                                              //   MaterialStateProperty.all<RoundedRectangleBorder>(
+                                              //   RoundedRectangleBorder(
+                                              //     borderRadius: BorderRadius.circular(3),
+                                              //   ),
+                                              // ),
+                                              shape: MaterialStateProperty.resolveWith((states) {
+                                                return RoundedRectangleBorder(
+                                                  side: BorderSide(color: defaultColor,width: 2),
+                                                  borderRadius: BorderRadius.circular(25)
+                                                );
+                                              }),
                                           )
                                         ),
-
-                                     
                                     ],
                                     ),
                                   IconButton(
@@ -233,20 +300,55 @@ class _CartPageState extends State<CartPage> {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    width: 190,
-                    child: ElevatedButton(
-                      style: ButtonStyle(backgroundColor:MaterialStateProperty.all(defaultColor)),
-                      child: Text("Check Out"),
-                      onPressed: () {},
-                    ),
+                  // SizedBox(
+                  //   width: 150,
+                  //   child: ElevatedButton(
+                  //     style: ButtonStyle(backgroundColor:MaterialStateProperty.all(defaultColor)),
+                  //     child: Text("Check Out"),
+                  //     onPressed: () {},
+                  //   ),
+                  // ),
+                //   FloatingActionButton.extended(
+                //   onPressed: () {
+                //     print("Check out cliked");
+                //   },
+                //   icon: const Icon(Icons.arrow_forward),
+                //   label: const Text('Check Out'),
+                //   backgroundColor: defaultColor,
+                // ),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    color: defaultColor,
                   ),
+                  child: InkWell(
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Row(
+                        children:const [
+                           Text("Check out",
+                           style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                          SizedBox(width: 10,),
+                          Icon(Icons.arrow_forward,
+                          color: Colors.white,),
+                        ],
+                      ),
+                    ),
+                    onTap: (){
+                      print("check");
+                      Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const UserFullInfo()),);
+                    },
+                  ),
+                )
                 ],
               ),
             ],
           ),
         ),
       ),
+    );
+      }),
     );
   }
 }
