@@ -10,6 +10,7 @@ class CategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ShopCubit.get(context).getProductsPerCat();
     return CupertinoTabView(
       builder: (context){
         return Scaffold(

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import '../../Models/ProductModel/ProductModel.dart';
 import '../../ViewModels/constants.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
-  const ProductDetailsScreen({Key? key}) : super(key: key);
+  final ProductModel product;
+  const ProductDetailsScreen(this.product, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: defaultColor,
-        title: const Text("Details"),
+        title:  const Text("Details"),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -19,17 +21,17 @@ class ProductDetailsScreen extends StatelessWidget {
               SizedBox(
                 height: 400,
                 width: double.infinity,
-                child: Image.asset(
-                  'assets/images/girl.png',
-                  fit: BoxFit.cover,
+                child: Image.network(
+                  product.image!,
+                  fit: BoxFit.fill,
                 ),
               ),
               const SizedBox(
                 height: 18,
               ),
-              const Text(
-                '\$600',
-                style: TextStyle(
+               Text(
+                '\$${product.price!}',
+                style: const TextStyle(
                   color: Colors.blueGrey,
                   fontSize: 25,
                 ),
@@ -40,8 +42,8 @@ class ProductDetailsScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 width: double.infinity,
-                child: const Text(
-                  'description description description description description description description description description description description description description ',
+                child: Text(
+                  product.description!,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 17,
