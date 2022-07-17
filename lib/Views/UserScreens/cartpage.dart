@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/Views/PaymentScreen/paymentscreen.dart';
 
 import '../../ViewModels/constants.dart';
-
 
 class CartPage extends StatefulWidget {
   @override
@@ -44,14 +44,14 @@ class _CartPageState extends State<CartPage> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: Colors.white,
-                        boxShadow:[
+                        boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.5),
                             spreadRadius: 1,
                             blurRadius: 7,
                             offset: Offset(0, 3), // changes position of shadow
                           ),
-                        ] ,
+                        ],
                       ),
                       child: Row(
                         children: [
@@ -65,18 +65,19 @@ class _CartPageState extends State<CartPage> {
                                       width: 120,
                                       height: 120,
                                       decoration: BoxDecoration(
-                                        // boxShadow:[
-                                        //   BoxShadow(
-                                        //     color: Colors.grey.withOpacity(0.5),
-                                        //     spreadRadius: 5,
-                                        //     blurRadius: 2,
-                                        //     offset: Offset(0, 3), // changes position of shadow
-                                        //   ),
-                                        // ] ,
-                                          borderRadius: BorderRadius.circular(5),
+                                          // boxShadow:[
+                                          //   BoxShadow(
+                                          //     color: Colors.grey.withOpacity(0.5),
+                                          //     spreadRadius: 5,
+                                          //     blurRadius: 2,
+                                          //     offset: Offset(0, 3), // changes position of shadow
+                                          //   ),
+                                          // ] ,
+                                          borderRadius:
+                                              BorderRadius.circular(5),
                                           image: const DecorationImage(
-                                              image:
-                                                  AssetImage("assets/images/girl.png"),
+                                              image: AssetImage(
+                                                  "assets/images/girl.png"),
                                               fit: BoxFit.cover)),
                                     ),
                                   ),
@@ -94,74 +95,79 @@ class _CartPageState extends State<CartPage> {
                               Text(
                                 "name",
                                 style: TextStyle(
-                                  fontSize: 19,
-                                  fontWeight: FontWeight.bold
-                                ),
+                                    fontSize: 19, fontWeight: FontWeight.bold),
                               ),
-                             const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                    "\$ 500",
-                                    style: TextStyle(
-                                        fontSize: 16, color: defaultColor,
-                                        fontWeight: FontWeight.bold),
-                                  ),
                               const SizedBox(
                                 height: 10,
                               ),
-                                    Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                       Row(
-                                          children: [
-                                          ElevatedButton(onPressed: (){
-
-                                        }, child: Text("+"),
+                              Text(
+                                "\$ 500",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: defaultColor,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      ElevatedButton(
+                                          onPressed: () {},
+                                          child: Text("+"),
                                           style: ButtonStyle(
-                                            minimumSize:MaterialStateProperty.all(Size(35, 35)) ,
-                                            backgroundColor: MaterialStateProperty.all(defaultColor),
-                                              shape: 
-                                                MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(3),
-                                                ),
+                                            minimumSize:
+                                                MaterialStateProperty.all(
+                                                    Size(35, 35)),
+                                            backgroundColor:
+                                                MaterialStateProperty.all(
+                                                    defaultColor),
+                                            shape: MaterialStateProperty.all<
+                                                RoundedRectangleBorder>(
+                                              RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(3),
                                               ),
-                                          )
-                                        ),
-                                        const SizedBox(width:11),
-
-                                        Text("4"),
-
-                                        const SizedBox(width:11),
-
-                                        ElevatedButton(onPressed: (){
-                                        },
-                                         child: Text("-"),
+                                            ),
+                                          )),
+                                      const SizedBox(width: 11),
+                                      Text("4"),
+                                      const SizedBox(width: 11),
+                                      ElevatedButton(
+                                          onPressed: () {},
+                                          child: Text("-"),
                                           style: ButtonStyle(
-                                            minimumSize:MaterialStateProperty.all(Size(35, 35)) ,
-                                            backgroundColor: MaterialStateProperty.all(defaultColor),
-                                              shape: 
-                                                MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(3),
-                                                ),
+                                            minimumSize:
+                                                MaterialStateProperty.all(
+                                                    Size(35, 35)),
+                                            backgroundColor:
+                                                MaterialStateProperty.all(
+                                                    defaultColor),
+                                            shape: MaterialStateProperty.all<
+                                                RoundedRectangleBorder>(
+                                              RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(3),
                                               ),
-                                          )
-                                        ),
-
-                                     
+                                            ),
+                                          )),
                                     ],
-                                    ),
+                                  ),
                                   IconButton(
                                     icon: const Icon(
-                                      Icons.delete, ),
+                                      Icons.delete,
+                                    ),
                                     onPressed: () {
                                       print("Remove Cliked");
                                     },
-                                    color: Colors.red,)
-                                    ],
-                                  ),
+                                    color: Colors.red,
+                                  )
+                                ],
+                              ),
                               // Row(
                               //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               //   children: [
@@ -236,9 +242,17 @@ class _CartPageState extends State<CartPage> {
                   SizedBox(
                     width: 190,
                     child: ElevatedButton(
-                      style: ButtonStyle(backgroundColor:MaterialStateProperty.all(defaultColor)),
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(defaultColor)),
                       child: Text("Check Out"),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PaymentScreen()),
+                        );
+                      },
                     ),
                   ),
                 ],
