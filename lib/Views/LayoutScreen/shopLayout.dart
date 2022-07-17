@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/ViewModels/constants.dart';
 import 'package:shop_app/Views/UserScreens/cartpage.dart';
 import 'package:shop_app/Views/UserScreens/profile_screen.dart';
 import '../CategoriesScreen/CategoriesScreen.dart';
 import '../HomeScreen/home_screen.dart';
+import '../UserScreens/UserFullInfo.dart';
 import '../WishlistScreen/favouriteScreen.dart';
 import '../../ViewModels/Block/Cubit.dart';
 import '../../ViewModels/Block/States.dart';
@@ -16,6 +18,7 @@ class ShopLayout extends StatelessWidget {
     const CategoriesScreen(),
     const FavouriteScreen(),
      CartPage(),
+     UserFullInfo(),
     const ProfileScreen(),
   ];
 
@@ -59,6 +62,8 @@ class ShopLayout extends StatelessWidget {
                           icon: Icon(Icons.favorite), label: "Favourites"),
                       BottomNavigationBarItem(
                           icon: Icon(Icons.shopping_cart), label: "Cart"),
+                      BottomNavigationBarItem(
+                          icon: Icon(Icons.home), label: "Address"),
                       BottomNavigationBarItem(
                           icon: Icon(Icons.person), label: "Profile"),
                     ]),
