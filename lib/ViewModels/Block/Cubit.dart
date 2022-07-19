@@ -129,22 +129,33 @@ class ShopCubit extends Cubit<ShopStates> {
   List <ProductCategoryModel> cats=[];
   void getCats()
   {
+    emit(GetCategoriesLoading());
     FirebaseFirestore.instance.collection("Categories").get().then((value) {
       value.docs.forEach((element) {
         cats.add(ProductCategoryModel.fromJson(element.data()));
       });
+    }).then((value) {
+      emit(GetCategoriesSuccess());
+    }).catchError((err){
+      emit(GetCategoriesError());
     });
   }
 
   List<ProductModel> products= [];
   Future getProducts() async
   {
+    emit(GetProductsLoading());
     products= [];
     FirebaseFirestore.instance.collection("products").get().then((value) {
       value.docs.forEach((element) {
         products.add(ProductModel.fromJson(element.data()));
         favouritesProd.addAll({ProductModel.fromJson(element.data()).productId!: ProductModel.fromJson(element.data()).inFavourites!});
       });
+    }).then((value){
+      emit(GetProductsSuccess());
+    }).catchError((err){
+      emit(GetProductsError());
+      print(err);
     });
   }
 
@@ -171,6 +182,7 @@ class ShopCubit extends Cubit<ShopStates> {
     FirebaseFirestore.instance.collection("Favourites").get()
         .then((value){
       emit(ShopGetFavSuccessScreen());
+      canChangeFav= true;
       if(value.docs.isNotEmpty)
       {
         value.docs.forEach((element) {
@@ -188,6 +200,7 @@ class ShopCubit extends Cubit<ShopStates> {
 
 
   var itemId;
+  bool canChangeFav= false;
   Future addFavourites(ProductModel product) async
   {
     itemId= FirebaseFirestore.instance.collection("Favourites").doc().id;
@@ -215,6 +228,7 @@ class ShopCubit extends Cubit<ShopStates> {
   bool itemInFavourite= false;
   changeFav(ProductModel product)
   {
+    canChangeFav= false;
     favouritesProd[product.productId!] = !favouritesProd[product.productId!]!;
     emit(ShopChangeFavUIScreen());
     itemInFavourite= false;
@@ -261,6 +275,21 @@ class ShopCubit extends Cubit<ShopStates> {
           emit(ShopGetFavSuccessScreen());
         }
       });
+    });
+  }
+
+  //get Product Per Cat
+  Map<String,List<ProductModel>> categoriesProducts= {};
+  void getProductsPerCat()
+  {
+   cats.forEach((category) {
+     categoriesProducts[category.name]=[];
+     products.forEach((product) {
+         if(category.name == product.categoryName)
+         {
+           categoriesProducts[category.name]?.add(product);
+         }
+     });
     });
   }
 }

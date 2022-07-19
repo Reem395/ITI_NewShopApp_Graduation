@@ -13,7 +13,7 @@ class CategoriesItems extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const ProductsScreen()),
+          MaterialPageRoute(builder: (context) => ProductsScreen(ShopCubit.get(context).cats[index].name)),
         );
       },
       child: Row(

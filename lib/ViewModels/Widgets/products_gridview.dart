@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/ViewModels/constants.dart';
 import '../../Models/ProductModel/ProductModel.dart';
 import '../Block/Cubit.dart';
 
@@ -71,9 +72,20 @@ class ProductGridView extends StatelessWidget {
                                     decoration: TextDecoration.lineThrough),
                               ),
                             const Spacer(),
-                            IconButton(
+                            Row(children: [
+                                    IconButton(
                                 iconSize: 22,
                                 onPressed: () {
+                                 //Add To cart
+                                },
+                                icon: Icon(
+                                  Icons.shopping_cart_outlined,
+                                  color: defaultColor,
+                                )),
+                              IconButton(
+                                iconSize: 22,
+                                onPressed:
+                                !ShopCubit.get(context).canChangeFav? null:() {
                                   ShopCubit.get(context)
                                       .changeFav(products[index]);
                                   products[index].productId;
@@ -84,7 +96,10 @@ class ProductGridView extends StatelessWidget {
                                       ? Icons.favorite_outline
                                       : Icons.favorite,
                                   color: Colors.red,
-                                ))
+                                )),
+
+                          
+                            ],),
                           ]),
                         ],
                       ))

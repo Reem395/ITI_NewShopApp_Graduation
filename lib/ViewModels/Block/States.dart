@@ -70,3 +70,14 @@ class ShopSuccessSignUpScreen extends ShopStates{
 class ShopFailSignUpScreen extends ShopStates{}
 
 class MoveToWishList extends ShopStates{}
+
+class GetProductsLoading extends ShopStates{}
+class GetProductsSuccess extends ShopStates{}
+class GetProductsError extends ShopStates{}
+
+class GetCategoriesLoading extends ShopStates{}
+class GetCategoriesSuccess extends ShopStates{}
+class GetCategoriesError extends ShopStates{}
+
+class GetCategoriesProductsLoading extends ShopStates{}
+class GetCategoriesProductsSuccess extends ShopStates{}
