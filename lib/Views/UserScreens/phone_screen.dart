@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../Service/firebase_auth_methods.dart';
+import '../../utils/showSnackbar.dart';
 import '../LayoutScreen/shopLayout.dart';
 
 class PhoneScreen extends StatefulWidget {
@@ -47,6 +48,9 @@ class _PhoneScreenState extends State<PhoneScreen> {
                   context,
                   MaterialPageRoute(builder: (context) => ShopLayout()),
                 );
+              }).catchError((onError) {
+                print("Error: ${onError.message!}");
+                showSnackBar(context, onError.message!);
               });
             },
             child: const Text('OK'),
