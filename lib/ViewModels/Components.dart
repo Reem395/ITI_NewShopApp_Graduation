@@ -5,13 +5,12 @@ import '../Views/ProductsScreens/product_details.dart';
 import 'Local/CacheHelper.dart';
 import 'constants.dart';
 
-// FocusNode myFocusNode = FocusNode();
 Widget defaultTextFormField(
     {@required String? label,
     @required TextEditingController? controller,
     @required String? Function(String?)? validate,
-    @required Function()? onTap,
-    @required FocusNode? myFocusNode,
+    // @required Function()? onTap,
+    // @required FocusNode? myFocusNode,
     IconData? prefix,
     IconData? suffix,
     TextInputType? keyboard,
@@ -19,7 +18,7 @@ Widget defaultTextFormField(
     double borderRaduis=0,
     Function()? changePassword,
     Function()? onEditingComplate,
-    
+    Color? labelColor,
     bool readOnly = false}) {
   return TextFormField(
     keyboardType: keyboard,
@@ -28,17 +27,16 @@ Widget defaultTextFormField(
     obscureText: password,
     readOnly: readOnly,
     onEditingComplete: onEditingComplate,
-    focusNode: myFocusNode,
+    // focusNode: myFocusNode,
     cursorColor: defaultColor,
     decoration: InputDecoration(
       fillColor: Colors.grey[200],
       focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: defaultColor)),
       isDense: true,
-      // label: Text(label!),
       labelText: label,
-       labelStyle: TextStyle(
-        color: myFocusNode!.hasFocus ? defaultColor : Colors.grey
-      ),
+      //  labelStyle: TextStyle(
+      //   color: myFocusNode!.hasFocus ? defaultColor : Colors.grey
+      // ),
       prefixIcon: Icon(prefix,color: defaultColor,),
       suffixIcon: GestureDetector(
         child: Icon(suffix,color: defaultColor,),
@@ -48,7 +46,7 @@ Widget defaultTextFormField(
           OutlineInputBorder(borderSide: BorderSide(color: defaultColor,),
           borderRadius: BorderRadius.all(Radius.circular(borderRaduis))),
     ),
-    onTap: onTap,
+    // onTap: onTap,
   );
 }
 

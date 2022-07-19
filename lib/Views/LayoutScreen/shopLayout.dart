@@ -9,6 +9,8 @@ import '../../Demo/testPage.dart';
 import '../CategoriesScreen/CategoriesScreen.dart';
 import '../HomeScreen/home_screen.dart';
 import '../UserScreens/UserFullInfo.dart';
+import '../UserScreens/addAddress_screen.dart';
+import '../UserScreens/addressReviewScreen.dart';
 import '../UserScreens/orderReview.dart';
 import '../WishlistScreen/favouriteScreen.dart';
 import '../../ViewModels/Block/Cubit.dart';
@@ -19,9 +21,10 @@ class ShopLayout extends StatelessWidget {
     const HomeScreen(),
     const CategoriesScreen(),
     const FavouriteScreen(),
-     CartPage(),
+    //  addressReviewScreen(),
     //  UserFullInfo(),
-    const orderReviewScreen(),
+     CartPage(),
+    // const orderReviewScreen(),
     // ResponsavelProfilePage(),
     const ProfileScreen(),
   ];
@@ -31,6 +34,9 @@ class ShopLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+              primarySwatch: Colors.teal,
+      ),
       home: BlocProvider<ShopCubit>(
           create: (context) {
             return ShopCubit()
@@ -66,8 +72,8 @@ class ShopLayout extends StatelessWidget {
                           icon: Icon(Icons.favorite), label: "Favourites"),
                       BottomNavigationBarItem(
                           icon: Icon(Icons.shopping_cart), label: "Cart"),
-                      BottomNavigationBarItem(
-                          icon: Icon(Icons.home), label: "Address"),
+                      // BottomNavigationBarItem(
+                      //     icon: Icon(Icons.home), label: "Address"),
                       BottomNavigationBarItem(
                           icon: Icon(Icons.person), label: "Profile"),
                     ]),
