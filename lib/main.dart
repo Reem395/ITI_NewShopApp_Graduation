@@ -14,7 +14,7 @@ import 'ViewModels/BlocObserver.dart';
 import 'ViewModels/constants.dart';
 
 void main() {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     // systemNavigationBarColor: Colors.yellow, // navigation bar color
     statusBarColor: Color(0xff004D40),
   ));
@@ -46,35 +46,33 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  
   final Widget widget;
   const MyApp(this.widget, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ShopCubit>(create: (context){
-      return ShopCubit();
-    },
-    child: BlocConsumer<ShopCubit, ShopStates>(
-      builder: (context, state){
-        return MaterialApp(
-          theme: ThemeData(
-              primaryColor: const Color(0xff00695C),
-              primarySwatch: Colors.teal,
-              inputDecorationTheme: const InputDecorationTheme(
-                  focusColor: Colors.red,
-                  labelStyle: TextStyle(color: Color(0xff3b79a8)),
-                  focusedBorder: OutlineInputBorder(
-                      gapPadding: 10,
-                      borderSide: BorderSide(color: Color(0xff3b75a8))))),
-          home: widget,
-          debugShowCheckedModeBanner: false,
-        );
+    return BlocProvider<ShopCubit>(
+      create: (context) {
+        return ShopCubit();
       },
-      listener: (context, state){
-
-      },
-    ),
+      child: BlocConsumer<ShopCubit, ShopStates>(
+        builder: (context, state) {
+          return MaterialApp(
+            theme: ThemeData(
+                primaryColor: const Color(0xff00695C),
+                primarySwatch: Colors.teal,
+                inputDecorationTheme: const InputDecorationTheme(
+                    focusColor: Colors.red,
+                    labelStyle: TextStyle(color: Color(0xff3b79a8)),
+                    focusedBorder: OutlineInputBorder(
+                        gapPadding: 10,
+                        borderSide: BorderSide(color: Color(0xff3b75a8))))),
+            home: widget,
+            debugShowCheckedModeBanner: false,
+          );
+        },
+        listener: (context, state) {},
+      ),
     );
   }
 }

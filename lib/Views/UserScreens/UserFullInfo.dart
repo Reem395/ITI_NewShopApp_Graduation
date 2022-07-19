@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shop_app/Views/UserScreens/orderReview.dart';
 
 import '../../ViewModels/AddressData/AddressData.dart';
 import '../../ViewModels/Components.dart';
@@ -17,9 +18,7 @@ class _UserFullInfoState extends State<UserFullInfo> {
   String? secondaryState;
   String? primaryCity;
   String? secondaryCity;
-  late FocusNode _nameFocusNode;
-  late FocusNode _emailFocusNode;
-  late FocusNode _phoneFocusNode;
+  // late FocusNode _nameFocusNode;
   var nameController = TextEditingController();
   var emailController = TextEditingController();
   var phoneController = TextEditingController();
@@ -29,21 +28,17 @@ class _UserFullInfoState extends State<UserFullInfo> {
   // var primaryBuildingController = TextEditingController();
 
   bool secondaryAddressExisted = false;
-  @override
-  void initState() {
-    super.initState();
-    _nameFocusNode = FocusNode();
-    _emailFocusNode = FocusNode();
-    _phoneFocusNode = FocusNode();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _nameFocusNode = FocusNode();
+  // }
 
-  @override
-  void dispose() {
-    _nameFocusNode.dispose();
-    _emailFocusNode.dispose();
-    _phoneFocusNode.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _nameFocusNode.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -57,91 +52,71 @@ class _UserFullInfoState extends State<UserFullInfo> {
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
           child: Column(
-            
-            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-                const SizedBox(
+              const SizedBox(
                 height: 25,
               ),
+              // defaultTextFormField(
+              //     label: 'Name',
+              //     controller: nameController,
+              //     validate: (String? value) {
+              //       if (value!.isEmpty) {
+              //         return "Name is Required";
+              //       }
+              //       return null;
+              //     },
+              //     prefix: Icons.person,
+              //     borderRaduis: 9,
+              //     myFocusNode: _nameFocusNode,
+              //     onTap: _requestFocus),
+
               defaultTextFormField(
-                  label: 'Name',
-                  controller: nameController,
-                  validate: (String? value) {
-                    if (value!.isEmpty) {
-                      return "Name is Required";
-                    }
-                    return null;
-                  },
-                  prefix: Icons.person,
-                  borderRaduis: 9,
-                  myFocusNode: _nameFocusNode,
-                  onTap: _requestFocus),
+                label: 'Name',
+                controller: nameController,
+                validate: (String? value) {
+                  if (value!.isEmpty) {
+                    return "Name is Required";
+                  }
+                  return null;
+                },
+                prefix: Icons.person,
+                borderRaduis: 9,
+              ),
 
               const SizedBox(
                 height: 25,
               ),
 
               defaultTextFormField(
-                  label: 'Email',
-                  controller: emailController,
-                  validate: (String? value) {
-                    if (value!.isEmpty) {
-                      return "Email is Required";
-                    }
-                    return null;
-                  },
-                  prefix: Icons.email,
-                  borderRaduis: 9,
-                  myFocusNode: _emailFocusNode,
-                  onTap: _emailrequestFocus),
+                label: 'Email',
+                controller: emailController,
+                validate: (String? value) {
+                  if (value!.isEmpty) {
+                    return "Email is Required";
+                  }
+                  return null;
+                },
+                prefix: Icons.email,
+                borderRaduis: 9,
+              ),
 
               const SizedBox(
                 height: 25,
               ),
 
               defaultTextFormField(
-                  label: 'Phone',
-                  controller: phoneController,
-                  validate: (String? value) {
-                    if (value!.isEmpty) {
-                      return "Phone is Required";
-                    }
-                    return null;
-                  },
-                  prefix: Icons.phone,
-                  borderRaduis: 9,
-                  myFocusNode: _phoneFocusNode,
-                  onTap: _phonerequestFocus),
-
-              const SizedBox(
-                height: 25,
-              ),
-              TextFormField(
+                label: 'Phone',
                 controller: phoneController,
-                decoration: InputDecoration(
-                    prefixIcon: Icon(
-                      Icons.shopping_bag,
-                      color: defaultColor,
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: defaultColor, width: 2),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(9)),
-                      borderSide: BorderSide(
-                        color: defaultColor,
-                      ),
-                    ),
-                    focusColor: defaultColor,
-                    hintText: "Last Name"),
-                cursorColor: defaultColor,
+                validate: (String? value) {
+                  if (value!.isEmpty) {
+                    return "Phone is Required";
+                  }
+                  return null;
+                },
+                prefix: Icons.phone,
+                borderRaduis: 9,
               ),
-              // TextField(
-              //   decoration: InputDecoration(
-              //     labelText: 'phone',
-              //     labelStyle: TextStyle(
-              //       color: defaultColor, //<-- SEE HERE
-              //     ),),),
+
               const SizedBox(
                 height: 45,
               ),
@@ -159,7 +134,7 @@ class _UserFullInfoState extends State<UserFullInfo> {
                               Icons.home,
                               color: defaultColor,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             const Text(
@@ -187,13 +162,6 @@ class _UserFullInfoState extends State<UserFullInfo> {
                     ),
                   ),
                   Container(
-                    // width: double.infinity,
-                    // decoration: BoxDecoration(
-                    //   shape: BoxShape.rectangle,
-                    //   borderRadius: BorderRadius.circular(8),
-                    //   border: Border.all(color: Colors.black38),
-                    //   //  color: Colors.white,
-                    // ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
@@ -294,23 +262,23 @@ class _UserFullInfoState extends State<UserFullInfo> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Icon(
-                              Icons.home,
-                              color: defaultColor,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            const Text(
-                              "Secondary Address: ",
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.grey),
-                            ),
-                          ],
-                        ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Icon(
+                                      Icons.home,
+                                      color: defaultColor,
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    const Text(
+                                      "Secondary Address: ",
+                                      style: TextStyle(
+                                          fontSize: 18, color: Colors.grey),
+                                    ),
+                                  ],
+                                ),
 
                                 const SizedBox(
                                   height: 15,
@@ -414,7 +382,12 @@ class _UserFullInfoState extends State<UserFullInfo> {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const orderReviewScreen()),
+          );
+        },
         label: Text("Save"),
         icon: Icon(Icons.save),
         backgroundColor: defaultColor,
@@ -422,21 +395,9 @@ class _UserFullInfoState extends State<UserFullInfo> {
     );
   }
 
-  void _requestFocus() {
-    setState(() {
-      FocusScope.of(context).requestFocus(_nameFocusNode);
-    });
-  }
-
-  void _emailrequestFocus() {
-    setState(() {
-      FocusScope.of(context).requestFocus(_emailFocusNode);
-    });
-  }
-
-  void _phonerequestFocus() {
-    setState(() {
-      FocusScope.of(context).requestFocus(_phoneFocusNode);
-    });
-  }
+  // void _requestFocus() {
+  //   setState(() {
+  //     FocusScope.of(context).requestFocus(_nameFocusNode);
+  //   });
+  // }
 }

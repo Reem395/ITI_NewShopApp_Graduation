@@ -10,16 +10,16 @@ Widget defaultTextFormField(
     {@required String? label,
     @required TextEditingController? controller,
     @required String? Function(String?)? validate,
-    @required Function()? onTap,
-    @required FocusNode? myFocusNode,
+    // @required Function()? onTap,
+    // @required FocusNode? myFocusNode,
     IconData? prefix,
     IconData? suffix,
     TextInputType? keyboard,
     bool password = false,
-    double borderRaduis=0,
+    double borderRaduis = 0,
     Function()? changePassword,
     Function()? onEditingComplate,
-    
+    Color? labelColor,
     bool readOnly = false}) {
   return TextFormField(
     keyboardType: keyboard,
@@ -28,27 +28,35 @@ Widget defaultTextFormField(
     obscureText: password,
     readOnly: readOnly,
     onEditingComplete: onEditingComplate,
-    focusNode: myFocusNode,
+    // focusNode: myFocusNode,
     cursorColor: defaultColor,
     decoration: InputDecoration(
       fillColor: Colors.grey[200],
-      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: defaultColor)),
+      focusedBorder:
+          OutlineInputBorder(borderSide: BorderSide(color: defaultColor)),
       isDense: true,
-      // label: Text(label!),
       labelText: label,
-       labelStyle: TextStyle(
-        color: myFocusNode!.hasFocus ? defaultColor : Colors.grey
+      //  labelStyle: TextStyle(
+      //   color: myFocusNode!.hasFocus ? defaultColor : Colors.grey
+      // ),
+      prefixIcon: Icon(
+        prefix,
+        color: defaultColor,
       ),
-      prefixIcon: Icon(prefix,color: defaultColor,),
       suffixIcon: GestureDetector(
-        child: Icon(suffix,color: defaultColor,),
+        child: Icon(
+          suffix,
+          color: defaultColor,
+        ),
         onTap: changePassword,
       ),
-      border:
-          OutlineInputBorder(borderSide: BorderSide(color: defaultColor,),
+      border: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: defaultColor,
+          ),
           borderRadius: BorderRadius.all(Radius.circular(borderRaduis))),
     ),
-    onTap: onTap,
+    // onTap: onTap,
   );
 }
 
@@ -94,7 +102,6 @@ Future<dynamic> navigateAndReplace(BuildContext context, Widget screen) {
       context, MaterialPageRoute(builder: (context) => screen));
 }
 
-
 /*Widget buildBanner(ShopHomeModel? homeModel) {
   return Padding(
     padding: const EdgeInsets.only(top: 20),
@@ -111,7 +118,7 @@ Future<dynamic> navigateAndReplace(BuildContext context, Widget screen) {
   );
 }*/
 
- //Widget buildCatItem(BuildContext context, int index) {
+//Widget buildCatItem(BuildContext context, int index) {
 //   return Row(
 //     children: [Image(image: NetworkImage(ShopCubit.get(context).categoryModel!.data.data[index].image),
 //       fit: BoxFit.cover,
@@ -127,7 +134,6 @@ Future<dynamic> navigateAndReplace(BuildContext context, Widget screen) {
 //     ],
 //   );
 // }
-
 
 /*ListView buildSearchList(SearchModel model, bool favColor) {
   return ListView.separated(
@@ -185,7 +191,7 @@ Future<dynamic> navigateAndReplace(BuildContext context, Widget screen) {
                               decoration: TextDecoration.lineThrough),
                         ),
                       Spacer(),
-                      *//*IconButton(
+                      */ /*IconButton(
                             onPressed: () {
                               favColor = !favColor;
                               ShopCubit.get(context).changeFavourites(
@@ -198,7 +204,7 @@ Future<dynamic> navigateAndReplace(BuildContext context, Widget screen) {
                                     ? Icons.favorite
                                     : Icons.favorite_outline),
                             color: Colors.red,
-                          ),*//*
+                          ),*/ /*
                     ],
                   )
                 ],
@@ -227,7 +233,7 @@ AppBar ShopSearchAppbar(context) {
     actions: [
       IconButton(
           onPressed: () {
-           // navigateTo(context, SearchScreen());
+            // navigateTo(context, SearchScreen());
           },
           icon: const Icon(Icons.search))
     ],
