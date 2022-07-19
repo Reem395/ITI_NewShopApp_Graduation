@@ -11,7 +11,7 @@ class FirebaseAuthMethods {
   final FirebaseAuth _auth;
   FirebaseAuthMethods(this._auth);
 
-  User get user => _auth.currentUser!;
+  User? get user => _auth.currentUser;
 
   Stream<User?> get authState => FirebaseAuth.instance.authStateChanges();
 
@@ -69,10 +69,15 @@ class FirebaseAuthMethods {
       }
       print(
           "Google data: ${googleUser?.displayName} ${googleUser?.id} ${googleUser?.email}");
+
       FirebaseFirestore.instance.collection('Users').add({
         'userId': googleUser?.id,
         'email': googleUser?.email,
-        'name': googleUser?.displayName
+        'name': googleUser?.displayName,
+        'phone': null,
+        'state': null,
+        'city': null,
+        'description': null
       });
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!);
@@ -85,6 +90,15 @@ class FirebaseAuthMethods {
       final LoginResult loginResult = await FacebookAuth.instance.login();
 
       var data = await FacebookAuth.instance.getUserData();
+      // FirebaseFirestore.instance.collection('Users').add({
+      //   'userId': data?.id,
+      //   'email': googleUser?.email,
+      //   'name': googleUser?.displayName,
+      //   'phone': null,
+      //   'state': null,
+      //   'city': null,
+      //   'description': null
+      // });
       print("Facebook data ${data['name']} ${data['email']} ${data['id']}");
       final OAuthCredential facebookAuthCredential =
           FacebookAuthProvider.credential(loginResult.accessToken!.token);

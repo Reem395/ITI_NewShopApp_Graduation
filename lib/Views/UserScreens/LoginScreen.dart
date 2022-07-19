@@ -40,11 +40,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 message: message,
                 state: LoginState.success,
                 toastLength: Toast.LENGTH_SHORT);
-            CacheHelper.setData(key: "token", value: state.userData.data?.token)
-                .then((value) {
-              navigateAndReplace(context, ShopLayout());
-              token = state.userData.data?.token;
-            });
+            navigateAndReplace(context, ShopLayout());
+            token = state.userData.data?.token;
           } else {
             buildShopToast(
                 message: message,
