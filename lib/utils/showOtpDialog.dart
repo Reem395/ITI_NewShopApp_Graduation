@@ -15,6 +15,10 @@ void showOTPDialog({
         children: <Widget>[
           TextField(
             controller: codeController,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Enter OTP code',
+            ),
           ),
         ],
       ),

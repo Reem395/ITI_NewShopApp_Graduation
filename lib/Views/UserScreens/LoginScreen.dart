@@ -6,6 +6,7 @@ import '../../Service/firebase_auth_methods.dart';
 import '../../ViewModels/Block/Cubit.dart';
 import '../../ViewModels/Block/States.dart';
 import '../../ViewModels/Local/CacheHelper.dart';
+import '../../utils/showSnackbar.dart';
 import '../LayoutScreen/shopLayout.dart';
 import 'SignupScreen.dart';
 import '../../ViewModels/constants.dart';
@@ -197,6 +198,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                       MaterialPageRoute(
                                           builder: (context) => ShopLayout()),
                                     );
+                                  }).catchError((onError) {
+                                    print("Error: ${onError.message!}");
+                                    showSnackBar(context, onError.message!);
                                   });
                                 },
                                 shape:
@@ -216,6 +220,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                       MaterialPageRoute(
                                           builder: (context) => ShopLayout()),
                                     );
+                                  }).catchError((onError) {
+                                    print("Error: ${onError.message!}");
+                                    showSnackBar(context, onError.message!);
                                   });
                                 },
                                 shape:

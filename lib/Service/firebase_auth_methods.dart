@@ -40,6 +40,24 @@ class FirebaseAuthMethods {
             );
             await _auth.signInWithCredential(credential);
             Navigator.of(context).pop();
+            print("User data = $user");
+            FirebaseFirestore.instance
+                .collection('Users')
+                .where('userId', isEqualTo: user?.uid)
+                .snapshots()
+                .listen((data) {
+              if (data.docs.isEmpty) {
+                FirebaseFirestore.instance.collection('Users').add({
+                  'userId': user?.uid,
+                  'email': null,
+                  'name': null,
+                  'phone': phoneNumber,
+                  'state': null,
+                  'city': null,
+                  'description': null
+                });
+              }
+            });
           },
         );
       }),
@@ -67,17 +85,24 @@ class FirebaseAuthMethods {
           if (userCredential.additionalUserInfo!.isNewUser) {}
         }
       }
-      print(
-          "Google data: ${googleUser?.displayName} ${googleUser?.id} ${googleUser?.email}");
 
-      FirebaseFirestore.instance.collection('Users').add({
-        'userId': googleUser?.id,
-        'email': googleUser?.email,
-        'name': googleUser?.displayName,
-        'phone': null,
-        'state': null,
-        'city': null,
-        'description': null
+      print("User data = $user");
+      FirebaseFirestore.instance
+          .collection('Users')
+          .where('userId', isEqualTo: user?.uid)
+          .snapshots()
+          .listen((data) {
+        if (data.docs.isEmpty) {
+          FirebaseFirestore.instance.collection('Users').add({
+            'userId': googleUser?.id,
+            'email': googleUser?.email,
+            'name': googleUser?.displayName,
+            'phone': null,
+            'state': null,
+            'city': null,
+            'description': null
+          });
+        }
       });
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!);
@@ -90,20 +115,29 @@ class FirebaseAuthMethods {
       final LoginResult loginResult = await FacebookAuth.instance.login();
 
       var data = await FacebookAuth.instance.getUserData();
-      // FirebaseFirestore.instance.collection('Users').add({
-      //   'userId': data?.id,
-      //   'email': googleUser?.email,
-      //   'name': googleUser?.displayName,
-      //   'phone': null,
-      //   'state': null,
-      //   'city': null,
-      //   'description': null
-      // });
-      print("Facebook data ${data['name']} ${data['email']} ${data['id']}");
+
       final OAuthCredential facebookAuthCredential =
           FacebookAuthProvider.credential(loginResult.accessToken!.token);
 
       await _auth.signInWithCredential(facebookAuthCredential);
+      print("User data = $user");
+      FirebaseFirestore.instance
+          .collection('Users')
+          .where('userId', isEqualTo: user?.uid)
+          .snapshots()
+          .listen((data) {
+        if (data.docs.isEmpty) {
+          FirebaseFirestore.instance.collection('Users').add({
+            'userId': user?.uid,
+            'email': user?.email,
+            'name': user?.displayName,
+            'phone': null,
+            'state': null,
+            'city': null,
+            'description': null
+          });
+        }
+      });
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!);
     }
