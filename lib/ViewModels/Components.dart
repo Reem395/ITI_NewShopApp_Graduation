@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../Models/ProductModel/ProductModel.dart';
 import '../Views/SearchScreen/searchScreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import '../Service/firebase_auth_methods.dart';
 import '../Views/UserScreens/LoginScreen.dart';
 import '../Views/ProductsScreens/product_details.dart';
 import 'Block/Cubit.dart';
@@ -37,9 +42,10 @@ Widget defaultTextFormField(
     decoration: InputDecoration(
       fillColor: Colors.white,
       filled: true,
-      labelStyle: TextStyle(color: defaultColor, fontSize: 20, fontWeight: FontWeight.bold),
+      labelStyle: TextStyle(
+          color: defaultColor, fontSize: 20, fontWeight: FontWeight.bold),
       enabledBorder:
-      const OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+          const OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
       focusedBorder:
           OutlineInputBorder(borderSide: BorderSide(color: defaultColor)),
       isDense: true,
@@ -199,19 +205,21 @@ ListView buildSearchList(List<ProductModel> model) {
                               decoration: TextDecoration.lineThrough),
                         ),
                       Spacer(),
-                       IconButton(
-                            onPressed: !ShopCubit.get(context).canChangeFav? null:() {
-                                ShopCubit.get(context)
-                                    .changeFav(model[index]);
-                                model[index].productId;
+                      IconButton(
+                          onPressed: !ShopCubit.get(context).canChangeFav
+                              ? null
+                              : () {
+                                  ShopCubit.get(context)
+                                      .changeFav(model[index]);
+                                  model[index].productId;
                                 },
-                           icon: Icon(
-                             !ShopCubit.get(context).favouritesProd[
-                             model[index].productId]!
-                                 ? Icons.favorite_outline
-                                 : Icons.favorite,
-                             color: Colors.red,
-                           ))
+                          icon: Icon(
+                            !ShopCubit.get(context)
+                                    .favouritesProd[model[index].productId]!
+                                ? Icons.favorite_outline
+                                : Icons.favorite,
+                            color: Colors.red,
+                          ))
                     ],
                   )
                 ],
@@ -225,7 +233,7 @@ ListView buildSearchList(List<ProductModel> model) {
             height: 2,
             color: Colors.grey[200],
           ),
-      itemCount:model.length);
+      itemCount: model.length);
 }
 
 void navigateToLogin(BuildContext context) {
@@ -242,13 +250,26 @@ AppBar ShopSearchAppbar(context) {
           onPressed: () {
             navigateTo(context, SearchScreen());
           },
-          icon: const Icon(Icons.search))
+          icon: const Icon(Icons.search)),
+      IconButton(
+          onPressed: () {
+            FirebaseAuthMethods(FirebaseAuth.instance)
+                .signOut(context)
+                .then((value) {
+              Navigator.of(context, rootNavigator: true).push(
+                CupertinoPageRoute<bool>(
+                  fullscreenDialog: true,
+                  builder: (BuildContext context) => LoginScreen(),
+                ),
+              );
+            });
+          },
+          icon: const Icon(Icons.logout))
     ],
   );
 }
 
-showMessage(String message)
-{
+showMessage(String message) {
   Fluttertoast.showToast(
       msg: message,
       toastLength: Toast.LENGTH_LONG,
