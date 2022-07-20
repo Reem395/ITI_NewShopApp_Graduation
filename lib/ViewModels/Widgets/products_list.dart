@@ -67,9 +67,11 @@ class ProductList extends StatelessWidget {
                           ),
                         const Spacer(),
                         IconButton(
-                            onPressed: () {
-                              ShopCubit.get(context).changeFav(products[index]);
-                              products[index].productId;
+                            onPressed:
+                              !ShopCubit.get(context).canChangeFav? null:() {
+                                ShopCubit.get(context)
+                                    .changeFav(products[index]);
+                                products[index].productId;
                             },
                             icon: Icon(
                               !ShopCubit.get(context).favouritesProd[

@@ -84,7 +84,8 @@ class ProductGridView extends StatelessWidget {
                                 )),
                               IconButton(
                                 iconSize: 22,
-                                onPressed: () {
+                                onPressed:
+                                !ShopCubit.get(context).canChangeFav? null:() {
                                   ShopCubit.get(context)
                                       .changeFav(products[index]);
                                   products[index].productId;

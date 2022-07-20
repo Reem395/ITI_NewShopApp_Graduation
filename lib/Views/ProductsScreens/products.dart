@@ -1,26 +1,49 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
-import '../../ViewModels/Components.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/Models/ProductModel/ProductModel.dart';
+import 'package:shop_app/ViewModels/Block/States.dart';
+import '../../ViewModels/Block/Cubit.dart';
+import '../../ViewModels/Widgets/product_items_categries.dart';
 import '../../ViewModels/constants.dart';
 
 class ProductsScreen extends StatelessWidget {
-  const ProductsScreen({Key? key}) : super(key: key);
+  final String categoryName;
+  ProductsScreen(this.categoryName,{Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-return Scaffold(
+    Map<String,List<ProductModel>> products= ShopCubit.get(context).categoriesProducts;
+
+return BlocConsumer<ShopCubit,ShopStates>(
+  builder: (context, state){
+    return Scaffold(
       appBar: AppBar(title: const Text('Products'),
-      backgroundColor: defaultColor,),
-      body: GridView.builder(
-        padding: const EdgeInsets.all(15.0),
-        itemCount: 10,
-        itemBuilder: (ctx, i) => (const ProductItem()),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 2 / 2,
-          crossAxisSpacing: 15,
-          mainAxisSpacing: 15,
-        ),
+        backgroundColor: defaultColor,),
+      body: ConditionalBuilder(
+        fallback: (BuildContext context) {
+          return const CircularProgressIndicator();
+        },
+        condition: state is !GetCategoriesProductsLoading,
+        builder: (BuildContext context) {
+          return GridView.builder(
+            padding: const EdgeInsets.all(15.0),
+            itemCount: products[categoryName]?.length,
+            itemBuilder: (ctx, index) => (ProductItem(products[categoryName]![index])),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 2 / 2,
+              crossAxisSpacing: 15,
+              mainAxisSpacing: 15,
+            ),
+          );
+        },
       ),
     );
+  },
+  listener: (context, state){
+
+  },
+);
   }
 }

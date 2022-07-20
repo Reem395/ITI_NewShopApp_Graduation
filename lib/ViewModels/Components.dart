@@ -5,6 +5,7 @@ import '../Views/ProductsScreens/product_details.dart';
 import 'Local/CacheHelper.dart';
 import 'constants.dart';
 
+// FocusNode myFocusNode = FocusNode();
 Widget defaultTextFormField(
     {@required String? label,
     @required TextEditingController? controller,
@@ -15,7 +16,7 @@ Widget defaultTextFormField(
     IconData? suffix,
     TextInputType? keyboard,
     bool password = false,
-    double borderRaduis=0,
+    double borderRaduis = 0,
     Function()? changePassword,
     Function()? onEditingComplate,
     Color? labelColor,
@@ -31,19 +32,28 @@ Widget defaultTextFormField(
     cursorColor: defaultColor,
     decoration: InputDecoration(
       fillColor: Colors.grey[200],
-      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: defaultColor)),
+      focusedBorder:
+          OutlineInputBorder(borderSide: BorderSide(color: defaultColor)),
       isDense: true,
       labelText: label,
       //  labelStyle: TextStyle(
       //   color: myFocusNode!.hasFocus ? defaultColor : Colors.grey
       // ),
-      prefixIcon: Icon(prefix,color: defaultColor,),
+      prefixIcon: Icon(
+        prefix,
+        color: defaultColor,
+      ),
       suffixIcon: GestureDetector(
-        child: Icon(suffix,color: defaultColor,),
+        child: Icon(
+          suffix,
+          color: defaultColor,
+        ),
         onTap: changePassword,
       ),
-      border:
-          OutlineInputBorder(borderSide: BorderSide(color: defaultColor,),
+      border: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: defaultColor,
+          ),
           borderRadius: BorderRadius.all(Radius.circular(borderRaduis))),
     ),
     // onTap: onTap,
@@ -92,7 +102,6 @@ Future<dynamic> navigateAndReplace(BuildContext context, Widget screen) {
       context, MaterialPageRoute(builder: (context) => screen));
 }
 
-
 /*Widget buildBanner(ShopHomeModel? homeModel) {
   return Padding(
     padding: const EdgeInsets.only(top: 20),
@@ -109,7 +118,7 @@ Future<dynamic> navigateAndReplace(BuildContext context, Widget screen) {
   );
 }*/
 
- //Widget buildCatItem(BuildContext context, int index) {
+//Widget buildCatItem(BuildContext context, int index) {
 //   return Row(
 //     children: [Image(image: NetworkImage(ShopCubit.get(context).categoryModel!.data.data[index].image),
 //       fit: BoxFit.cover,
@@ -125,7 +134,6 @@ Future<dynamic> navigateAndReplace(BuildContext context, Widget screen) {
 //     ],
 //   );
 // }
-
 
 /*ListView buildSearchList(SearchModel model, bool favColor) {
   return ListView.separated(
@@ -183,7 +191,7 @@ Future<dynamic> navigateAndReplace(BuildContext context, Widget screen) {
                               decoration: TextDecoration.lineThrough),
                         ),
                       Spacer(),
-                      *//*IconButton(
+                      */ /*IconButton(
                             onPressed: () {
                               favColor = !favColor;
                               ShopCubit.get(context).changeFavourites(
@@ -196,7 +204,7 @@ Future<dynamic> navigateAndReplace(BuildContext context, Widget screen) {
                                     ? Icons.favorite
                                     : Icons.favorite_outline),
                             color: Colors.red,
-                          ),*//*
+                          ),*/ /*
                     ],
                   )
                 ],
@@ -218,69 +226,6 @@ void navigateToLogin(BuildContext context) {
       .then((value) => navigateAndReplace(context, LoginScreen()));
 }
 
-//Hadeer
-class ProductItem extends StatefulWidget {
-  const ProductItem({Key? key}) : super(key: key);
-
-  @override
-  State<ProductItem> createState() => _ProductItemState();
-}
-
-//hadeer
-class _ProductItemState extends State<ProductItem> {
-  bool isFavorite = false;
-  @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(10),
-      child: GridTile(
-        child: GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const ProductDetailsScreen()),
-            );
-          },
-          child: Image.asset(
-            'assets/images/girl.png',
-            fit: BoxFit.cover,
-          ),
-        ),
-        footer: GridTileBar(
-          backgroundColor: const Color.fromARGB(221, 78, 82, 87),
-          leading: IconButton(
-            icon: Icon(
-              isFavorite ? Icons.favorite : Icons.favorite_border,
-            ),
-            color: Colors.red,
-            onPressed: () {
-              toggleFavoriteStatus();
-            },
-          ),
-          title: const Text(
-            "Girls",
-            textAlign: TextAlign.center,
-          ),
-          trailing: IconButton(
-            icon: const Icon(
-              Icons.shopping_cart,
-            ),
-            onPressed: () {},
-            color: Theme.of(context).primaryColor,
-          ),
-        ),
-      ),
-    );
-  }
-
-  void toggleFavoriteStatus() {
-    setState(() {
-      isFavorite = !isFavorite;
-    });
-  }
-}
-
 AppBar ShopSearchAppbar(context) {
   return AppBar(
     backgroundColor: defaultColor,
@@ -288,7 +233,7 @@ AppBar ShopSearchAppbar(context) {
     actions: [
       IconButton(
           onPressed: () {
-           // navigateTo(context, SearchScreen());
+            // navigateTo(context, SearchScreen());
           },
           icon: const Icon(Icons.search))
     ],

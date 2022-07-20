@@ -1,26 +1,30 @@
-class OrderModel{
+class OrderModel {
+  String? orderId;
+  late String userId, orderState;
+  late String? state, city, description;
+  List<String> prodIds = [];
+  OrderModel(
+      {this.orderId,
+      required this.userId,
+      required this.prodIds,
+      required this.orderState});
 
-  String? orderId ;
-  late String userId,state;
-  List<String> prodIds=[];
-  OrderModel({this.orderId, required this.userId,
-   required this.prodIds,required this.state});
-
-  OrderModel.fromJson(Map<dynamic,dynamic>map){
+  OrderModel.fromJson(Map<dynamic, dynamic> map) {
     orderId = map['orderId'];
     userId = map['userId'];
     for (var item in map['prodIds']) {
       // print("From Forloop: $item");
       prodIds.add(item);
     }
-    state = map['state'];
+    orderState = map['orderState'];
   }
 
-  toJson(){
+  toJson() {
     return {
-      'orderId':orderId,
-      'userId':userId,
-      'prodIds':prodIds,
-      'state':state    };
+      'orderId': orderId,
+      'userId': userId,
+      'prodIds': prodIds,
+      'orderState': orderState
+    };
   }
 }
