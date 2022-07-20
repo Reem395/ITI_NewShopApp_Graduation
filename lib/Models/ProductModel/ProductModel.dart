@@ -2,9 +2,10 @@ class ProductModel {
  late  String?name,description ,image ,categoryName;
  late int  noItemsInStock;
  late int? productId;
- late var oldPrice,price ;
- late var discount;
+ late dynamic oldPrice,price ;
+ late dynamic discount;
  bool? inFavourites= false;
+ bool? inCart= false;
 List<String> prodImages=[];
 
   ProductModel({this.productId, required this.name,

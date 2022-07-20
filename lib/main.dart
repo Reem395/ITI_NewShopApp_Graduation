@@ -8,8 +8,8 @@ import 'package:shop_app/ViewModels/Block/Cubit.dart';
 import 'Service/firebase_auth_methods.dart';
 import 'ViewModels/Block/States.dart';
 import 'ViewModels/Local/CacheHelper.dart';
-import 'ViewModels/Network/DioHelper.dart';
 import 'Views/LayoutScreen/ShopLayout.dart';
+import 'Views/LayoutScreen/adminShopLayout.dart';
 import 'Views/OnBoardingScreen/on_boarding_screen.dart';
 import 'Views/UserScreens/LoginScreen.dart';
 import 'ViewModels/BlocObserver.dart';
@@ -24,8 +24,8 @@ void main() {
     () async {
       WidgetsFlutterBinding.ensureInitialized();
       await Firebase.initializeApp();
-      DioHelper.init();
       await CacheHelper.init();
+      uId = CacheHelper.getData(key: "uId");
       token = FirebaseAuthMethods(FirebaseAuth.instance).user?.uid;
 
       var boardingState = CacheHelper.getData(key: "onBoardingOpened");
@@ -33,7 +33,8 @@ void main() {
 
       if (boardingState != null) {
         if (token != null) {
-          widget = ShopLayout();
+          // widget = ShopLayout();
+          widget = AdminShopLayout();
         } else {
           widget = const LoginScreen();
         }

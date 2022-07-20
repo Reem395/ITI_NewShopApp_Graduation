@@ -7,13 +7,11 @@ import '../../Service/firebase_auth_methods.dart';
 import '../../ViewModels/Components.dart';
 import '../../ViewModels/constants.dart';
 import '../../ViewModels/Block/Cubit.dart';
-import '../CartScreen/cartpage.dart';
+import '../UserScreens/LoginScreen.dart';
 import '../WishlistScreen/favouriteScreen.dart';
-import 'LoginScreen.dart';
-import 'account_info_screen.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+class AdminProfileScreen extends StatelessWidget {
+  const AdminProfileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +24,7 @@ class ProfileScreen extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(
                     height: 20,
@@ -33,51 +32,21 @@ class ProfileScreen extends StatelessWidget {
                   Container(
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
+                      // color: Colors.amber,
                     ),
-                    child: Stack(
-                      alignment: AlignmentDirectional.bottomEnd,
-                      children: const [
-                        CircleAvatar(
-                            radius: 59,
-                            backgroundImage:
-                                AssetImage("assets/images/avatar.png")),
-                        /*Padding(
-                          padding: const EdgeInsets.all(5),
-                          child: CircleAvatar(
-                            radius: 13,
-                            backgroundColor: Colors.white,
-                            child: IconButton(
-                              alignment: AlignmentDirectional.center,
-                              icon: const Icon(
-                                Icons.edit,
-                                size: 13,
-                                color: Colors.black,
-                              ),
-                              onPressed: () {},
-                            ),
-                          ),
-                        )*/
-                      ],
+                    child: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      foregroundColor: defaultColor,
+                      radius: 59,
+                      backgroundImage: AssetImage("assets/images/admin.png"),
                     ),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    ShopCubit.get(context).user!.name != null
-                        ? ShopCubit.get(context).user!.name!
-                        : "",
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 20),
-                  ),
-                  Text(
-                    ShopCubit.get(context).user!.email != null
-                        ? ShopCubit.get(context).user!.email!
-                        : "",
-                    style: const TextStyle(
-                      fontSize: 13,
-                      color: Colors.grey,
-                    ),
+                  const Text(
+                    "Admin",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                   ClipPath(
                     clipper: CustomClipPath(),
@@ -94,44 +63,6 @@ class ProfileScreen extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        buildRow(
-                            icon: Icons.person_outline,
-                            title: "Account Information",
-                            onTap: () {
-                              navigateTo(context, const AccountInfoScreen());
-                            }),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            buildRow(
-                                icon: Icons.location_on_outlined,
-                                title: "My Addresses",
-                                onTap: () {
-                                  navigateTo(
-                                      context, const addressReviewScreen());
-                                }),
-                          ],
-                        ),
-                        buildRow(
-                            icon: Icons.shopping_cart,
-                            title: "My Cart",
-                            onTap: () {
-                              ShopCubit.get(context).changeCurrentIndex(3);
-                              navigateTo(context, CartPage());
-                            }),
-                        buildRow(
-                            icon: Icons.shopify,
-                            title: "My Orders",
-                            onTap: () {
-                              navigateTo(context, MyOrdersScreen());
-                            }),
-                        buildRow(
-                            icon: Icons.favorite_outline,
-                            title: "My Wishlist",
-                            onTap: () {
-                              ShopCubit.get(context).changeCurrentIndex(2);
-                              navigateTo(context, const FavouriteScreen());
-                            }),
                         buildRow(
                             icon: Icons.logout,
                             title: "Logout",

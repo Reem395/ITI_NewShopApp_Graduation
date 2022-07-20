@@ -1,7 +1,8 @@
 class CartModel{
 
   String? ItemId;
-  late String userId, productId;
+  late String userId;
+  late int productId;
   late int NoProductsInCart;
   CartModel({this.ItemId, required this.userId,
    required this.productId, required this.NoProductsInCart});
