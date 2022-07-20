@@ -25,16 +25,23 @@ class _AddProductFormState extends State<AddProductForm> {
       allCategoriesName.add(item.name);
     }
   }
-
+final TextEditingController name = TextEditingController();
+  final TextEditingController description = TextEditingController();
+  final TextEditingController image = TextEditingController();
+  final TextEditingController noItemsInStock =TextEditingController();
+    double? oldPrice ;
+     TextEditingController price = TextEditingController();
+    final TextEditingController discount = TextEditingController();
+    final List<String> prodImages = [];
+    final TextEditingController imageTwo = TextEditingController();
+    final TextEditingController imageThree = TextEditingController();
   @override
   Widget build(BuildContext context) {
   int productId= ShopCubit.get(context).products.length+1;
-    String? name, description, image;
-    int? noItemsInStock;
-    double? oldPrice, price, discount;
-    List<String> prodImages = [];
-    TextEditingController imageTwo = TextEditingController();
-    TextEditingController imageThree = TextEditingController();
+  
+
+    // TextEditingController oldPrice = TextEditingController();
+    
     WidgetsFlutterBinding.ensureInitialized();
     return SingleChildScrollView(
       child: Padding(
@@ -48,9 +55,7 @@ class _AddProductFormState extends State<AddProductForm> {
                 labelText: 'Name',
                 hintText: 'Product Name',
               ),
-              onChanged: (value) {
-                name = value;
-              },
+              controller: name,
             ),
 
             const SizedBox(
@@ -64,9 +69,8 @@ class _AddProductFormState extends State<AddProductForm> {
                 hintText: 'Product Price',
               ),
               keyboardType: TextInputType.number,
-              onChanged: (value) {
-                price = double.parse(value);
-              },
+              controller: price,
+   
             ),
 
             const SizedBox(
@@ -79,9 +83,7 @@ class _AddProductFormState extends State<AddProductForm> {
                 labelText: 'Description',
                 hintText: 'Product Description',
               ),
-              onChanged: (value) {
-                description = value;
-              },
+              controller: description,
             ),
 
             const SizedBox(
@@ -95,9 +97,7 @@ class _AddProductFormState extends State<AddProductForm> {
                 hintText: 'No Of Items In Stock',
               ),
               keyboardType: TextInputType.number,
-              onChanged: (value) {
-                noItemsInStock = int.parse(value);
-              },
+              controller: noItemsInStock,
             ),
 
             const SizedBox(
@@ -110,9 +110,7 @@ class _AddProductFormState extends State<AddProductForm> {
                 labelText: 'Main image',
                 hintText: 'Main image',
               ),
-              onChanged: (value) {
-                image = value;
-              },
+              controller: image,
             ),
 
             const SizedBox(
@@ -170,6 +168,8 @@ class _AddProductFormState extends State<AddProductForm> {
                 setState(() {
                   categoryName = newValue;
                 });
+                  // categoryName = newValue;
+
               },
               items: allCategoriesName
                   .map<DropdownMenuItem<String>>((String value) {
@@ -227,9 +227,7 @@ class _AddProductFormState extends State<AddProductForm> {
                       hintText: 'Product Discount',
                     ),
                     keyboardType: TextInputType.number,
-                    onChanged: (value) {
-                      discount = double.parse(value);
-                    },
+                    controller: discount,
                   )
                 : const SizedBox(
                     height: 5,
@@ -245,36 +243,44 @@ class _AddProductFormState extends State<AddProductForm> {
                       backgroundColor: MaterialStateProperty.all(defaultColor)),
                   onPressed: () async {
                     try {
-                      if (name == "" ||
-                          description == "" ||
-                          image == "" ||
-                          imageTwo.text == "" ||
-                          imageThree.text == "" ||
-                          categoryName == "") {
+                      int flag =0;
+                      print(categoryName);
+                      if (name.text.isEmpty  ||
+                          description.text.isEmpty ||
+                          image.text.isEmpty||
+                          imageTwo.text.isEmpty ||
+                          imageThree.text.isEmpty ||
+                          categoryName!.isEmpty) {
                         Fluttertoast.showToast(
                             msg: "Please enter all fields",
                             toastLength: Toast.LENGTH_SHORT);
-                      } else if (price == 0.0||noItemsInStock==0) {
+                            flag =1;
+                      } 
+                      else if (double.parse(price.text) == 0.0||int.parse(noItemsInStock.text)==0) {
                         Fluttertoast.showToast(
                             msg: "Please enter valid Number",
                             toastLength: Toast.LENGTH_SHORT);
-                      } else if (discount! > 0) {
-                        oldPrice = price;
-                        price = (oldPrice! * (100 - discount!)) / 100;
-                      } else {
+                            flag=1;
+                      }
+                       if (double.parse(discount.text) > 0) {
+                        oldPrice = double.parse(price.text);
+                        price.text = ((oldPrice! * (100 - double.parse(discount.text))) / 100).toString();
+                      } 
+                      if(flag==0) {
+                        print("Product: $productId , $name, $oldPrice ,$price , $description , $image , ${imageTwo.text},${imageThree.text},$noItemsInStock,$categoryName,$discount");
                         prodImages.add(imageTwo.text);
                         prodImages.add(imageThree.text);
                         ProductModel product = ProductModel(
                             productId:productId,
-                            name: name,
-                            oldPrice: oldPrice!,
-                            price: price!,
-                            description: description,
-                            image: image,
+                            name: name.text,
+                            oldPrice: oldPrice,
+                            price: double.parse(price.text) ,
+                            description: description.text,
+                            image: image.text,
                             prodImages: prodImages,
-                            noItemsInStock: noItemsInStock!,
+                            noItemsInStock: int.parse(noItemsInStock.text),
                             categoryName: categoryName,
-                            discount: discount);
+                            discount: double.parse(discount.text));
 
                         await FireStoreProduct().addProductToFireStore(product);
 
@@ -301,6 +307,9 @@ class _AddProductFormState extends State<AddProductForm> {
                               );
                             });
                       }
+                       
+                      
+                      // }
                     } catch (e) {
                       print(e.toString());
                     }

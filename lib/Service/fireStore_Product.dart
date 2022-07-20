@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 import '../Models/ProductModel/ProductModel.dart';
+import '../ViewModels/Block/Cubit.dart';
 
 class FireStoreProduct {
   List<ProductModel> products = [];
@@ -30,10 +32,20 @@ class FireStoreProduct {
     });
   }
 
-  deleteProduct(String id) {
+
+///************Update Product****************************** */
+updateProduct(String productDocID,ProductModel prodUpdate){
+FirebaseFirestore.instance.collection("products").doc(productDocID).update(prodUpdate.toJson());
+}
+
+///************delete Product****************************** */
+
+  deleteProduct(String id,BuildContext contex) {
     var collection = FirebaseFirestore.instance.collection('products');
     collection
         .doc(id) // <-- Doc ID to be deleted.
         .delete();
+  ShopCubit.get(contex).getProducts();
+
   }
 }

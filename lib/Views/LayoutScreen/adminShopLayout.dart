@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,11 +7,14 @@ import 'package:shop_app/ViewModels/constants.dart';
 import 'package:shop_app/Views/UserScreens/cartpage.dart';
 import 'package:shop_app/Views/UserScreens/profile_screen.dart';
 import '../../Demo/testPage.dart';
+import '../../Service/firebase_auth_methods.dart';
 import '../AdminScreens/AddCategoryForm.dart';
 import '../AdminScreens/AddProductForm.dart';
 import '../AdminScreens/adminHome_screen.dart';
+import '../AdminScreens/adminProfileScreen.dart';
 import '../CategoriesScreen/CategoriesScreen.dart';
 import '../HomeScreen/home_screen.dart';
+import '../UserScreens/LoginScreen.dart';
 import '../UserScreens/UserFullInfo.dart';
 import '../UserScreens/addAddress_screen.dart';
 import '../UserScreens/addressReviewScreen.dart';
@@ -20,20 +24,19 @@ import '../../ViewModels/Block/Cubit.dart';
 import '../../ViewModels/Block/States.dart';
 
 class AdminShopLayout extends StatelessWidget {
-  final List<Widget> pages = [
-    const AdminHomeScreen(),
-    const CategoriesScreen(),
-    const AddProductForm(),
-    const ProfileScreen(),
-  ];
-
   AdminShopLayout({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final List<Widget> pages = [
+      const AdminHomeScreen(),
+      const CategoriesScreen(),
+      const AddCategoryForm(),
+      const AddProductForm(),
+    ];
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-              primarySwatch: Colors.teal,
+        primarySwatch: Colors.teal,
       ),
       home: BlocProvider<ShopCubit>(
           create: (context) {
@@ -67,9 +70,11 @@ class AdminShopLayout extends StatelessWidget {
                       BottomNavigationBarItem(
                           icon: Icon(Icons.apps_sharp), label: "Categories"),
                       BottomNavigationBarItem(
-                          icon: Icon(Icons.add_box_rounded), label: "Add To Shop"),
+                          icon: Icon(Icons.add_box_rounded),
+                          label: "Add Category"),
                       BottomNavigationBarItem(
-                          icon: Icon(Icons.person), label: "Profile"),
+                          icon: Icon(Icons.add_box_rounded),
+                          label: "Add Product"),
                     ]),
               );
             },
