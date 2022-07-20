@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/ViewModels/Block/Cubit.dart';
 import 'ViewModels/Block/States.dart';
 import 'ViewModels/Local/CacheHelper.dart';
-import 'ViewModels/Network/DioHelper.dart';
 import 'Views/LayoutScreen/ShopLayout.dart';
 import 'Views/OnBoardingScreen/on_boarding_screen.dart';
 import 'Views/UserScreens/LoginScreen.dart';
@@ -22,10 +21,10 @@ void main() {
     () async {
       WidgetsFlutterBinding.ensureInitialized();
       await Firebase.initializeApp();
-      DioHelper.init();
       await CacheHelper.init();
       token = CacheHelper.getData(key: "token");
-
+      uId= CacheHelper.getData(key: "uId");
+      print(uId);
       var boardingState = CacheHelper.getData(key: "onBoardingOpened");
       Widget widget;
 

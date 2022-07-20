@@ -32,13 +32,14 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     child: Stack(
                       alignment: AlignmentDirectional.bottomEnd,
-                      children: [
-                        const CircleAvatar(
+                      children: const [
+                        CircleAvatar(
                           radius: 59,
-                          backgroundImage: NetworkImage(
-                              'https://png.pngtree.com/png-clipart/20220117/original/pngtree-original-cartoon-avatar-girl-png-image_7145782.png'),
+                          backgroundImage: AssetImage(
+                            "assets/images/avatar.png"
+                          )
                         ),
-                        Padding(
+                        /*Padding(
                           padding: const EdgeInsets.all(5),
                           child: CircleAvatar(
                             radius: 13,
@@ -53,20 +54,20 @@ class ProfileScreen extends StatelessWidget {
                               onPressed: () {},
                             ),
                           ),
-                        )
+                        )*/
                       ],
                     ),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  const Text(
-                    "Full Name",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                   Text(
+                       ShopCubit.get(context).user!.name!=null? ShopCubit.get(context).user!.name!: "",
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
-                  const Text(
-                    "Anything Here",
-                    style: TextStyle(
+                   Text(
+                     ShopCubit.get(context).user!.email!=null?ShopCubit.get(context).user!.email!: "",
+                    style: const TextStyle(
                       fontSize: 13,
                       color: Colors.grey,
                     ),

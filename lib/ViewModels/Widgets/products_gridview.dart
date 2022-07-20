@@ -18,93 +18,94 @@ class ProductGridView extends StatelessWidget {
         childAspectRatio: 1 / 1.4,
         children: List.generate(
           products.length,
-          (index) => Container(
-              color: Colors.white,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Stack(
-                    alignment: AlignmentDirectional.bottomStart,
-                    children: [
-                      Image.network(
-                        products[index].image!,
-                        height: 150,
-                        width: double.infinity,
-                      ),
-                      if (products[index].discount > 0)
-                        Container(
-                          padding: EdgeInsets.all(1),
-                          child: const Text(
-                            "Discount",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          color: Colors.red,
-                        )
-                    ],
-                  ),
-                  Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            products[index].name!,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(height: 1.3, fontSize: 13),
-                          ),
-                          const SizedBox(
-                            height: 1,
-                          ),
-                          Row(children: [
-                            Text(
-                              products[index].price.round().toString(),
-                              style: const TextStyle(color: Colors.blue),
+          (index) {
+                return Container(
+                    color: Colors.white,
+                    child: !ShopCubit.get(context).productExist(products[index])? null: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Stack(
+                          alignment: AlignmentDirectional.bottomStart,
+                          children: [
+                            Image.network(
+                              products[index].image!,
+                              height: 150,
+                              width: double.infinity,
                             ),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            if (products[index].discount != 0)
-                              Text(
-                                products[index].oldPrice.toString(),
-                                style: const TextStyle(
-                                    color: Colors.grey,
-                                    decoration: TextDecoration.lineThrough),
-                              ),
-                            const Spacer(),
-                            Row(children: [
+                            if (products[index].discount > 0)
+                              Container(
+                                padding: EdgeInsets.all(1),
+                                child: const Text(
+                                  "Discount",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                color: Colors.red,
+                              )
+                          ],
+                        ),
+                        Padding(
+                            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  products[index].name!,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(height: 1.3, fontSize: 13),
+                                ),
+                                const SizedBox(
+                                  height: 1,
+                                ),
+                                Row(children: [
+                                  Text(
+                                    products[index].price.round().toString(),
+                                    style: const TextStyle(color: Colors.blue),
+                                  ),
+                                  const SizedBox(
+                                    width: 8,
+                                  ),
+                                  if (products[index].discount != 0)
+                                    Text(
+                                      products[index].oldPrice.toString(),
+                                      style: const TextStyle(
+                                          color: Colors.grey,
+                                          decoration: TextDecoration.lineThrough),
+                                    ),
+                                  const Spacer(),
+                                  Row(children: [
                                     IconButton(
-                                iconSize: 22,
-                                onPressed: () {
-                                 //Add To cart
-                                },
-                                icon: Icon(
-                                  Icons.shopping_cart_outlined,
-                                  color: defaultColor,
-                                )),
-                              IconButton(
-                                iconSize: 22,
-                                onPressed:
-                                !ShopCubit.get(context).canChangeFav? null:() {
-                                  ShopCubit.get(context)
-                                      .changeFav(products[index]);
-                                  products[index].productId;
-                                },
-                                icon: Icon(
-                                  !ShopCubit.get(context).favouritesProd[
+                                        iconSize: 22,
+                                        onPressed: !ShopCubit.get(context).canChangeCart? null:() {
+                                          //Add To cart
+                                          ShopCubit.get(context).changeCart(products[index]);
+                                        },
+                                        icon: Icon(
+                                          ShopCubit.get(context).cartProd[products[index].productId]!?
+                                          Icons.shopping_cart: Icons.shopping_cart_outlined,
+                                          color: defaultColor,
+                                        )),
+                                    IconButton(
+                                        iconSize: 22,
+                                        onPressed:
+                                        !ShopCubit.get(context).canChangeFav? null:() {
+                                          ShopCubit.get(context)
+                                              .changeFav(products[index]);
+                                        },
+                                        icon: Icon(
+                                          !ShopCubit.get(context).favouritesProd[
                                           products[index].productId]!
-                                      ? Icons.favorite_outline
-                                      : Icons.favorite,
-                                  color: Colors.red,
-                                )),
-
-                          
-                            ],),
-                          ]),
-                        ],
-                      ))
-                ],
-              )),
+                                              ? Icons.favorite_outline
+                                              : Icons.favorite,
+                                          color:Colors.red,
+                                        )),
+                                  ],),
+                                ]),
+                              ],
+                            ))
+                      ],
+                    ));
+          },
         ));
   }
 }

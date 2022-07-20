@@ -2,7 +2,7 @@ class UserModel {
   late String? name, email, password, phone;
   late String? state, city, description;
 
-  late int userId;
+  late String userId;
 
   UserModel(
       {required this.userId,

@@ -94,9 +94,9 @@ class FirebaseAuthMethods {
           .listen((data) {
         if (data.docs.isEmpty) {
           FirebaseFirestore.instance.collection('Users').add({
-            'userId': googleUser?.id,
-            'email': googleUser?.email,
-            'name': googleUser?.displayName,
+            'userId': user?.uid,
+            'email': user?.email,
+            'name': user?.displayName,
             'phone': null,
             'state': null,
             'city': null,

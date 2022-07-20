@@ -5,6 +5,7 @@ class ProductModel {
  late var oldPrice,price ;
  late var discount;
  bool? inFavourites= false;
+ bool? inCart= false;
 List<String> prodImages=[];
 
   ProductModel({this.productId, required this.name,
