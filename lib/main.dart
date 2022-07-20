@@ -8,6 +8,7 @@ import 'ViewModels/Block/States.dart';
 import 'ViewModels/Local/CacheHelper.dart';
 import 'ViewModels/Network/DioHelper.dart';
 import 'Views/LayoutScreen/ShopLayout.dart';
+import 'Views/LayoutScreen/adminShopLayout.dart';
 import 'Views/OnBoardingScreen/on_boarding_screen.dart';
 import 'Views/UserScreens/LoginScreen.dart';
 import 'ViewModels/BlocObserver.dart';
@@ -31,7 +32,9 @@ void main() {
 
       if (boardingState != null) {
         if (token != null) {
-          widget = ShopLayout();
+          // widget = ShopLayout();
+          widget = AdminShopLayout();
+          
         } else {
           widget = const LoginScreen();
         }

@@ -8,6 +8,7 @@ import 'package:shop_app/Views/UserScreens/profile_screen.dart';
 import '../../Demo/testPage.dart';
 import '../AdminScreens/AddCategoryForm.dart';
 import '../AdminScreens/AddProductForm.dart';
+import '../AdminScreens/adminHome_screen.dart';
 import '../CategoriesScreen/CategoriesScreen.dart';
 import '../HomeScreen/home_screen.dart';
 import '../UserScreens/UserFullInfo.dart';
@@ -18,18 +19,15 @@ import '../WishlistScreen/favouriteScreen.dart';
 import '../../ViewModels/Block/Cubit.dart';
 import '../../ViewModels/Block/States.dart';
 
-class ShopLayout extends StatelessWidget {
+class AdminShopLayout extends StatelessWidget {
   final List<Widget> pages = [
-    const HomeScreen(),
+    const AdminHomeScreen(),
     const CategoriesScreen(),
-    const FavouriteScreen(),
-     CartPage(),
-    // AddCategoryForm(),
-    AddProductForm(),
+    const AddProductForm(),
     const ProfileScreen(),
   ];
 
-  ShopLayout({Key? key}) : super(key: key);
+  AdminShopLayout({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -42,7 +40,7 @@ class ShopLayout extends StatelessWidget {
             return ShopCubit()
               ..getProfileData()
               ..getProducts()
-              ..getFavorites()
+              // ..getFavorites()
               ..getCats();
           },
           child: BlocConsumer<ShopCubit, ShopStates>(
@@ -69,11 +67,7 @@ class ShopLayout extends StatelessWidget {
                       BottomNavigationBarItem(
                           icon: Icon(Icons.apps_sharp), label: "Categories"),
                       BottomNavigationBarItem(
-                          icon: Icon(Icons.favorite), label: "Favourites"),
-                      BottomNavigationBarItem(
-                          icon: Icon(Icons.shopping_cart), label: "Cart"),
-                      BottomNavigationBarItem(
-                          icon: Icon(Icons.add_box_rounded), label: "Add Cat"),
+                          icon: Icon(Icons.add_box_rounded), label: "Add To Shop"),
                       BottomNavigationBarItem(
                           icon: Icon(Icons.person), label: "Profile"),
                     ]),

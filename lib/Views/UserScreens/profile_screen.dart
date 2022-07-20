@@ -1,10 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shop_app/Views/UserScreens/MyOrdersScreen.dart';
+import 'package:shop_app/Views/UserScreens/addressReviewScreen.dart';
+import 'package:shop_app/Views/UserScreens/cartpage.dart';
 import '../../Service/firebase_auth_methods.dart';
 import '../../ViewModels/Components.dart';
 import '../../ViewModels/constants.dart';
 import '../../ViewModels/Block/Cubit.dart';
+import '../WishlistScreen/favouriteScreen.dart';
 import 'LoginScreen.dart';
 import 'account_info_screen.dart';
 
@@ -98,30 +102,45 @@ class ProfileScreen extends StatelessWidget {
                             buildRow(
                                 icon: Icons.location_on_outlined,
                                 title: "My Addresses",
-                                onTap: () {}),
+                                onTap: () {
+                                  navigateTo(
+                                      context, const addressReviewScreen());
+                                }),
                           ],
                         ),
                         buildRow(
                             icon: Icons.shopping_cart,
+                            title: "My Cart",
+                            onTap: () {
+                              ShopCubit.get(context).changeCurrentIndex(3);
+                              navigateTo(context, CartPage());
+                            }),
+                        buildRow(
+                            icon: Icons.shopify,
                             title: "My Orders",
-                            onTap: () {}),
+                            onTap: () {
+                              navigateTo(context, MyOrdersScreen());
+                            }),
                         buildRow(
                             icon: Icons.favorite_outline,
                             title: "My Wishlist",
                             onTap: () {
                               ShopCubit.get(context).changeCurrentIndex(2);
+                              navigateTo(context, const FavouriteScreen());
                             }),
                         buildRow(
                             icon: Icons.logout,
                             title: "Logout",
                             onTap: () {
-                              FirebaseAuthMethods(FirebaseAuth.instance).signOut(context);
+                              FirebaseAuthMethods(FirebaseAuth.instance)
+                                  .signOut(context);
                               Navigator.of(context, rootNavigator: true).push(
-                               CupertinoPageRoute<bool>(
-                                fullscreenDialog: true,
-                                builder: (BuildContext context) => LoginScreen(),
-                              ),
-                            );
+                                CupertinoPageRoute<bool>(
+                                  fullscreenDialog: true,
+                                  builder: (BuildContext context) =>
+                                      LoginScreen(),
+                                ),
+                              );
                             })
                       ],
                     ),
