@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/ViewModels/constants.dart';
-import 'package:shop_app/Views/UserScreens/cartpage.dart';
 import 'package:shop_app/Views/UserScreens/profile_screen.dart';
 import '../../Demo/testPage.dart';
 import '../../Service/firebase_auth_methods.dart';
@@ -41,7 +40,7 @@ class AdminShopLayout extends StatelessWidget {
       home: BlocProvider<ShopCubit>(
           create: (context) {
             return ShopCubit()
-              ..getProfileData()
+              ..getUser(uId!)
               ..getProducts()
               // ..getFavorites()
               ..getCats();

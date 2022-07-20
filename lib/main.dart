@@ -8,7 +8,6 @@ import 'package:shop_app/ViewModels/Block/Cubit.dart';
 import 'Service/firebase_auth_methods.dart';
 import 'ViewModels/Block/States.dart';
 import 'ViewModels/Local/CacheHelper.dart';
-import 'ViewModels/Network/DioHelper.dart';
 import 'Views/LayoutScreen/ShopLayout.dart';
 import 'Views/LayoutScreen/adminShopLayout.dart';
 import 'Views/OnBoardingScreen/on_boarding_screen.dart';
@@ -25,8 +24,8 @@ void main() {
     () async {
       WidgetsFlutterBinding.ensureInitialized();
       await Firebase.initializeApp();
-      DioHelper.init();
       await CacheHelper.init();
+      uId = CacheHelper.getData(key: "uId");
       token = FirebaseAuthMethods(FirebaseAuth.instance).user?.uid;
 
       var boardingState = CacheHelper.getData(key: "onBoardingOpened");
@@ -36,7 +35,6 @@ void main() {
         if (token != null) {
           // widget = ShopLayout();
           widget = AdminShopLayout();
-          
         } else {
           widget = const LoginScreen();
         }
@@ -72,7 +70,7 @@ class MyApp extends StatelessWidget {
                     focusedBorder: OutlineInputBorder(
                         gapPadding: 10,
                         borderSide: BorderSide(color: Color(0xff3b75a8))))),
-            home: AdminShopLayout(),
+            home: widget,
             debugShowCheckedModeBanner: false,
           );
         },

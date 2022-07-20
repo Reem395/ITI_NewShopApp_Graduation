@@ -35,20 +35,14 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocConsumer<ShopCubit, ShopStates>(
       listener: (BuildContext context, Object? state) {
         if (state is ShopLLoginSuccessState) {
-          message = state.userData.message!;
-          if (state.userData.status) {
-            buildShopToast(
-                message: message,
-                state: LoginState.success,
-                toastLength: Toast.LENGTH_SHORT);
+          CacheHelper.setData(key: "uId", value: uId);
             navigateAndReplace(context, ShopLayout());
-            token = state.userData.data?.token;
-          } else {
+          } else if(state is ShopLLoginErrorState) {
+            message= "Your Data isn't Valid";
             buildShopToast(
                 message: message,
                 state: LoginState.fail,
                 toastLength: Toast.LENGTH_LONG);
-          }
         }
       },
       builder: (BuildContext context, state) {
@@ -142,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   height: 40,
                                   onPressed: () {
                                     if (formState.currentState!.validate()) {
-                                      cubit.userLogin(
+                                      cubit.signIn(
                                           email: emailController.text,
                                           password: passwordController.text);
                                     }

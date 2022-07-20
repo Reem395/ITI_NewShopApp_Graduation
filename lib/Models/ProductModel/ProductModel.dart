@@ -5,6 +5,7 @@ class ProductModel {
  late dynamic oldPrice,price ;
  late dynamic discount;
  bool? inFavourites= false;
+ bool? inCart= false;
 List<String> prodImages=[];
 
   ProductModel({this.productId, required this.name,

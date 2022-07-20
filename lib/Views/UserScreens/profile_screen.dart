@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shop_app/Views/UserScreens/MyOrdersScreen.dart';
 import 'package:shop_app/Views/UserScreens/addressReviewScreen.dart';
-import 'package:shop_app/Views/UserScreens/cartpage.dart';
 import '../../Service/firebase_auth_methods.dart';
 import '../../ViewModels/Components.dart';
 import '../../ViewModels/constants.dart';
 import '../../ViewModels/Block/Cubit.dart';
+import '../CartScreen/cartpage.dart';
 import '../WishlistScreen/favouriteScreen.dart';
 import 'LoginScreen.dart';
 import 'account_info_screen.dart';
@@ -36,13 +36,12 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     child: Stack(
                       alignment: AlignmentDirectional.bottomEnd,
-                      children: [
-                        const CircleAvatar(
-                          radius: 59,
-                          backgroundImage: NetworkImage(
-                              'https://png.pngtree.com/png-clipart/20220117/original/pngtree-original-cartoon-avatar-girl-png-image_7145782.png'),
-                        ),
-                        Padding(
+                      children: const [
+                        CircleAvatar(
+                            radius: 59,
+                            backgroundImage:
+                                AssetImage("assets/images/avatar.png")),
+                        /*Padding(
                           padding: const EdgeInsets.all(5),
                           child: CircleAvatar(
                             radius: 13,
@@ -57,20 +56,25 @@ class ProfileScreen extends StatelessWidget {
                               onPressed: () {},
                             ),
                           ),
-                        )
+                        )*/
                       ],
                     ),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  const Text(
-                    "Full Name",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  Text(
+                    ShopCubit.get(context).user!.name != null
+                        ? ShopCubit.get(context).user!.name!
+                        : "",
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 20),
                   ),
-                  const Text(
-                    "Anything Here",
-                    style: TextStyle(
+                  Text(
+                    ShopCubit.get(context).user!.email != null
+                        ? ShopCubit.get(context).user!.email!
+                        : "",
+                    style: const TextStyle(
                       fontSize: 13,
                       color: Colors.grey,
                     ),
