@@ -1,9 +1,11 @@
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/ViewModels/Block/Cubit.dart';
+import 'Service/firebase_auth_methods.dart';
 import 'ViewModels/Block/States.dart';
 import 'ViewModels/Local/CacheHelper.dart';
 import 'ViewModels/Network/DioHelper.dart';
@@ -25,7 +27,7 @@ void main() {
       await Firebase.initializeApp();
       DioHelper.init();
       await CacheHelper.init();
-      token = CacheHelper.getData(key: "token");
+      token = FirebaseAuthMethods(FirebaseAuth.instance).user?.uid;
 
       var boardingState = CacheHelper.getData(key: "onBoardingOpened");
       Widget widget;
