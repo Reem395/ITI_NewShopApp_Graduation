@@ -14,12 +14,11 @@ class addressReviewScreen extends StatefulWidget {
 
 class _addressReviewScreenState extends State<addressReviewScreen> {
   bool secondaryAddressExisted = false;
-String primaryAddress="2526 Walt Nuzum Farm Road, Angelica,New York";
-String secondaryAddress ="4661 Chipmunk Lane, Seattle Washington";
+  String primaryAddress = "2526 Walt Nuzum Farm Road, Angelica,New York";
+  String secondaryAddress = "4661 Chipmunk Lane, Seattle Washington";
   @override
   Widget build(BuildContext context) {
-
-           return Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: const Text("Your Addresses"),
         backgroundColor: defaultColor,
@@ -65,7 +64,7 @@ String secondaryAddress ="4661 Chipmunk Lane, Seattle Washington";
               ),
               secondaryAddressExisted == true
                   ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -90,13 +89,12 @@ String secondaryAddress ="4661 Chipmunk Lane, Seattle Washington";
                         Card(
                           child: Padding(
                             padding: const EdgeInsets.all(20.0),
-                              child: Text("$secondaryAddress"),
-                      
+                            child: Text("$secondaryAddress"),
                           ),
                         ),
-                           const SizedBox(
-                height: 25,
-              ),
+                        const SizedBox(
+                          height: 25,
+                        ),
                       ],
                     )
                   : SizedBox(
@@ -116,6 +114,5 @@ String secondaryAddress ="4661 Chipmunk Lane, Seattle Washington";
         ),
       ),
     );
-
   }
 }
