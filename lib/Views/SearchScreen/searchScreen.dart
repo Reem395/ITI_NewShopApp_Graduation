@@ -42,8 +42,7 @@ class SearchScreen extends StatelessWidget {
                 Expanded(
                   child: ConditionalBuilder(
                       condition: ShopCubit.get(context).searchList.isNotEmpty,
-                      builder: (context) =>
-                          buildSearchList(cubit.searchList!),
+                      builder: (context) => buildSearchList(cubit.searchList),
                       fallback: (context) => Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: const [
