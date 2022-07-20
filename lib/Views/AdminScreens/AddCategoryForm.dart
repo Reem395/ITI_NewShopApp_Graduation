@@ -53,15 +53,17 @@ class AddCategoryForm extends StatelessWidget {
               child: ElevatedButton(
                 style: ButtonStyle(backgroundColor: MaterialStateProperty.all(defaultColor)),
                   onPressed: () async {
+                    int flag =0;
                     try {
                       if(name==""|| image==""){
                         Fluttertoast.showToast(msg: "Please enter all fields",
                         toastLength: Toast.LENGTH_SHORT);
+                        flag =1;
                       }
-                      else{
+                      if(flag==0){
                           ProductCategoryModel category =
                           ProductCategoryModel(categoryId: categoryNewID, name: name!, image: image!);
-                          await FireStoreCategory().addCategoryToFireStore(category);
+                          await FireStoreCategory().addCategoryToFireStore(category,context);
                         showDialog(context: context, builder: (context){
                             return AlertDialog(
                               title: Text("Success",style: TextStyle(color: defaultColor),),
@@ -73,6 +75,7 @@ class AddCategoryForm extends StatelessWidget {
                               ],
                             );
                         });
+                        
                         print("cat added");
                       }
                     } catch (e) {

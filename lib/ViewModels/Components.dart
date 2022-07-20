@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import '../Service/firebase_auth_methods.dart';
 import '../Views/UserScreens/LoginScreen.dart';
 import '../Views/ProductsScreens/product_details.dart';
 import 'Local/CacheHelper.dart';
@@ -235,7 +238,21 @@ AppBar ShopSearchAppbar(context) {
           onPressed: () {
             // navigateTo(context, SearchScreen());
           },
-          icon: const Icon(Icons.search))
+          icon: const Icon(Icons.search)),
+      IconButton(
+          onPressed: () {
+            FirebaseAuthMethods(FirebaseAuth.instance)
+                .signOut(context)
+                .then((value) {
+              Navigator.of(context, rootNavigator: true).push(
+                CupertinoPageRoute<bool>(
+                  fullscreenDialog: true,
+                  builder: (BuildContext context) => LoginScreen(),
+                ),
+              );
+            });
+          },
+          icon: const Icon(Icons.logout))
     ],
   );
 }
