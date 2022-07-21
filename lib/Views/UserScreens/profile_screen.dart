@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shop_app/ViewModels/Local/CacheHelper.dart';
 import 'package:shop_app/Views/UserScreens/MyOrdersScreen.dart';
 import 'package:shop_app/Views/UserScreens/addressReviewScreen.dart';
 import '../../Service/firebase_auth_methods.dart';
@@ -17,6 +18,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ShopCubit.get(context).getUser();
     return CupertinoTabView(
       builder: (context) {
         return SafeArea(
@@ -136,6 +138,7 @@ class ProfileScreen extends StatelessWidget {
                             icon: Icons.logout,
                             title: "Logout",
                             onTap: () {
+                              CacheHelper.removeKey(key: "uId");
                               FirebaseAuthMethods(FirebaseAuth.instance)
                                   .signOut(context);
                               Navigator.of(context, rootNavigator: true).push(

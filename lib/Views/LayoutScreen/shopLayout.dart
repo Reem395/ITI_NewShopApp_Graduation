@@ -39,8 +39,9 @@ class ShopLayout extends StatelessWidget {
       ),
       home: BlocProvider<ShopCubit>(
           create: (context) {
+          //  print('uId---------'+uId!);
             return ShopCubit()
-              ..getUser(uId!)
+              ..getUser()
               ..getProducts()
               ..getFavorites()
               ..getCats()

@@ -99,7 +99,7 @@ class ShopCubit extends Cubit<ShopStates> {
       emit(ShopGetFavSuccessScreen());
       if (value.docs.isNotEmpty) {
         value.docs.forEach((element) {
-          if (element.data()["userId"] == token) {
+          if (element.data()["userId"] == uId) {
             favourites.add(WishListModel.fromJson(element.data()));
           }
         });
@@ -116,7 +116,7 @@ class ShopCubit extends Cubit<ShopStates> {
   Future addFavourites(ProductModel product) async {
     itemId = FirebaseFirestore.instance.collection("Favourites").doc().id;
     return FirebaseFirestore.instance.collection("Favourites").doc(itemId).set(
-        {"ItemId": itemId, "productId": product.productId, "userId": token});
+        {"ItemId": itemId, "productId": product.productId, "userId": uId});
   }
 
   Future removeFavourites(ProductModel product) async {
@@ -197,15 +197,22 @@ class ShopCubit extends Cubit<ShopStates> {
   List<CartModel> carts = [];
 
   getCart() {
+    emit(ShopCartLoadingScreen());
     carts = [];
     FirebaseFirestore.instance.collection("Carts").get().then((value) {
       emit(ShopGetCartSuccessScreen());
+      print("uId========");
+      print(uId);
       if (value.docs.isNotEmpty) {
         value.docs.forEach((element) {
-          if (element.data()["userId"] == token) {
+          print("uId========");
+          print(uId);
+          if (element.data()["userId"] == uId) {
             carts.add(CartModel.fromJson(element.data()));
           }
         });
+        print("carts.length");
+        print(carts.length);
       }
       getCartProducts();
       print(canChangeCart);
@@ -235,7 +242,7 @@ class ShopCubit extends Cubit<ShopStates> {
       return FirebaseFirestore.instance.collection("Carts").doc(itemId).set({
         "ItemId": itemId,
         "productId": product.productId,
-        "userId": token,
+        "userId": uId,
         "NoProductsInCart": ++count
       }).then((value) {
         getProduct(product.productId!).then((value) {
@@ -247,7 +254,7 @@ class ShopCubit extends Cubit<ShopStates> {
       return FirebaseFirestore.instance.collection("Carts").doc(itemId).update({
         "ItemId": itemId,
         "productId": product.productId,
-        "userId": token,
+        "userId": uId,
         "NoProductsInCart": ++count
       }).then((value) {
         getProduct(product.productId!).then((value){
@@ -294,7 +301,7 @@ class ShopCubit extends Cubit<ShopStates> {
             .update({
           "ItemId": itemId,
           "productId": product.productId,
-          "userId": token,
+          "userId": uId,
           "NoProductsInCart": --count
         }).then((value) {
           getProduct(product.productId!).then((value){
@@ -393,7 +400,9 @@ class ShopCubit extends Cubit<ShopStates> {
         phone: phone,
         uId: value.user?.uid,
       );
-      getUser(value.user!.uid);
+      uId= value.user?.uid;
+      print(uId);
+      getUser();
        emit(ShopSuccessSignUpScreen(user!));
     }).catchError((err) {
       print(err);
@@ -429,6 +438,8 @@ class ShopCubit extends Cubit<ShopStates> {
     FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password)
         .then((value) {
+      uId= value.user?.uid;
+      print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'+uId!);
       emit(ShopLLoginSuccessState());
     }).catchError((err) {
       emit(ShopLLoginErrorState(err.toString()));
@@ -436,16 +447,35 @@ class ShopCubit extends Cubit<ShopStates> {
     });
   }
 
-  void getUser(String uId) {
-    FirebaseFirestore.instance.collection("Users").doc(uId).get().then((value) {
+
+  void getUser() {
+    emit(ShopGetUserLoading());
+   /* FirebaseFirestore.instance.collection("Users").doc(uId).get().then((value) {
       if (value.data() != null) {
         user = UserModel.fromJson(value.data()!);
         print(user);
+      }*/
+
+    FirebaseFirestore.instance
+        .collection('Users')
+        .where('userId', isEqualTo: uId)
+        .snapshots()
+        .listen((data) {
+      if (data.docs.isNotEmpty) {
+        print("data.docs.first");
+        print(uId);
+        user= UserModel(userId: uId!, name: data.docs.first["name"],
+            phone: data.docs.first["phone"], password: data.docs.first["password"], email: data.docs.first["email"] );
+        print(data.docs.first["name"]);
+        print(user?.name);
       }
+    });
+      /*emit(ShopGetUserSuccess());
       print(value.data());
     }).catchError((err) {
       print(err);
-    });
+      emit(ShopGetUserFail());
+    });*/
   }
 
   //cart
@@ -508,13 +538,20 @@ class ShopCubit extends Cubit<ShopStates> {
     user?.phone= phone;
     user?.password= password;
     emit(ShopUpdateUserLoadingScreen());
-    FirebaseFirestore.instance.collection("Users").doc(uId).update(user?.toJson())
-        .then((value) {
+    FirebaseFirestore.instance.collection('Users')
+        .where('userId', isEqualTo: uId)
+        .snapshots()
+        .listen((data) {
+    if (data.docs.isNotEmpty) {
+      FirebaseFirestore.instance.collection("Users").doc(data.docs.first.id).update(user?.toJson())
+          .then((value) {
       emit(ShopUpdateUserSuccessScreen());
-    }
-    ).catchError((err) {
+      }
+      ).catchError((err) {
       print(err);
       emit(ShopUpdateUserFailScreen());
+    });
+    }
     });
   }
 

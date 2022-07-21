@@ -25,7 +25,7 @@ class CartPage extends StatelessWidget {
           return CupertinoTabView(
             builder: ((context) {
               return Scaffold(
-                appBar: ShopSearchAppbar(context),
+                appBar: ShopSearchAppbar(context, false),
                 backgroundColor: const Color.fromARGB(255, 237, 237, 237),
                 body: Container(
                   color: const Color.fromARGB(255, 237, 237, 237),

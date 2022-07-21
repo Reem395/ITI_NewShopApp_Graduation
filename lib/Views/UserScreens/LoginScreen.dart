@@ -29,6 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
   bool passwordVisible = true;
   IconData suffixIcon = Icons.remove_red_eye;
   late String message;
+ // bool admin= false;
 
   @override
   Widget build(BuildContext context) {
@@ -129,6 +130,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       Column(
                         children: [
+                         /* Row(
+                            children: [
+                              Text("User"),
+                              Checkbox(value: value, onChanged: onChanged)
+                            ],
+                          ),*/
                           state is! ShopLLoginLoadingState
                               ? MaterialButton(
                                   minWidth:

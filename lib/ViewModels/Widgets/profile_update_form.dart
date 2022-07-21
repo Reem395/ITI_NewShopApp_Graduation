@@ -29,7 +29,7 @@ class UpdateForm extends StatelessWidget {
                 ),
               ],
             ),
-            child: defaultTextFormField(
+            child: profileTextFormField(
                 label: 'Name',
                 controller: name,
                 validate: (String? value) {
@@ -56,7 +56,7 @@ class UpdateForm extends StatelessWidget {
                 ),
               ],
             ),
-            child: defaultTextFormField(
+            child: profileTextFormField(
                 label: 'Password',
                 controller: password,
                 validate: (String? value) {
@@ -83,7 +83,7 @@ class UpdateForm extends StatelessWidget {
                 ),
               ],
             ),
-            child: defaultTextFormField(
+            child: profileTextFormField(
                 label: 'Phone',
                 controller: phone,
                 validate: (String? value) {

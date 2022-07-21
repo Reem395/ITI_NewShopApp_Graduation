@@ -77,3 +77,7 @@ class ShopGetCartSuccessScreen extends ShopStates{}
 class ShopGetCartFailScreen extends ShopStates{}
 
 class ShopUpdateCartPrice extends ShopStates{}
+
+class ShopGetUserLoading extends ShopStates{}
+class ShopGetUserSuccess extends ShopStates{}
+class ShopGetUserFail extends ShopStates{}

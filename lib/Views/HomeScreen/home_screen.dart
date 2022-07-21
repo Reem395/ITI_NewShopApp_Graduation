@@ -17,11 +17,11 @@ class HomeScreen extends StatelessWidget {
     return CupertinoTabView(
       builder: ((context) {
         return  BlocConsumer<ShopCubit, ShopStates>(
-          builder: (context, states) {
+          builder: (context, state) {
             return ConditionalBuilder(
-              condition: ShopCubit.get(context).favouritesProd.isNotEmpty,
+              condition: state is !GetProductsLoading,
               builder: (context) => Scaffold(
-                appBar: ShopSearchAppbar(context),
+                appBar: ShopSearchAppbar(context, true),
                 body: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

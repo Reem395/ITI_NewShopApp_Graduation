@@ -31,10 +31,10 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
   Widget build(BuildContext context) {
     return BlocConsumer<ShopCubit, ShopStates>(
         builder: (context, state) {
-          nameController.text = ShopCubit.get(context).user!.name!;
-          emailController.text = ShopCubit.get(context).user!.email!;
-          phoneController.text = ShopCubit.get(context).user!.phone!;
-          passwordController.text = ShopCubit.get(context).user!.password!;
+          nameController.text = ShopCubit.get(context).user!.name?? "";
+          emailController.text = ShopCubit.get(context).user!.email?? "";
+          phoneController.text = ShopCubit.get(context).user!.phone?? "";
+          passwordController.text = ShopCubit.get(context).user!.password?? "";
 
           return ConditionalBuilder(
               condition: state is! ShopLoadingProfileScreen,

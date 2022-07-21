@@ -26,15 +26,15 @@ void main() {
       await Firebase.initializeApp();
       await CacheHelper.init();
       uId = CacheHelper.getData(key: "uId");
+      //print('uId'+ uId!);
       token = FirebaseAuthMethods(FirebaseAuth.instance).user?.uid;
-
       var boardingState = CacheHelper.getData(key: "onBoardingOpened");
       Widget widget;
 
       if (boardingState != null) {
         if (token != null) {
-          // widget = ShopLayout();
-          widget = AdminShopLayout();
+          widget = ShopLayout();
+          // widget = AdminShopLayout();
         } else {
           widget = const LoginScreen();
         }

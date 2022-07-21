@@ -16,6 +16,41 @@ import 'constants.dart';
 
 // FocusNode myFocusNode = FocusNode();
 Widget defaultTextFormField(
+    {
+      @required String? label,
+      @required TextEditingController? controller,
+      @required String? Function(String?)? validate,
+      IconData? prefix,
+      IconData? suffix,
+      TextInputType? keyboard,
+      bool password= false,
+      Function()? changePassword,
+      Function()? onEditingComplate,
+      bool readOnly=false,
+      double borderRaduis = 0,
+    }) {
+  return TextFormField(
+    keyboardType: keyboard,
+    controller: controller,
+    validator: validate,
+    obscureText: password,
+    readOnly: readOnly,
+    onEditingComplete: onEditingComplate,
+    decoration: InputDecoration(
+      fillColor: Colors.grey[200],
+      isDense: true,
+      label: Text(label!),
+      prefixIcon: Icon(prefix),
+      suffixIcon: GestureDetector(child: Icon(suffix), onTap: changePassword,),
+      border: const OutlineInputBorder(
+          borderSide: BorderSide(
+              color: Colors.red
+          ),
+      ),
+    ),
+  );
+}
+Widget profileTextFormField(
     {@required String? label,
     @required TextEditingController? controller,
     @required String? Function(String?)? validate,
@@ -241,11 +276,12 @@ void navigateToLogin(BuildContext context) {
       .then((value) => navigateAndReplace(context, LoginScreen()));
 }
 
-AppBar ShopSearchAppbar(context) {
+AppBar ShopSearchAppbar(context, bool home) {
   return AppBar(
     backgroundColor: defaultColor,
     title: const Text("ShopApp"),
     actions: [
+      if(home== true)
       IconButton(
           onPressed: () {
             navigateTo(context, SearchScreen());

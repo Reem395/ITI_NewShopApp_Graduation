@@ -14,7 +14,7 @@ class CategoriesScreen extends StatelessWidget {
     return CupertinoTabView(
       builder: (context){
         return Scaffold(
-          appBar: ShopSearchAppbar(context),
+          appBar: ShopSearchAppbar(context, false),
           body: ConditionalBuilder(
             condition: ShopCubit.get(context).cats.isNotEmpty,
             builder: (context)

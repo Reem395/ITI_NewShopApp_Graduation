@@ -14,7 +14,7 @@ class FavouriteScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     ShopCubit.get(context).getProdFav();
     return Scaffold(
-      appBar: ShopSearchAppbar(context),
+      appBar: ShopSearchAppbar(context, false),
       body: BlocConsumer<ShopCubit, ShopStates>(
         builder: (context, state) => ConditionalBuilder(
             condition: state is !ShopLoadingFavScreen ,

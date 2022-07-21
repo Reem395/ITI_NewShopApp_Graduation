@@ -40,7 +40,7 @@ class AdminShopLayout extends StatelessWidget {
       home: BlocProvider<ShopCubit>(
           create: (context) {
             return ShopCubit()
-              ..getUser(uId!)
+              //..getUser()
               ..getProducts()
               // ..getFavorites()
               ..getCats();
