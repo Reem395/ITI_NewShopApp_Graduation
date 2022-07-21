@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 String? token;
+String? uId;
+bool? cart;
 // Color defaultColor= const Color(0xff3b75a8);
 Color defaultColor= const Color(0xff00695C);
 // Color defaultColor= const Color(0xff004D40);

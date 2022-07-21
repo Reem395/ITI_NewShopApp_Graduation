@@ -15,7 +15,23 @@
       },
       "oauth_client": [
         {
-          "client_id": "813131592145-ek6bbrtobr4ke6gn8771a324g0o4a1b7.apps.googleusercontent.com",
+          "client_id": "813131592145-9blc7daeooaq9pfi82c8lsoe1ns9ja19.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shop_app",
+            "certificate_hash": "efeacef602900d042f7d41bcde79d332762aedae"
+          }
+        },
+        {
+          "client_id": "813131592145-ga60b1c19lmbqo5r5kkt1sqgdarnbcfc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shop_app",
+            "certificate_hash": "b7e90d904c0c0bb948814c6b204853848a1b9132"
+          }
+        },
+        {
+          "client_id": "813131592145-ovnq4red452t9m98jakbio09qeo4g5hf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.shop_app",

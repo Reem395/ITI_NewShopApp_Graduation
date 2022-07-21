@@ -1,4 +1,3 @@
-/*
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,13 +37,12 @@ class SearchScreen extends StatelessWidget {
                     },
                     prefix: Icons.search,
                     onEditingComplate: () {
-                      cubit.getSearch(text: searchController.text);
+                      cubit.searchProduct(searchController.text);
                     }),
                 Expanded(
                   child: ConditionalBuilder(
-                      condition: ShopCubit.get(context).searchModel != null,
-                      builder: (context) =>
-                          buildSearchList(cubit.searchModel!, favColor),
+                      condition: ShopCubit.get(context).searchList.isNotEmpty,
+                      builder: (context) => buildSearchList(cubit.searchList),
                       fallback: (context) => Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: const [
@@ -61,4 +59,3 @@ class SearchScreen extends StatelessWidget {
     );
   }
 }
-*/

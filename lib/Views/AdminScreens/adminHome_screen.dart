@@ -22,7 +22,7 @@ class AdminHomeScreen extends StatelessWidget {
             return ConditionalBuilder(
               condition: ShopCubit.get(context).favouritesProd.isNotEmpty,
               builder: (context) => Scaffold(
-                appBar: ShopSearchAppbar(context),
+                appBar: ShopSearchAppbar(context, true),
                 body: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

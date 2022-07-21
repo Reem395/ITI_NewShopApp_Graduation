@@ -4,11 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
-import 'package:flutter_signin_button/button_view.dart';
 import 'package:shop_app/Views/UserScreens/LoginScreen.dart';
 import '../../Service/firebase_auth_methods.dart';
 import '../../ViewModels/Components.dart';
-import '../../ViewModels/Local/CacheHelper.dart';
 import '../../ViewModels/constants.dart';
 import '../../ViewModels/Block/Cubit.dart';
 import '../../ViewModels/Block/States.dart';
@@ -145,7 +143,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                       MediaQuery.of(context).size.width / 2,
                                   height: 40,
                                   onPressed: () {
-                                    ShopCubit.get(context).SignUp(
+                                    ShopCubit.get(context).Register(
                                         name: nameController.text,
                                         phone: phoneController.text,
                                         email: emailController.text,
@@ -258,22 +256,13 @@ class _SignupScreenState extends State<SignupScreen> {
       },
       listener: (BuildContext context, Object? state) {
         if (state is ShopSuccessSignUpScreen) {
-          if (state.userSignData.status) {
-            CacheHelper.setData(
-                    key: "token", value: state.userSignData.data?.token)
-                .then((value) {
-              token = state.userSignData.data?.token;
-              navigateAndReplace(context, ShopLayout());
-              buildShopToast(
-                  message: state.userSignData.message,
-                  state: LoginState.success);
-            });
-          } else {
-            buildShopToast(
-                message: state.userSignData.message, state: LoginState.fail);
+          navigateAndReplace(context, ShopLayout());
           }
+        else if (state is ShopFailSignUpScreen) {
+          buildShopToast(
+              message: "Error in sign Up try again", state: LoginState.fail);
         }
-      },
+      }
     );
   }
 }

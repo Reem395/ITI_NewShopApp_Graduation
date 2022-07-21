@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/ViewModels/constants.dart';
-import 'package:shop_app/Views/UserScreens/cartpage.dart';
+import '../CartScreen/cartpage.dart';
 import 'package:shop_app/Views/UserScreens/profile_screen.dart';
 import '../../Demo/testPage.dart';
 import '../AdminScreens/AddCategoryForm.dart';
@@ -39,11 +39,13 @@ class ShopLayout extends StatelessWidget {
       ),
       home: BlocProvider<ShopCubit>(
           create: (context) {
+          //  print('uId---------'+uId!);
             return ShopCubit()
-              ..getProfileData()
+              ..getUser()
               ..getProducts()
               ..getFavorites()
-              ..getCats();
+              ..getCats()
+              ..getCart();
           },
           child: BlocConsumer<ShopCubit, ShopStates>(
             builder: (BuildContext context, Object? state) {

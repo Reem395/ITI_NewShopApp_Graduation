@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shop_app/Views/UserScreens/MyOrdersScreen.dart';
 import 'package:shop_app/Views/UserScreens/addressReviewScreen.dart';
-import 'package:shop_app/Views/UserScreens/cartpage.dart';
 import '../../Service/firebase_auth_methods.dart';
 import '../../ViewModels/Components.dart';
 import '../../ViewModels/constants.dart';
@@ -36,12 +35,11 @@ class AdminProfileScreen extends StatelessWidget {
                       // color: Colors.amber,
                     ),
                     child: CircleAvatar(
-                          backgroundColor:Colors.white ,
-                          foregroundColor: defaultColor,
-                          radius: 59,
-                          backgroundImage:
-                              AssetImage("assets/images/admin.png"),
-                        ),
+                      backgroundColor: Colors.white,
+                      foregroundColor: defaultColor,
+                      radius: 59,
+                      backgroundImage: AssetImage("assets/images/admin.png"),
+                    ),
                   ),
                   const SizedBox(
                     height: 10,

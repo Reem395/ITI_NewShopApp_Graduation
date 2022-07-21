@@ -3,7 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
+import '../ViewModels/Local/CacheHelper.dart';
+import '../ViewModels/constants.dart';
 import '../utils/showOtpDialog.dart';
 import '../utils/showSnackbar.dart';
 
@@ -54,7 +55,8 @@ class FirebaseAuthMethods {
                   'phone': phoneNumber,
                   'state': null,
                   'city': null,
-                  'description': null
+                  'description': null,
+                  "password": null
                 });
               }
             });
@@ -87,6 +89,8 @@ class FirebaseAuthMethods {
       }
 
       print("User data = $user");
+      CacheHelper.setData(key: "uId", value: user?.uid);
+      uId= user?.uid;
       FirebaseFirestore.instance
           .collection('Users')
           .where('userId', isEqualTo: user?.uid)
@@ -100,7 +104,8 @@ class FirebaseAuthMethods {
             'phone': null,
             'state': null,
             'city': null,
-            'description': null
+            'description': null,
+            "password": null
           });
         }
       });
@@ -121,6 +126,8 @@ class FirebaseAuthMethods {
 
       await _auth.signInWithCredential(facebookAuthCredential);
       print("User data = $user");
+      CacheHelper.setData(key: "uId", value: user?.uid);
+      uId= user?.uid;
       FirebaseFirestore.instance
           .collection('Users')
           .where('userId', isEqualTo: user?.uid)
@@ -134,7 +141,8 @@ class FirebaseAuthMethods {
             'phone': null,
             'state': null,
             'city': null,
-            'description': null
+            'description': null,
+            "password": null
           });
         }
       });

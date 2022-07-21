@@ -29,26 +29,21 @@ class _LoginScreenState extends State<LoginScreen> {
   bool passwordVisible = true;
   IconData suffixIcon = Icons.remove_red_eye;
   late String message;
+ // bool admin= false;
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ShopCubit, ShopStates>(
       listener: (BuildContext context, Object? state) {
         if (state is ShopLLoginSuccessState) {
-          message = state.userData.message!;
-          if (state.userData.status) {
-            buildShopToast(
-                message: message,
-                state: LoginState.success,
-                toastLength: Toast.LENGTH_SHORT);
+          CacheHelper.setData(key: "uId", value: uId);
             navigateAndReplace(context, ShopLayout());
-            token = state.userData.data?.token;
-          } else {
+          } else if(state is ShopLLoginErrorState) {
+            message= "Your Data isn't Valid";
             buildShopToast(
                 message: message,
                 state: LoginState.fail,
                 toastLength: Toast.LENGTH_LONG);
-          }
         }
       },
       builder: (BuildContext context, state) {
@@ -135,6 +130,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       Column(
                         children: [
+                         /* Row(
+                            children: [
+                              Text("User"),
+                              Checkbox(value: value, onChanged: onChanged)
+                            ],
+                          ),*/
                           state is! ShopLLoginLoadingState
                               ? MaterialButton(
                                   minWidth:
@@ -142,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   height: 40,
                                   onPressed: () {
                                     if (formState.currentState!.validate()) {
-                                      cubit.userLogin(
+                                      cubit.signIn(
                                           email: emailController.text,
                                           password: passwordController.text);
                                     }
