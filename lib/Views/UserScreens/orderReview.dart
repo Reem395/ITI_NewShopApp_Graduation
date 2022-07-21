@@ -8,6 +8,7 @@ class orderReviewScreen extends StatefulWidget {
   State<orderReviewScreen> createState() => _orderReviewScreenState();
 }
 
+  bool checked=false;
 class _orderReviewScreenState extends State<orderReviewScreen> {
   double orderTotalPrice = 115;
   double shippingPrice = 50;
@@ -94,8 +95,15 @@ class _orderReviewScreenState extends State<orderReviewScreen> {
             const SizedBox(
               height: 25,
             ),
+            // Text(
+            //   "Select Payment Method",
+            //   style: TextStyle(
+            //       fontSize: 20,
+            //       color: defaultColor,
+            //       fontWeight: FontWeight.bold),
+            // ),
             Text(
-              "Select Payment Method",
+              "Payment Method: ",
               style: TextStyle(
                   fontSize: 20,
                   color: defaultColor,
@@ -110,27 +118,27 @@ class _orderReviewScreenState extends State<orderReviewScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            const CircleAvatar(
-                              backgroundImage:
-                                  AssetImage('assets/images/gPay128.png'),
-                              backgroundColor: Colors.white,
-                              radius: 25,
-                            ),
-                            // const SizedBox(width: 15,),
-                  //           Text("GPay",style: TextStyle(
-                  // fontSize: 15,
-                  // color: defaultColor,
-                  // fontWeight: FontWeight.bold),),
-                          ],
-                        ),
-                        Checkbox(value: false, onChanged: (ischecked) {})
-                      ],
-                    ),
+                  //   Row(
+                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //     children: [
+                  //       Row(
+                  //         children: [
+                  //           const CircleAvatar(
+                  //             backgroundImage:
+                  //                 AssetImage('assets/images/gPay128.png'),
+                  //             backgroundColor: Colors.white,
+                  //             radius: 25,
+                  //           ),
+                  //           // const SizedBox(width: 15,),
+                  // //           Text("GPay",style: TextStyle(
+                  // // fontSize: 15,
+                  // // color: defaultColor,
+                  // // fontWeight: FontWeight.bold),),
+                  //         ],
+                  //       ),
+                  //       Checkbox(value: false, onChanged: (ischecked) {})
+                  //     ],
+                  //   ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -155,7 +163,11 @@ class _orderReviewScreenState extends State<orderReviewScreen> {
                         //   backgroundColor: Colors.white,
                         //   radius: 30,
                         // ),
-                        Checkbox(value: false, onChanged: (ischecked) {})
+                        Checkbox(value:checked , onChanged: (ischecked) {
+                          setState(() {
+                            checked = ischecked!;
+                          });
+                        })
                       ],
                     ),
                   ],

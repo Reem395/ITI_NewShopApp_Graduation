@@ -25,7 +25,7 @@ class ShopLayout extends StatelessWidget {
     const FavouriteScreen(),
      CartPage(),
     // AddCategoryForm(),
-    AddProductForm(),
+    // AddProductForm(),
     const ProfileScreen(),
   ];
 
@@ -72,8 +72,8 @@ class ShopLayout extends StatelessWidget {
                           icon: Icon(Icons.favorite), label: "Favourites"),
                       BottomNavigationBarItem(
                           icon: Icon(Icons.shopping_cart), label: "Cart"),
-                      BottomNavigationBarItem(
-                          icon: Icon(Icons.add_box_rounded), label: "Add Cat"),
+                      // BottomNavigationBarItem(
+                      //     icon: Icon(Icons.add_box_rounded), label: "Add Cat"),
                       BottomNavigationBarItem(
                           icon: Icon(Icons.person), label: "Profile"),
                     ]),

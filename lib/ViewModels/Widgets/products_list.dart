@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/ViewModels/constants.dart';
 import '../../Models/ProductModel/ProductModel.dart';
 import '../Block/Cubit.dart';
 
@@ -10,8 +11,15 @@ class ProductList extends StatelessWidget {
   Widget build(BuildContext context) {
     if(ShopCubit.get(context).prodFav.isEmpty)
       {
-        return const Center(
-          child: Text("UR Fav Is Empty"),
+        return  Center(
+          // child: Text("UR Fav Is Empty"),
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height/12,
+            child: ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(defaultColor)),
+              onPressed: null, child: Text("Your Favourite Is Empty",style: TextStyle(color: Colors.white),)),
+          ),
         );
       }
     return ListView.separated(

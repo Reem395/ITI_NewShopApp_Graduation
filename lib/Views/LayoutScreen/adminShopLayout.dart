@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/Demo/demo.dart';
 import 'package:shop_app/ViewModels/constants.dart';
 import 'package:shop_app/Views/UserScreens/cartpage.dart';
 import 'package:shop_app/Views/UserScreens/profile_screen.dart';
@@ -32,6 +33,7 @@ class AdminShopLayout extends StatelessWidget {
       const CategoriesScreen(),
       const AddCategoryForm(),
       const AddProductForm(),
+      // const DemoScreen(),
     ];
     return MaterialApp(
       debugShowCheckedModeBanner: false,

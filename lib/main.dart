@@ -34,8 +34,8 @@ void main() {
 
       if (boardingState != null) {
         if (token != null) {
-          // widget = ShopLayout();
-          widget = AdminShopLayout();
+          widget = ShopLayout();
+          // widget = AdminShopLayout();
           
         } else {
           widget = const LoginScreen();
@@ -72,7 +72,8 @@ class MyApp extends StatelessWidget {
                     focusedBorder: OutlineInputBorder(
                         gapPadding: 10,
                         borderSide: BorderSide(color: Color(0xff3b75a8))))),
-            home: AdminShopLayout(),
+            // home: AdminShopLayout(),
+            home: widget,
             debugShowCheckedModeBanner: false,
           );
         },

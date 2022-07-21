@@ -40,12 +40,16 @@ FirebaseFirestore.instance.collection("products").doc(productDocID).update(prodU
 
 ///************delete Product****************************** */
 
-  deleteProduct(String id,BuildContext contex) {
+  deleteProduct(String id,BuildContext context)  {
     var collection = FirebaseFirestore.instance.collection('products');
     collection
         .doc(id) // <-- Doc ID to be deleted.
-        .delete();
-  ShopCubit.get(contex).getProducts();
+        .delete().then((value){
+
+        print("Length After delete: ${ShopCubit.get(context).products.length}");
+  // ShopCubit.get(context).products.clear();
+  ShopCubit.get(context).getProducts();
+        });
 
   }
 }

@@ -1,11 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shop_app/ViewModels/Block/States.dart';
 import 'package:shop_app/ViewModels/constants.dart';
+import 'package:shop_app/Views/HomeScreen/home_screen.dart';
+import 'package:shop_app/Views/LayoutScreen/adminShopLayout.dart';
 import '../../Models/ProductModel/ProductModel.dart';
 import '../../Service/fireStore_Product.dart';
 import '../../Views/AdminScreens/adminHome_screen.dart';
 import '../Block/Cubit.dart';
+import '../Components.dart';
 
 class admin_ProductGridView extends StatelessWidget {
   final List<ProductModel> products;
@@ -13,7 +18,9 @@ class admin_ProductGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
+    return BlocConsumer<ShopCubit,ShopStates>(builder: (context,state){
+      
+      return GridView.count(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         crossAxisCount: 2,
@@ -81,27 +88,78 @@ class admin_ProductGridView extends StatelessWidget {
                                 IconButton(
                                     iconSize: 22,
                                     onPressed: () {
-                                      print(
-                                          "prod id: ${products[index].productId}");
-                                      String? productDocID;
-                                      var productId = products[index].productId;
-                                      FirebaseFirestore.instance
-                                          .collection("products")
-                                          .where("productId",
-                                              isEqualTo: productId)
-                                          .snapshots()
-                                          .listen(((event) =>
-                                              event.docs.forEach((element) {
-                                                // print("element.id: ${element.id}");
-                                                productDocID = element.id;
-                                                FireStoreProduct()
-                                                    .deleteProduct(
-                                                        productDocID!,context);
-                                              })));
-                                      print("productDocID: $productDocID");
-                                      Fluttertoast.showToast(
-                                          msg: "Product Removed Successfully!",
-                                          toastLength: Toast.LENGTH_LONG);
+                                      int flag=0;
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return AlertDialog(
+                                              title: Text(
+                                                "Alert",
+                                                style: TextStyle(
+                                                    color: defaultColor),
+                                              ),
+                                              content: const Text(
+                                                  "Are you sure you want to remove this product?"),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () async {
+                                                    flag=1;
+                                                    if(flag==1){
+                                                      print("Product Length: ${ShopCubit.get(context).products.length}");
+                                                    print(
+                                                        "prod id: ${products[index].productId}");
+                                                    String? productDocID;
+                                                    var productId =
+                                                        products[index]
+                                                            .productId;
+                                                    FirebaseFirestore.instance
+                                                        .collection("products")
+                                                        .where("productId",
+                                                            isEqualTo:
+                                                                productId)
+                                                        .snapshots()
+                                                        .listen(((event) =>
+                                                            event.docs.forEach(
+                                                                (element) {
+                                                              // print("element.id: ${element.id}");
+                                                              productDocID =
+                                                                  element.id;
+                                                              FireStoreProduct()
+                                                                  .deleteProduct(
+                                                                      productDocID!,
+                                                                      context);
+                                                            })));
+                                                    print(
+                                                        "productDocID: $productDocID");
+
+                                                    
+                                                    await Navigator
+                                                        .pushAndRemoveUntil(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              AdminShopLayout()), // this mainpage is your page to refresh
+                                                      (Route<dynamic> route) =>
+                                                          true,
+                                                    );
+                                                    Fluttertoast.showToast(
+                                                        msg:
+                                                            "Product Removed Successfully!",
+                                                        toastLength:
+                                                            Toast.LENGTH_LONG);
+                                                    }
+                                                  },
+                                                  child: const Text("Ok"),
+                                                ),
+                                                TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: const Text("Cancel"))
+                                              ],
+                                            );
+                                          });
                                     },
                                     icon: const Icon(
                                       Icons.highlight_remove,
@@ -115,5 +173,8 @@ class admin_ProductGridView extends StatelessWidget {
                 ],
               )),
         ));
+  
+  
+    }, listener: (context,state){});
   }
 }

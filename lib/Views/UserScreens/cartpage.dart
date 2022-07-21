@@ -1,8 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_app/Views/UserScreens/UserFullInfo.dart';
 import 'package:shop_app/Views/UserScreens/orderReview.dart';
 
+import '../../Service/firebase_auth_methods.dart';
 import '../../ViewModels/Components.dart';
 import '../../ViewModels/constants.dart';
 
@@ -12,9 +16,16 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  Map userAllData = {};
   bool userInoAllComplete = true;
+  String? userUID;
+  String? userDocId;
   @override
   Widget build(BuildContext context) {
+    WidgetsFlutterBinding.ensureInitialized();
+    userUID = FirebaseAuthMethods(FirebaseAuth.instance).user?.uid;
+// Firebase.initializeApp();
+    print("User UID: $userUID");
     return CupertinoTabView(
       builder: ((context) {
         return Scaffold(
@@ -204,20 +215,64 @@ class _CartPageState extends State<CartPage> {
                             ),
                           ),
                           onTap: () {
-                            print("check");
-                            if (userInoAllComplete) {
+                            // UserMissingData();
+
+                            FirebaseFirestore.instance
+                                .collection("Users")
+                                .where("userId", isEqualTo: userUID)
+                                .snapshots()
+                                .listen(
+                                    ((event) => event.docs.forEach((element) {
+                                          // print("element.id: ${element.id}");
+                                          userDocId = element.id;
+                                          Map UserData = element.data();
+
+                                          print("From Function : $userDocId");
+                                          print("From Function : ${UserData}");
+                                          UserData.forEach((key, value) {
+                                            // print("Value: $value");
+                                            // userAllData [key]=value;
+                                            if (value == null) {
+                                              print("Null Value Found $value");
+                                              userInoAllComplete=false;
+                                              // Navigator.push(
+                                              //   context,
+                                              //   MaterialPageRoute(
+                                              //       builder: (context) =>
+                                              //           const UserFullInfo()),
+                                              // );
+                                              Navigator.pushReplacement(context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const UserFullInfo()),);
+                                              navToComplete();
+                                              throw "";
+                                            }
+                                          });
+                                          // if(UserData['name']==null||UserData['email']==null){
+
+                                          // }
+                                          // print("userInoAllComplete from Fun: $userInoAllComplete");
+                                        })));
+
+                            print("After fun: $userInoAllComplete ");
+
+                            print("User Missing Data? $userInoAllComplete");
+                            // print("check");
+
+                            // if (userInoAllComplete) {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
                                           const orderReviewScreen()));
-                            } else {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const UserFullInfo()),
-                              );
-                            }
+                            // } else {
+                            //   Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) => const UserFullInfo()),
+                            //   );
+                            // }
                           },
                         ),
                       )
@@ -228,8 +283,38 @@ class _CartPageState extends State<CartPage> {
             ),
           ),
         );
-      
       }),
     );
+  }
+
+  // void UserMissingData() {
+  //   FirebaseFirestore.instance
+  //       .collection("Users")
+  //       .where("userId", isEqualTo: userUID)
+  //       .snapshots()
+  //       .listen(((event) => event.docs.forEach((element) {
+  //             // print("element.id: ${element.id}");
+  //             userDocId = element.id;
+  //           Map UserData = element.data();
+
+  //           // print("From Function : $userDocId");
+  //           // print("From Function : ${UserData}");
+  //       // UserData.forEach((key, value) {
+  //       //   // print("Value: $value");
+  //       //   if(value==null){
+  //       //     print("Null Value Found $value");
+  //       //       userInoAllComplete=false;
+  //       //       throw "";
+  //       //   }
+  //       // });
+  //       if(UserData['name']==null||UserData['email']==null){
+
+  //       }
+  //           print("userInoAllComplete from Fun: $userInoAllComplete");
+  //           })));
+  // }
+  void navToComplete() {
+    userInoAllComplete = false;
+    print("From method $userInoAllComplete");
   }
 }
