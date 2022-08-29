@@ -1,8 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/ViewModels/Block/States.dart';
 import 'package:shop_app/Views/UserScreens/orderReview.dart';
 
+import '../../Service/firebase_auth_methods.dart';
 import '../../ViewModels/AddressData/AddressData.dart';
+import '../../ViewModels/Block/Cubit.dart';
 import '../../ViewModels/Components.dart';
 import '../../ViewModels/constants.dart';
 
@@ -42,7 +48,8 @@ class _UserFullInfoState extends State<UserFullInfo> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BlocConsumer<ShopCubit,ShopStates>(builder: (context,state){
+return Scaffold(
       // resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: defaultColor,
@@ -87,18 +94,18 @@ class _UserFullInfoState extends State<UserFullInfo> {
                 height: 25,
               ),
 
-              defaultTextFormField(
-                label: 'Email',
-                controller: emailController,
-                validate: (String? value) {
-                  if (value!.isEmpty) {
-                    return "Email is Required";
-                  }
-                  return null;
-                },
-                prefix: Icons.email,
-                borderRaduis: 9,
-              ),
+              // defaultTextFormField(
+              //   label: 'Email',
+              //   controller: emailController,
+              //   validate: (String? value) {
+              //     if (value!.isEmpty) {
+              //       return "Email is Required";
+              //     }
+              //     return null;
+              //   },
+              //   prefix: Icons.email,
+              //   borderRaduis: 9,
+              // ),
 
               const SizedBox(
                 height: 25,
@@ -106,6 +113,7 @@ class _UserFullInfoState extends State<UserFullInfo> {
 
               defaultTextFormField(
                 label: 'Phone',
+                keyboard: TextInputType.phone,
                 controller: phoneController,
                 validate: (String? value) {
                   if (value!.isEmpty) {
@@ -383,9 +391,18 @@ class _UserFullInfoState extends State<UserFullInfo> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
+          print("Print info: ${primaryaddressDetailsController.text},${primaryCity}");
+          ShopCubit.get(context).upDateUser(
+            name: nameController.text,
+            phone: phoneController.text,
+            primaryCity: primaryCity,
+            primaryState: primaryState,
+            primaryaddressDetails: primaryaddressDetailsController.text,
+          );
+
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const orderReviewScreen()),
+            MaterialPageRoute(builder: (context) => orderReviewScreen()),
           );
         },
         label: Text("Save"),
@@ -393,6 +410,8 @@ class _UserFullInfoState extends State<UserFullInfo> {
         backgroundColor: defaultColor,
       ),
     );
+  
+    }, listener: (context,state){});
   }
 
   // void _requestFocus() {

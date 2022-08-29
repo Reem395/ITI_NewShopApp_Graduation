@@ -12,6 +12,7 @@ import '../AdminScreens/AddCategoryForm.dart';
 import '../AdminScreens/AddProductForm.dart';
 import '../AdminScreens/adminHome_screen.dart';
 import '../AdminScreens/adminProfileScreen.dart';
+import '../CategoriesScreen/AdminCategoriesScreen.dart';
 import '../CategoriesScreen/CategoriesScreen.dart';
 import '../HomeScreen/home_screen.dart';
 import '../UserScreens/LoginScreen.dart';
@@ -29,7 +30,7 @@ class AdminShopLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Widget> pages = [
       const AdminHomeScreen(),
-      const CategoriesScreen(),
+      const AdminCategoriesScreen(),
       const AddCategoryForm(),
       const AddProductForm(),
       // const DemoScreen(),

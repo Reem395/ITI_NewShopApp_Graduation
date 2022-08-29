@@ -246,7 +246,7 @@ class ShopCubit extends Cubit<ShopStates> {
         "NoProductsInCart": ++count
       }).then((value) {
         getProduct(product.productId!).then((value) {
-          addProduct(product);
+          // addProduct(product);
           getCart();
         });
       });
@@ -258,7 +258,7 @@ class ShopCubit extends Cubit<ShopStates> {
         "NoProductsInCart": ++count
       }).then((value) {
         getProduct(product.productId!).then((value){
-          addProduct(product);
+          // addProduct(product);
           getCart();
         });
       });
@@ -288,7 +288,7 @@ class ShopCubit extends Cubit<ShopStates> {
               .delete()
               .then((value) {
             getProduct(product.productId!).then((value){
-              removeAllProduct(product, count);
+              // removeAllProduct(product, count);
               getCart();
               itemInCart = false;
             });
@@ -305,7 +305,7 @@ class ShopCubit extends Cubit<ShopStates> {
           "NoProductsInCart": --count
         }).then((value) {
           getProduct(product.productId!).then((value){
-            removeProduct(product);
+            // removeProduct(product);
             getCart();
             itemInCart = true;
           });
@@ -533,17 +533,30 @@ class ShopCubit extends Cubit<ShopStates> {
         .listen((data) => data.docs.forEach((element) {prodctDocId = element.id; print(productId);}));
   }
 
-  void upDateUser({@required name, @required phone, @required password}) {
+  void upDateUser({@required name, @required phone,  password,primaryState,primaryCity,primaryaddressDetails}) {
     user?.name= name;
     user?.phone= phone;
     user?.password= password;
+    user?.city =primaryCity.toString();
+    user?.state =primaryState.toString();
+    user?.description =primaryaddressDetails.toString();
+    print("from cubit: $primaryCity");
     emit(ShopUpdateUserLoadingScreen());
     FirebaseFirestore.instance.collection('Users')
         .where('userId', isEqualTo: uId)
         .snapshots()
         .listen((data) {
     if (data.docs.isNotEmpty) {
-      FirebaseFirestore.instance.collection("Users").doc(data.docs.first.id).update(user?.toJson())
+      FirebaseFirestore.instance.collection("Users").doc(data.docs.first.id).update(
+{
+      'name': name,
+      'password': password,
+      'phone': phone,
+      'state': state.toString(),
+      'city': primaryCity.toString(),
+      'description': primaryaddressDetails.toString(),
+}
+      )
           .then((value) {
       emit(ShopUpdateUserSuccessScreen());
       }

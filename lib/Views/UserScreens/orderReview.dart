@@ -1,19 +1,21 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app/ViewModels/constants.dart';
+import 'package:shop_app/Views/LayoutScreen/shopLayout.dart';
 
-class orderReviewScreen extends StatefulWidget {
-  const orderReviewScreen({Key? key}) : super(key: key);
+import '../../ViewModels/Block/Cubit.dart';
+import '../../ViewModels/Components.dart';
+import '../HomeScreen/home_screen.dart';
 
-  @override
-  State<orderReviewScreen> createState() => _orderReviewScreenState();
-}
-
-  bool checked=false;
-class _orderReviewScreenState extends State<orderReviewScreen> {
-  double orderTotalPrice = 115;
+class orderReviewScreen extends StatelessWidget {
+  //  orderReviewScreen({Key? key}) : super(key: key);
+  dynamic orderTotalPrice;
   double shippingPrice = 50;
+  bool checked = false;
   @override
   Widget build(BuildContext context) {
+    orderTotalPrice = ShopCubit.get(context).cartProdPrice;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Order summary"),
@@ -82,7 +84,7 @@ class _orderReviewScreenState extends State<orderReviewScreen> {
                         const SizedBox(
                           width: 15,
                         ),
-                        Text("EGP ${shippingPrice + orderTotalPrice}",
+                        Text("EGP ${shippingPrice + orderTotalPrice!}",
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                             )),
@@ -118,27 +120,27 @@ class _orderReviewScreenState extends State<orderReviewScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                  //   Row(
-                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //     children: [
-                  //       Row(
-                  //         children: [
-                  //           const CircleAvatar(
-                  //             backgroundImage:
-                  //                 AssetImage('assets/images/gPay128.png'),
-                  //             backgroundColor: Colors.white,
-                  //             radius: 25,
-                  //           ),
-                  //           // const SizedBox(width: 15,),
-                  // //           Text("GPay",style: TextStyle(
-                  // // fontSize: 15,
-                  // // color: defaultColor,
-                  // // fontWeight: FontWeight.bold),),
-                  //         ],
-                  //       ),
-                  //       Checkbox(value: false, onChanged: (ischecked) {})
-                  //     ],
-                  //   ),
+                    //   Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //     children: [
+                    //       Row(
+                    //         children: [
+                    //           const CircleAvatar(
+                    //             backgroundImage:
+                    //                 AssetImage('assets/images/gPay128.png'),
+                    //             backgroundColor: Colors.white,
+                    //             radius: 25,
+                    //           ),
+                    //           // const SizedBox(width: 15,),
+                    // //           Text("GPay",style: TextStyle(
+                    // // fontSize: 15,
+                    // // color: defaultColor,
+                    // // fontWeight: FontWeight.bold),),
+                    //         ],
+                    //       ),
+                    //       Checkbox(value: false, onChanged: (ischecked) {})
+                    //     ],
+                    //   ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -163,11 +165,13 @@ class _orderReviewScreenState extends State<orderReviewScreen> {
                         //   backgroundColor: Colors.white,
                         //   radius: 30,
                         // ),
-                        Checkbox(value:checked , onChanged: (ischecked) {
-                          setState(() {
-                            checked = ischecked!;
-                          });
-                        })
+                        Checkbox(
+                            value: true,
+                            onChanged: (ischecked) {
+                              // setState(() {
+                              //   checked = ischecked!;
+                              // });
+                            })
                       ],
                     ),
                   ],
@@ -178,7 +182,37 @@ class _orderReviewScreenState extends State<orderReviewScreen> {
               height: 35,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Fluttertoast.showToast(
+                    msg: "Order Placed Successfully",
+                    toastLength: Toast.LENGTH_SHORT);
+                var id =
+                    FirebaseFirestore.instance.collection('Orders').doc().id;
+
+                FirebaseFirestore.instance.collection('Orders').add({
+                  'orderId': id,
+                  'userId': uId,
+                  'prodIds': [],
+                  'orderState': 'pending'
+                });
+                ////////yasser
+                FirebaseFirestore.instance
+                .collection('Carts')
+                .where('userId', isEqualTo: uId)
+                .snapshots()
+                .listen((data) {
+                 data.docs.forEach((element) {
+                   
+                FirebaseFirestore.instance.collection('Carts').doc(element.id).delete();
+                  });
+              
+            });
+            ShopCubit.get(context).carts.clear();
+            ShopCubit.get(context).cartProd.clear();
+            ShopCubit.get(context).changeCurrentIndex(0);
+                navigateAndReplace(context,HomeScreen());
+                // Navigator.pushReplacement(context, newRoute)
+              },
               child: const Text("Place Order"),
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(defaultColor),

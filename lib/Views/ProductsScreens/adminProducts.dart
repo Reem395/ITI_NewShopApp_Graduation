@@ -8,9 +8,9 @@ import '../../ViewModels/Widgets/admin_Product_item_categories.dart';
 import '../../ViewModels/Widgets/product_items_categries.dart';
 import '../../ViewModels/constants.dart';
 
-class ProductsScreen extends StatelessWidget {
+class AdminProductsScreen extends StatelessWidget {
   final String categoryName;
-  ProductsScreen(this.categoryName,{Key? key}) : super(key: key);
+  AdminProductsScreen(this.categoryName,{Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +30,8 @@ return BlocConsumer<ShopCubit,ShopStates>(
           return GridView.builder(
             padding: const EdgeInsets.all(15.0),
             itemCount: products[categoryName]?.length,
-            itemBuilder: (ctx, index) => (ProductItem(products[categoryName]![index])),
-            // itemBuilder: (ctx, index) => (AdminProductItem(products[categoryName]![index])),
+            // itemBuilder: (ctx, index) => (ProductItem(products[categoryName]![index])),
+            itemBuilder: (ctx, index) => (AdminProductItem(products[categoryName]![index])),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 2 / 2,

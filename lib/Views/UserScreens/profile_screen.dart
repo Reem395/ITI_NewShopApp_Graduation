@@ -121,12 +121,12 @@ class ProfileScreen extends StatelessWidget {
                               ShopCubit.get(context).changeCurrentIndex(3);
                               navigateTo(context, CartPage());
                             }),
-                        buildRow(
-                            icon: Icons.shopify,
-                            title: "My Orders",
-                            onTap: () {
-                              navigateTo(context, MyOrdersScreen());
-                            }),
+                        // buildRow(
+                        //     icon: Icons.shopify,
+                        //     title: "My Orders",
+                        //     onTap: () {
+                        //       navigateTo(context, MyOrdersScreen());
+                        //     }),
                         buildRow(
                             icon: Icons.favorite_outline,
                             title: "My Wishlist",

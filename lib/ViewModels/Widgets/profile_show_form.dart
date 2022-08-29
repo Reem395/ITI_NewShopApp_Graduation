@@ -102,31 +102,33 @@ class ShowProfileData extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
-        Container(
-          height: 50,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(3),
-            color: Colors.white,
-            boxShadow:[
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 1,
-                blurRadius: 7,
-                offset: Offset(0, 3), // changes position of shadow
-              ),
-            ] ,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Row(children: [
-              Text("Password: ",style: TextStyle(fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: defaultColor),),
-              const SizedBox(width:10),
-              Text(password.text,style: TextStyle(fontSize: 18,)),
-            ],),
-          ),
-        ),
+        // Container(
+        //   height: 50,
+        //   decoration: BoxDecoration(
+        //     borderRadius: BorderRadius.circular(3),
+        //     color: Colors.white,
+        //     boxShadow:[
+        //       BoxShadow(
+        //         color: Colors.grey.withOpacity(0.5),
+        //         spreadRadius: 1,
+        //         blurRadius: 7,
+        //         offset: Offset(0, 3), // changes position of shadow
+        //       ),
+        //     ] ,
+        //   ),
+        //   child:
+        //    Padding(
+        //     padding: const EdgeInsets.all(15.0),
+        //     child:
+        //      Row(children: [
+        //       Text("Password: ",style: TextStyle(fontSize: 18,
+        //           fontWeight: FontWeight.bold,
+        //           color: defaultColor),),
+        //       const SizedBox(width:10),
+        //       Text(password.text,style: TextStyle(fontSize: 18,)),
+        //     ],),
+        //   ),
+        // ),
         const SizedBox(
           height: 30,
         ),

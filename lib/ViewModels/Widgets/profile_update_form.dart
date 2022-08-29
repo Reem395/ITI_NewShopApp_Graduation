@@ -42,30 +42,30 @@ class UpdateForm extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
-        Container(
-            height: 50,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(3),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 1,
-                  blurRadius: 7,
-                  offset: Offset(0, 3), // changes position of shadow
-                ),
-              ],
-            ),
-            child: profileTextFormField(
-                label: 'Password',
-                controller: password,
-                validate: (String? value) {
-                  if (value!.isEmpty) {
-                    return "Password is Required";
-                  }
-                  return null;
-                },
-                prefix: Icons.email)),
+        // Container(
+        //     height: 50,
+        //     decoration: BoxDecoration(
+        //       borderRadius: BorderRadius.circular(3),
+        //       color: Colors.white,
+        //       boxShadow: [
+        //         BoxShadow(
+        //           color: Colors.grey.withOpacity(0.5),
+        //           spreadRadius: 1,
+        //           blurRadius: 7,
+        //           offset: Offset(0, 3), // changes position of shadow
+        //         ),
+        //       ],
+        //     ),
+        //     child: profileTextFormField(
+        //         label: 'Password',
+        //         controller: password,
+        //         validate: (String? value) {
+        //           if (value!.isEmpty) {
+        //             return "Password is Required";
+        //           }
+        //           return null;
+        //         },
+        //         prefix: Icons.email)),
         const SizedBox(
           height: 20,
         ),

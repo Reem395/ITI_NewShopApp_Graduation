@@ -223,28 +223,29 @@ class _SignupScreenState extends State<SignupScreen> {
                               },
                               shape: Border.all(color: defaultColor, width: 1),
                             )),
-                        SizedBox(
-                          width: 230,
-                          child: ElevatedButton.icon(
-                              label: const Text("Sign in with Phone number"),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const PhoneScreen()),
-                                );
-                              },
-                              icon: const Icon(Icons.phone),
-                              style: ButtonStyle(
-                                  shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(1),
-                                          side: BorderSide(
-                                              color: defaultColor))))),
-                        )
+                        // SizedBox(
+                        //   width: 230,
+                        //   child: ElevatedButton.icon(
+                        //       label: const Text("Sign in with Phone number"),
+                        //       onPressed: () {
+                        //         Navigator.push(
+                        //           context,
+                        //           MaterialPageRoute(
+                        //               builder: (context) =>
+                        //                   const PhoneScreen()),
+                        //         );
+                        //       },
+                        //       icon: const Icon(Icons.phone),
+                        //       style: ButtonStyle(
+                        //           shape: MaterialStateProperty.all<
+                        //                   RoundedRectangleBorder>(
+                        //               RoundedRectangleBorder(
+                        //                   borderRadius:
+                        //                       BorderRadius.circular(1),
+                        //                   side: BorderSide(
+                        //                       color: defaultColor))))),
+                        // )
+                     
                       ],
                     )
                   ],

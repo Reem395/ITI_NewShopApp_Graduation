@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,20 +7,20 @@ import 'package:shop_app/ViewModels/Block/Cubit.dart';
 import 'package:shop_app/ViewModels/Block/States.dart';
 import 'package:shop_app/ViewModels/Local/CacheHelper.dart';
 import 'package:shop_app/Views/UserScreens/UserFullInfo.dart';
+import 'package:shop_app/Views/UserScreens/orderReview.dart';
 import '../../ViewModels/Components.dart';
 import '../../ViewModels/constants.dart';
 
 class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-     ShopCubit.get(context).getCartProducts();
-     cart= CacheHelper.getData(key: "cart");
-     if(cart== null)
-      {
+    ShopCubit.get(context).getCartProducts();
+    cart = CacheHelper.getData(key: "cart");
+    if (cart == null) {
       showMessage("Swap right or left to remove item");
-      }
+    }
     //  CacheHelper.removeKey(key: "cart");
-     CacheHelper.setData(key: "cart", value: true);
+    CacheHelper.setData(key: "cart", value: true);
     return BlocConsumer<ShopCubit, ShopStates>(
         builder: (cntext, state) {
           return CupertinoTabView(
@@ -38,27 +39,27 @@ class CartPage extends StatelessWidget {
                               ShopCubit.get(context).cartProducts.length,
                               (index) {
                             return Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      color: Colors.white,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.5),
-                                          spreadRadius: 1,
-                                          blurRadius: 7,
-                                          offset: const Offset(0,
-                                              3), // changes position of shadow
-                                        ),
-                                      ],
+                              padding: const EdgeInsets.all(5.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 1,
+                                      blurRadius: 7,
+                                      offset: const Offset(
+                                          0, 3), // changes position of shadow
                                     ),
-                                child: Dismissible(
-                                      key: UniqueKey(),
-                                background: Container(
-                                  color: defaultColor,
-                                  child: const Icon(Icons.delete),
+                                  ],
                                 ),
+                                child: Dismissible(
+                                    key: UniqueKey(),
+                                    background: Container(
+                                      color: defaultColor,
+                                      child: const Icon(Icons.delete),
+                                    ),
                                     child: Row(
                                       children: [
                                         Padding(
@@ -81,8 +82,7 @@ class CartPage extends StatelessWidget {
                                                                     .cartProducts[
                                                                         index]
                                                                     .image!),
-                                                            fit: BoxFit
-                                                                .cover)),
+                                                            fit: BoxFit.cover)),
                                                   ),
                                                 ),
                                               ),
@@ -131,43 +131,61 @@ class CartPage extends StatelessWidget {
                                                   children: [
                                                     IconButton(
                                                       icon: const Icon(
-                                                        Icons.remove_circle_outline,
+                                                        Icons
+                                                            .remove_circle_outline,
                                                       ),
                                                       onPressed: () {
-                                                        !ShopCubit.get(context).canChangeCart? null:ShopCubit.get(context)
-                                                            .removeFromCart(
-                                                            ShopCubit.get(
-                                                                context)
-                                                                .cartProducts[
-                                                            index]);
+                                                        !ShopCubit.get(context)
+                                                                .canChangeCart
+                                                            ? null
+                                                            : ShopCubit.get(
+                                                                    context)
+                                                                .removeFromCart(
+                                                                    ShopCubit.get(
+                                                                            context)
+                                                                        .cartProducts[index]);
                                                       },
                                                       color: defaultColor,
                                                     ),
-                                                    Text(ShopCubit.get(context)
-                                                        .cartProdCount[ShopCubit
-                                                                .get(context)
-                                                            .cartProducts[index]
-                                                            .productId]
-                                                        .toString(), style: const TextStyle(
-                                                      fontWeight: FontWeight.bold,
-                                                      fontSize: 18
-                                                    ),),
+                                                    Text(
+                                                      ShopCubit.get(context)
+                                                          .cartProdCount[
+                                                              ShopCubit.get(
+                                                                      context)
+                                                                  .cartProducts[
+                                                                      index]
+                                                                  .productId]
+                                                          .toString(),
+                                                      style: const TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 18),
+                                                    ),
                                                     IconButton(
-                                                      disabledColor: Colors.grey,
+                                                      disabledColor:
+                                                          Colors.grey,
                                                       icon: const Icon(
-                                                        Icons.add_circle_outline,
+                                                        Icons
+                                                            .add_circle_outline,
                                                       ),
-                                                      onPressed:
-                                                      !ShopCubit.get(context).productExist(ShopCubit.get(
-                                                          context)
-                                                          .cartProducts[index])|| !ShopCubit.get(context).canChangeCart? null:() {
-                                                        ShopCubit.get(context)
-                                                            .addToCart(
-                                                            ShopCubit.get(
-                                                                context)
-                                                                .cartProducts[
-                                                            index]);
-                                                      },
+                                                      onPressed: !ShopCubit.get(
+                                                                      context)
+                                                                  .productExist(
+                                                                      ShopCubit.get(context)
+                                                                              .cartProducts[
+                                                                          index]) ||
+                                                              !ShopCubit.get(
+                                                                      context)
+                                                                  .canChangeCart
+                                                          ? null
+                                                          : () {
+                                                              ShopCubit.get(
+                                                                      context)
+                                                                  .addToCart(ShopCubit
+                                                                          .get(
+                                                                              context)
+                                                                      .cartProducts[index]);
+                                                            },
                                                       color: defaultColor,
                                                     )
                                                   ],
@@ -179,14 +197,16 @@ class CartPage extends StatelessWidget {
                                       ],
                                     ),
                                     onDismissed: (direction) {
-                                      !ShopCubit.get(context).canChangeCart? null:ShopCubit.get(context).removeFromCart(
-                                          ShopCubit.get(context)
-                                              .cartProducts[index],
-                                          all: true);
-                                    }
-                                  ),
-                                ),
-                                );
+                                      !ShopCubit.get(context).canChangeCart
+                                          ? null
+                                          : ShopCubit.get(context)
+                                              .removeFromCart(
+                                                  ShopCubit.get(context)
+                                                      .cartProducts[index],
+                                                  all: true);
+                                    }),
+                              ),
+                            );
                           }),
                         ),
                       ),
@@ -227,7 +247,9 @@ class CartPage extends StatelessWidget {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  ShopCubit.get(context).cartProdPrice.toString(),
+                                  ShopCubit.get(context)
+                                      .cartProdPrice
+                                      .toString(),
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold),
@@ -262,12 +284,31 @@ class CartPage extends StatelessWidget {
                                 ),
                                 onTap: () {
                                   print("check");
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const UserFullInfo()),
-                                  );
+                                  FirebaseFirestore.instance
+                                      .collection('Users')
+                                      .where('userId', isEqualTo: uId)
+                                      .snapshots()
+                                      .listen((data) {
+                                    if (data.docs.first['state'] == null ||
+                                        data.docs.first['city'] == null ||
+                                        data.docs.first['description'] ==
+                                            null ||
+                                        data.docs.first['phone'] == null) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const UserFullInfo()),
+                                      );
+                                    } else {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                orderReviewScreen()),
+                                      );
+                                    }
+                                  });
                                 },
                               ),
                             )

@@ -1111,14 +1111,16 @@ List<Map<String, dynamic>> products=
               FireStoreOrder().getOrders();
             }, child: Text("Get"),),
 
-             ElevatedButton(onPressed: (){
-              products.forEach((element) {
-                var id= FirebaseFirestore.instance.collection("products").doc().id;
-                    FirebaseFirestore.instance.collection("products")
-                        .doc(id).set(element);
-                  });
-            },
-             child: Text("Push Categories data To FireStore"),),
+            //  ElevatedButton(onPressed: (){
+            //   products.forEach((element) {
+            //     var id= FirebaseFirestore.instance.collection("products").doc().id;
+            //         FirebaseFirestore.instance.collection("products")
+            //             .doc(id).set(element);
+            //       });
+            // },
+            //  child: Text("Push Categories data To FireStore"),),
+
+
              ElevatedButton(onPressed: (){
               products.forEach((element) {
                 var id= FirebaseFirestore.instance.collection("products").doc().id;

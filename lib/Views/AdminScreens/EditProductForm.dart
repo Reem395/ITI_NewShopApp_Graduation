@@ -268,6 +268,7 @@ class _EditProductFormState extends State<EditProductForm> {
                             MaterialStateProperty.all(defaultColor)),
                     onPressed: () async {
                       try {
+                        int flag =0;
                         if (name == "" ||
                             description == "" ||
                             image == "" ||
@@ -277,14 +278,17 @@ class _EditProductFormState extends State<EditProductForm> {
                           Fluttertoast.showToast(
                               msg: "Please enter all fields",
                               toastLength: Toast.LENGTH_SHORT);
+                              flag=1;
                         } else if (price == 0.0 || noItemsInStock == 0) {
                           Fluttertoast.showToast(
                               msg: "Please enter valid Number",
                               toastLength: Toast.LENGTH_SHORT);
-                        } else if (discount! > 0) {
+                              flag=1;
+                        }  if (discount! > 0) {
                           oldPrice = price;
                           price = (oldPrice! * (100 - discount!)) / 100;
-                        } else {
+                        }
+                         if(flag==0) {
                           prodImages.add(imageTwo.text);
                           prodImages.add(imageThree.text);
                           ProductModel product = ProductModel(

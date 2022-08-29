@@ -48,91 +48,93 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                   body: Padding(
                   padding: const EdgeInsets.symmetric(
                       vertical: 20.0, horizontal: 20),
-                  child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      if (state is ShopUpdateUserLoadingScreen)
-                         LinearProgressIndicator(color: defaultColor,),
-                      if(readonly==false)
-                      UpdateForm(nameController, phoneController, passwordController),
-                      if(readonly==true)
-                        ShowProfileData(nameController, phoneController, emailController, passwordController),
-                      SizedBox(
-                        width: double.infinity,
-                        height: MediaQuery.of(context).size.height /14,
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all(defaultColor)),
-                          onPressed: () {
-                            if(!readonly){
-                              ShopCubit.get(context).upDateUser(
-                                  name: nameController.text,
-                                  phone: phoneController.text,
-                                  password: passwordController.text);
-                              setState(() {
-                                  btnTitle="Edit Info";                              
-                                  readonly=true;
-                              });
-                            }
-                            else{
+                  child: SingleChildScrollView(
+                    child: Column(
+                      // mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (state is ShopUpdateUserLoadingScreen)
+                           LinearProgressIndicator(color: defaultColor,),
+                        if(readonly==false)
+                        UpdateForm(nameController, phoneController, passwordController),
+                        if(readonly==true)
+                          ShowProfileData(nameController, phoneController, emailController, passwordController),
+                        SizedBox(
+                          width: double.infinity,
+                          height: MediaQuery.of(context).size.height /14,
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all(defaultColor)),
+                            onPressed: () {
+                              if(!readonly){
+                                ShopCubit.get(context).upDateUser(
+                                    name: nameController.text,
+                                    phone: phoneController.text,
+                                    password: passwordController.text);
                                 setState(() {
-                                  btnTitle="Update";
-                                  readonly=false;
+                                    btnTitle="Edit Info";                              
+                                    readonly=true;
                                 });
-                            }
-                          },
-                          child: Text(btnTitle),
+                              }
+                              else{
+                                  setState(() {
+                                    btnTitle="Update";
+                                    readonly=false;
+                                  });
+                              }
+                            },
+                            child: Text(btnTitle),
+                          ),
                         ),
-                      ),
-                      // const SizedBox(
-                      //   height: 20,
-                      // ),
-                      // SizedBox(
-                      //   width: MediaQuery.of(context).size.width / 2,
-                      //   child: ElevatedButton(
-                      //     style: ButtonStyle(
-                      //         backgroundColor:
-                      //             MaterialStateProperty.all(defaultColor)),
-                      //     onPressed: () {
-                      //       Navigator.push(context, MaterialPageRoute(
-                      //       builder: (BuildContext context) => const RestPasswordScreen(), ),);
-                      //     },
-                      //     child: const Text("Reset Password"),
-                      //   ),
-                      // ),
-
-
-                      // const SizedBox(
-                      //   height: 20,
-                      // ),
-                      //  SizedBox(
-                      //   width: MediaQuery.of(context).size.width / 2,
-                      //   child: ElevatedButton(
-                      //     style: ButtonStyle(
-                      //         backgroundColor:
-                      //             MaterialStateProperty.all(defaultColor)),
-                      //     onPressed: () {
-                      //       ShopCubit.get(context).LogOut();
-                      //       // navigateAndReplace(context, LoginScreen());
-                      //       // Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (context) => LoginScreen()));
-                      //     // Navigator.of(context).pushAndRemoveUntil(CupertinoPageRoute(builder: (context) => LoginScreen()), (r) => true);
-                      //     Navigator.of(context, rootNavigator: true).push(
-                      //        CupertinoPageRoute<bool>(
-                      //         fullscreenDialog: true,
-                      //         builder: (BuildContext context) => LoginScreen(),
-                      //       ),
-                      //     );
-                      //     },
-                      //     child: const Text("LogOut"),
-                      //   ),
-                      // ),
-                                
-                      // const SizedBox(
-                      //   height: 20,
-                      // ),
-                       
-                    ],
+                        // const SizedBox(
+                        //   height: 20,
+                        // ),
+                        // SizedBox(
+                        //   width: MediaQuery.of(context).size.width / 2,
+                        //   child: ElevatedButton(
+                        //     style: ButtonStyle(
+                        //         backgroundColor:
+                        //             MaterialStateProperty.all(defaultColor)),
+                        //     onPressed: () {
+                        //       Navigator.push(context, MaterialPageRoute(
+                        //       builder: (BuildContext context) => const RestPasswordScreen(), ),);
+                        //     },
+                        //     child: const Text("Reset Password"),
+                        //   ),
+                        // ),
+                  
+                  
+                        // const SizedBox(
+                        //   height: 20,
+                        // ),
+                        //  SizedBox(
+                        //   width: MediaQuery.of(context).size.width / 2,
+                        //   child: ElevatedButton(
+                        //     style: ButtonStyle(
+                        //         backgroundColor:
+                        //             MaterialStateProperty.all(defaultColor)),
+                        //     onPressed: () {
+                        //       ShopCubit.get(context).LogOut();
+                        //       // navigateAndReplace(context, LoginScreen());
+                        //       // Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (context) => LoginScreen()));
+                        //     // Navigator.of(context).pushAndRemoveUntil(CupertinoPageRoute(builder: (context) => LoginScreen()), (r) => true);
+                        //     Navigator.of(context, rootNavigator: true).push(
+                        //        CupertinoPageRoute<bool>(
+                        //         fullscreenDialog: true,
+                        //         builder: (BuildContext context) => LoginScreen(),
+                        //       ),
+                        //     );
+                        //     },
+                        //     child: const Text("LogOut"),
+                        //   ),
+                        // ),
+                                  
+                        // const SizedBox(
+                        //   height: 20,
+                        // ),
+                         
+                      ],
+                    ),
                   ),
                                 ),
                 );
